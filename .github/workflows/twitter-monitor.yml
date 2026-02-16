@@ -2,15 +2,8 @@ name: Twitter Monitor & Auto Deploy
 
 on:
   schedule:
-    # 每5分钟运行一次
     - cron: '*/5 * * * *'
-  workflow_dispatch:  # 手动触发
-
-env:
-  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-  DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+  workflow_dispatch:
 
 jobs:
   monitor-and-deploy:
@@ -20,50 +13,41 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
         
-    - name: Install dependencies
-      run: |
-        pip install requests feedparser
-        npm install -g vercel
+    - name: Install Python dependencies
+      run: pip install requests
         
     - name: Run Twitter Monitor
-      id: monitor
+      env:
+        DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
       run: |
-        python scripts/twitter_monitor.py
-      continue-on-error: true
+        echo "🚀 Starting Twitter Monitor..."
+        python twitter_monitor.py
         
-    - name: Check if content updated
-      id: check
+    - name: Check generated files
       run: |
-        if [ -f "content_updated.flag" ]; then
-          echo "changed=true" >> $GITHUB_OUTPUT
-          rm content_updated.flag
-        else
-          echo "changed=false" >> $GITHUB_OUTPUT
-        fi
+        echo "📁 Checking files..."
+        ls -la daily-digest/
+        echo "📄 First 50 lines of app.js:"
+        head -50 daily-digest/app.js
         
-    - name: Build and Deploy
-      if: steps.check.outputs.changed == 'true'
+    - name: Install Node dependencies
+      run: |
+        cd daily-digest
+        npm ci
+        
+    - name: Build
       run: |
         cd daily-digest
         npm run build
-        vercel --token ${{ secrets.VERCEL_TOKEN }} --yes --prod
         
-    - name: Notify success
-      if: steps.check.outputs.changed == 'true'
+    - name: Deploy to Vercel
+      env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       run: |
-        echo "✅ Twitter content updated and deployed at $(date)"
-        
-    - name: Notify no update
-      if: steps.check.outputs.changed == 'false'
-      run: |
-        echo "⏭️ No new content at $(date), skipping deployment"
+        cd daily-digest
+        npx vercel --token "$VERCEL_TOKEN" --yes --prod
