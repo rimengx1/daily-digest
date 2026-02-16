@@ -145,7 +145,7 @@ function renderAll() {
     const textMap = {
       'rss-articles': isEn ? '📡 RSS' : '📡 RSS文章',
       'ai-news': isEn ? '🤖 AI News' : '🤖 AI新闻',
-      'thoughts': isEn ? '💭 Thoughts' : '💭 个人思考',
+      'thoughts': isEn ? '🐦 Twitter Monitor' : '🐦 推特监控',
       'recommendations': isEn ? '📌 Rec' : '📌 个人推荐',
       'archive': isEn ? '📅 Archive' : '📅 往日回顾',
       'favorites': isEn ? '❤️ Favorites' : '❤️ 我的收藏'
