@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Digest - 每日精选</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-brand"><h1>Daily Digest</h1></div>
+    <div class="nav-menu">
+      <button class="nav-btn active" onclick="showSection('rss-articles')">RSS文章</button>
+      <button class="nav-btn" onclick="showSection('ai-news')">AI新闻</button>
+      <button class="nav-btn" onclick="showSection('thoughts')">推特监控</button>
+      <button class="nav-btn" onclick="showSection('recommendations')">个人推荐</button>
+      <button class="nav-btn" onclick="showSection('archive')">往日回顾</button>
+      <button class="nav-btn" onclick="showSection('favorites')">我的收藏</button>
+    </div>
+    <div class="nav-actions">
+      <button onclick="toggleTheme()" class="theme-btn">☀</button>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="container">
+    <!-- RSS文章 -->
+    <section class="section active" id="rss-articles">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">📡 RSS文章</span>
+          <span class="panel-date">2026年02月16日</span>
+        </div>
+        <div class="article-list">
+          <div class="article-card">
+            <div class="article-title">GPT-5.2 在理论物理上给出新结果</div>
+            <div class="article-meta"><span class="article-source">OpenAI</span> <span class="article-date">10:00</span></div>
+            <div class="article-summary">GPT-5.2 提出胶子散射振幅公式</div>
+            <div class="article-footer"><a href="https://openai.com/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+          <div class="article-card">
+            <div class="article-title">ChatGPT 引入锁定模式</div>
+            <div class="article-meta"><span class="article-source">OpenAI</span> <span class="article-date">09:00</span></div>
+            <div class="article-summary">面向高风险用户的安全设置</div>
+            <div class="article-footer"><a href="https://openai.com/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI新闻 -->
+    <section class="section" id="ai-news">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">🤖 AI新闻</span>
+          <span class="panel-date">2026年02月16日</span>
+        </div>
+        <div class="article-list">
+          <div class="article-card">
+            <div class="article-title">黑石加码印度AI算力</div>
+            <div class="article-meta"><span class="article-source">TechCrunch</span></div>
+            <div class="article-summary">Neysa计划12亿美元融资</div>
+            <div class="article-footer"><a href="https://techcrunch.com/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+          <div class="article-card">
+            <div class="article-title">Google：Gemini蒸馏攻击增多</div>
+            <div class="article-meta"><span class="article-source">Google</span></div>
+            <div class="article-summary">观察到10万+提示词规模案例</div>
+            <div class="article-footer"><a href="https://google.com/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 推特监控 -->
+    <section class="section" id="thoughts">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">🐦 推特监控</span>
+          <span class="panel-date"></span>
+        </div>
+        <div class="article-list">
+          <div class="thought-card">
+            <div class="thought-content">[观点] @sama: AI is changing everything. New models coming soon.</div>
+            <div class="thought-time">刚刚</div>
+          </div>
+          <div class="thought-card">
+            <div class="thought-content">[技术] @karpathy: New neural architecture shows 2x efficiency gains.</div>
+            <div class="thought-time">5分钟前</div>
+          </div>
+          <div class="thought-card">
+            <div class="thought-content">[观点] @ylecun: Open source AI is the only way forward for safety.</div>
+            <div class="thought-time">10分钟前</div>
+          </div>
+          <div class="thought-card">
+            <div class="thought-content">[技术] @DrJimFan: Embodied AI breakthrough: robot learned to fold clothes.</div>
+            <div class="thought-time">15分钟前</div>
+          </div>
+          <div class="thought-card">
+            <div class="thought-content">[教育] @jeremyphoward: Fast.ai new course on LLM fine-tuning is live.</div>
+            <div class="thought-time">20分钟前</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 个人推荐 -->
+    <section class="section" id="recommendations">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">📌 个人推荐</span>
+          <span class="panel-date"></span>
+        </div>
+        <div class="article-list">
+          <div class="article-card">
+            <div class="article-title">AI Agent记忆管理实战</div>
+            <div class="article-meta"><span class="article-source">x/@xxx111god</span></div>
+            <div class="article-summary">Token降78%的三层架构方案</div>
+            <div class="article-footer"><a href="https://x.com/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+          <div class="article-card">
+            <div class="article-title">别再用提示词去AI味了</div>
+            <div class="article-meta"><span class="article-source">x/@dotey</span></div>
+            <div class="article-summary">提示词同质化问题分析</div>
+            <div class="article-footer"><a href="https://x.com/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 往日回顾 -->
+    <section class="section" id="archive">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">📅 往日回顾</span>
+          <span class="panel-date"></span>
+        </div>
+        <div class="article-list">
+          <div class="empty-state">暂无历史内容</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 我的收藏 -->
+    <section class="section" id="favorites">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">❤️ 我的收藏</span>
+        </div>
+        <div class="article-list">
+          <div class="empty-state">暂无收藏</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Daily Digest | 每日精选</p>
+  </footer>
+
+  <script>
+    // 切换版块
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id)?.classList.add('active');
+      event.target.classList.add('active');
+    }
+    
+    // 切换主题
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    
+    // 恢复主题
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+</body>
+</html>
