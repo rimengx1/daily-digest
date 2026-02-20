@@ -1,0 +1,53 @@
+name: Twitter Monitor & Auto Deploy
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  monitor-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install Python dependencies
+      run: pip install requests
+        
+    - name: Run Twitter Monitor
+      env:
+        DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      run: |
+        echo "🚀 Starting Twitter Monitor..."
+        python twitter_monitor.py
+        
+    - name: Check generated files
+      run: |
+        echo "📁 Checking files..."
+        ls -la daily-digest/
+        echo "📄 First 50 lines of app.js:"
+        head -50 daily-digest/app.js
+        
+    - name: Install Node dependencies
+      run: |
+        cd daily-digest
+        npm ci
+        
+    - name: Build
+      run: |
+        cd daily-digest
+        npm run build
+        
+    - name: Deploy to Vercel
+      env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      run: |
+        cd daily-digest
+        npx vercel --token "$VERCEL_TOKEN" --yes --prod
