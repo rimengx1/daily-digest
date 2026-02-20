@@ -4,8 +4,98 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daily Digest - 每日精选</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
   <link rel="stylesheet" href="./style.css">
-<!-- Build: 2026-02-21T02:34:37.467700 -->
+  <style>
+    /* AI摘要Tab样式 */
+    .ai-summary-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 8px;
+    }
+    .ai-tab {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #f3f4f6;
+      color: #6b7280;
+      border: none;
+    }
+    .ai-tab:hover {
+      background: #e5e7eb;
+    }
+    .ai-tab.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    .ai-summary-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .ai-summary-content.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .expand-btn {
+      color: #667eea;
+      font-size: 0.9em;
+      cursor: pointer;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .expand-btn:hover {
+      text-decoration: underline;
+    }
+    .ai-summary-section {
+      margin-top: 12px;
+      padding: 12px;
+      background: #f9fafb;
+      border-radius: 8px;
+      display: none;
+    }
+    .ai-summary-section.expanded {
+      display: block;
+    }
+    .loading-dots {
+      display: inline-flex;
+      gap: 4px;
+    }
+    .loading-dots span {
+      width: 8px;
+      height: 8px;
+      background: #667eea;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out both;
+    }
+    .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+    .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+    .bullet-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 6px 0;
+      font-size: 0.9em;
+    }
+    .bullet-point::before {
+      content: "•";
+      color: #667eea;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <!-- 导航栏 -->
@@ -18,169 +108,244 @@
       <button class="nav-btn" onclick="showSection('archive')">往日回顾</button>
       <button class="nav-btn" onclick="showSection('favorites')">我的收藏</button>
     </div>
-    <div class="nav-actions">
-      <button onclick="toggleTheme()" class="theme-btn">☀</button>
-    </div>
   </nav>
 
-  <!-- 主内容区 -->
   <main class="container">
-    <!-- RSS文章 -->
-    <section class="section active" id="rss-articles">
+    <!-- AI热点 -->
+    <section class="section active" id="ai-news">
       <div class="panel">
         <div class="panel-header">
-          <span class="panel-title">📡 RSS文章</span>
-          <span class="panel-date">2026年02月16日</span>
-        </div>
-        <div class="article-list">
-          <div class="article-card">
-            <div class="article-title">GPT-5.2 在理论物理上给出新结果</div>
-            <div class="article-meta"><span class="article-source">OpenAI</span> <span class="article-date">10:00</span></div>
-            <div class="article-summary">GPT-5.2 提出胶子散射振幅公式</div>
-            <div class="article-footer"><a href="https://openai.com/" target="_blank" class="article-link">阅读全文 →</a></div>
-          </div>
-          <div class="article-card">
-            <div class="article-title">ChatGPT 引入锁定模式</div>
-            <div class="article-meta"><span class="article-source">OpenAI</span> <span class="article-date">09:00</span></div>
-            <div class="article-summary">面向高风险用户的安全设置</div>
-            <div class="article-footer"><a href="https://openai.com/" target="_blank" class="article-link">阅读全文 →</a></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AI热点 - 已更新为2026-02-20日报 -->
-    <section class="section" id="ai-news">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">🤖 AI热点</span>
+          <span class="panel-title">AI热点</span>
           <span class="panel-date">2026年02月20日</span>
         </div>
         <div class="article-list">
-          <!-- 今日看点 -->
-          <div class="article-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-            <div class="article-title" style="color: white; font-size: 1.1em;">今日看点</div>
-            <div class="article-summary" style="color: rgba(255,255,255,0.9);">
-              今日技术圈焦点集中于AI模型的商业化竞争与架构创新，大模型定价策略成为关键战场。
-            </div>
-          </div>
-
+          
           <!-- Top 1 -->
-          <div class="article-card" style="position: relative;">
+          <div class="article-card" style="position: relative;" data-article-id="gemini-31-pro">
             <div style="position: absolute; top: 15px; right: 15px; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: bold;">87</div>
             <div class="article-title">Gemini 3.1 Pro</div>
             <div class="article-meta"><span class="article-source">simonwillison.net</span> <span class="article-date">21小时前</span></div>
             <div class="article-summary">
-              谷歌发布Gemini 3.1系列首个模型，定价与Gemini 3 Pro相同。输入输出每百万tokens价格分别为2美元和12美元。基准测试成绩与Claude Opus 4.6非常接近，但价格不到后者的一半。
+              谷歌发布Gemini 3.1系列首个模型，定价与Gemini 3 Pro相同。输入输出每百万tokens价格分别为2美元和12美元。
             </div>
-            <div class="article-footer">
-              <a href="https://simonwillison.net/2026/Feb/19/gemini-31-pro/" target="_blank" class="article-link">阅读全文 →</a>
+            <div class="expand-btn" onclick="toggleAISummary('gemini-31-pro', this)">
+              <span>🤖 AI智能摘要</span>
+              <span class="arrow">▼</span>
+            </div>
+            <div class="ai-summary-section" id="ai-summary-gemini-31-pro">
+              <div class="ai-summary-tabs">
+                <button class="ai-tab active" onclick="switchTab('gemini-31-pro', 'quick')">⚡ 30秒速读</button>
+                <button class="ai-tab" onclick="switchTab('gemini-31-pro', 'standard')">📄 标准摘要</button>
+                <button class="ai-tab" onclick="switchTab('gemini-31-pro', 'simple')">👶 小白解释</button>
+              </div>
+              <div class="ai-summary-content active" id="tab-gemini-31-pro-quick">
+                <div class="loading-dots" id="loading-gemini-31-pro-quick"><span></span><span></span><span></span></div>
+              </div>
+              <div class="ai-summary-content" id="tab-gemini-31-pro-standard">
+                <div class="loading-dots" id="loading-gemini-31-pro-standard"><span></span><span></span><span></span></div>
+              </div>
+              <div class="ai-summary-content" id="tab-gemini-31-pro-simple">
+                <div class="loading-dots" id="loading-gemini-31-pro-simple"><span></span><span></span><span></span></div>
+              </div>
             </div>
           </div>
 
           <!-- Top 2 -->
-          <div class="article-card" style="position: relative;">
+          <div class="article-card" style="position: relative;" data-article-id="prompt-caching">
             <div style="position: absolute; top: 15px; right: 15px; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: bold;">80</div>
             <div class="article-title">提示词缓存的工程实践</div>
             <div class="article-meta"><span class="article-source">simonwillison.net</span> <span class="article-date">8小时前</span></div>
             <div class="article-summary">
-              Thariq Shihipar关于提示词缓存在长周期智能体产品中关键作用的观点。Claude Code整个系统架构都围绕提示词缓存构建，通过复用先前轮次的计算显著降低延迟和成本。
+              Thariq Shihipar关于提示词缓存在长周期智能体产品中关键作用的观点。Claude Code整个系统架构都围绕提示词缓存构建。
             </div>
-            <div class="article-footer">
-              <a href="https://simonwillison.net/2026/Feb/20/thariq-shihipar/" target="_blank" class="article-link">阅读全文 →</a>
+            <div class="expand-btn" onclick="toggleAISummary('prompt-caching', this)">
+              <span>🤖 AI智能摘要</span>
+              <span class="arrow">▼</span>
+            </div>
+            <div class="ai-summary-section" id="ai-summary-prompt-caching">
+              <div class="ai-summary-tabs">
+                <button class="ai-tab active" onclick="switchTab('prompt-caching', 'quick')">⚡ 30秒速读</button>
+                <button class="ai-tab" onclick="switchTab('prompt-caching', 'standard')">📄 标准摘要</button>
+                <button class="ai-tab" onclick="switchTab('prompt-caching', 'simple')">👶 小白解释</button>
+              </div>
+              <div class="ai-summary-content active" id="tab-prompt-caching-quick">
+                <div class="loading-dots" id="loading-prompt-caching-quick"><span></span><span></span><span></span></div>
+              </div>
+              <div class="ai-summary-content" id="tab-prompt-caching-standard">
+                <div class="loading-dots" id="loading-prompt-caching-standard"><span></span><span></span><span></span></div>
+              </div>
+              <div class="ai-summary-content" id="tab-prompt-caching-simple">
+                <div class="loading-dots" id="loading-prompt-caching-simple"><span></span><span></span><span></span></div>
+              </div>
             </div>
           </div>
 
-          <!-- Top 3 -->
-          <div class="article-card" style="position: relative;">
-            <div style="position: absolute; top: 15px; right: 15px; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: bold;">77</div>
-            <div class="article-title">Pluralistic：被刺穿的公司面纱</div>
-            <div class="article-meta"><span class="article-source">pluralistic.net</span> <span class="article-date">53分钟前</span></div>
-            <div class="article-summary">
-              探讨限制公司权力的巴西方法——"刺穿公司面纱"。涵盖社交媒体如何将美国政党变成第三方组织的宿主、"公民"成为雇佣演员、保险外骨骼等多个社会与技术议题。
-            </div>
-            <div class="article-footer">
-              <a href="https://pluralistic.net/2026/02/20/karioca-konzernrecht/" target="_blank" class="article-link">阅读全文 →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 个人推荐 -->
-    <section class="section" id="recommendations">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">📌 个人推荐</span>
-          <span class="panel-date"></span>
-        </div>
-        <div class="article-list">
-          <div class="article-card">
-            <div class="article-title">AI Agent记忆管理实战</div>
-            <div class="article-meta"><span class="article-source">x/@xxx111god</span></div>
-            <div class="article-summary">Token降78%的三层架构方案</div>
-            <div class="article-footer"><a href="https://x.com/" target="_blank" class="article-link">阅读全文 →</a></div>
-          </div>
-          <div class="article-card">
-            <div class="article-title">别再用提示词去AI味了</div>
-            <div class="article-meta"><span class="article-source">x/@dotey</span></div>
-            <div class="article-summary">提示词同质化问题分析</div>
-            <div class="article-footer"><a href="https://x.com/" target="_blank" class="article-link">阅读全文 →</a></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 往日回顾 -->
-    <section class="section" id="archive">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">📅 往日回顾</span>
-          <span class="panel-date"></span>
-        </div>
-        <div class="article-list">
-          <div class="empty-state">暂无历史内容</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 我的收藏 -->
-    <section class="section" id="favorites">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">❤️ 我的收藏</span>
-        </div>
-        <div class="article-list">
-          <div class="empty-state">暂无收藏</div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>Daily Digest | 每日精选</p>
-  </footer>
-
   <script>
-    // 切换版块
+    // API配置 - 使用Kimi
+    const API_CONFIG = {
+      baseUrl: 'https://api.moonshot.cn/v1',
+      apiKey: 'sk-kimi-SQf5VB45vPipIvInNMKkMKwZUd1QSgf59qEJWowTwBFxiz4wgRueoA0pJHKetqKw',
+      model: 'kimi-k2p5'
+    };
+
+    // 本地缓存管理
+    const SummaryCache = {
+      get(articleId, type) {
+        const key = `summary_${articleId}_${type}`;
+        const cached = localStorage.getItem(key);
+        if (cached) {
+          const data = JSON.parse(cached);
+          // 缓存有效期7天
+          if (Date.now() - data.timestamp < 7 * 24 * 60 * 60 * 1000) {
+            return data.content;
+          }
+        }
+        return null;
+      },
+      set(articleId, type, content) {
+        const key = `summary_${articleId}_${type}`;
+        localStorage.setItem(key, JSON.stringify({
+          content,
+          timestamp: Date.now()
+        }));
+      }
+    };
+
+    // 展开/收起AI摘要
+    function toggleAISummary(articleId, btn) {
+      const section = document.getElementById(`ai-summary-${articleId}`);
+      const arrow = btn.querySelector('.arrow');
+      
+      if (section.classList.contains('expanded')) {
+        section.classList.remove('expanded');
+        arrow.textContent = '▼';
+      } else {
+        section.classList.add('expanded');
+        arrow.textContent = '▲';
+        // 首次展开时加载数据
+        loadSummary(articleId, 'quick');
+      }
+    }
+
+    // 切换Tab
+    function switchTab(articleId, type) {
+      // 更新按钮状态
+      const section = document.getElementById(`ai-summary-${articleId}`);
+      section.querySelectorAll('.ai-tab').forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // 更新内容显示
+      section.querySelectorAll('.ai-summary-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      document.getElementById(`tab-${articleId}-${type}`).classList.add('active');
+      
+      // 加载对应类型的摘要
+      loadSummary(articleId, type);
+    }
+
+    // 调用API生成摘要
+    async function generateSummary(articleId, type, content) {
+      const prompts = {
+        quick: `请用一句话总结这篇文章的核心内容，然后列出3个关键要点。格式：
+【一句话】...
+【要点】
+• ...
+• ...
+• ...
+
+文章内容：${content}`,
+        
+        standard: `请对这篇文章进行标准摘要，包括：
+1. 核心观点
+2. 主要论据
+3. 实际应用/影响
+
+请用简洁专业的语言，200字左右。
+
+文章内容：${content}`,
+        
+        simple: `请用通俗易懂的语言解释这篇文章，就像给完全不懂技术的人讲解一样。避免专业术语，用类比和例子帮助理解。
+
+文章内容：${content}`
+      };
+
+      try {
+        const response = await fetch(`${API_CONFIG.baseUrl}/chat/completions`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_CONFIG.apiKey}`
+          },
+          body: JSON.stringify({
+            model: API_CONFIG.model,
+            messages: [
+              { role: 'system', content: '你是一个专业的新闻摘要助手。' },
+              { role: 'user', content: prompts[type] }
+            ],
+            temperature: 0.7
+          })
+        });
+
+        const data = await response.json();
+        return data.choices[0].message.content;
+      } catch (error) {
+        console.error('API调用失败:', error);
+        return '生成摘要失败，请稍后重试。';
+      }
+    }
+
+    // 加载摘要
+    async function loadSummary(articleId, type) {
+      // 检查缓存
+      const cached = SummaryCache.get(articleId, type);
+      const contentEl = document.getElementById(`tab-${articleId}-${type}`);
+      
+      if (cached) {
+        contentEl.innerHTML = formatSummary(cached, type);
+        return;
+      }
+
+      // 获取文章内容
+      const card = document.querySelector(`[data-article-id="${articleId}"]`);
+      const title = card.querySelector('.article-title').textContent;
+      const summary = card.querySelector('.article-summary').textContent;
+      const fullContent = `${title}\n\n${summary}`;
+
+      // 调用API生成
+      const result = await generateSummary(articleId, type, fullContent);
+      
+      // 保存到缓存
+      SummaryCache.set(articleId, type, result);
+      
+      // 显示结果
+      contentEl.innerHTML = formatSummary(result, type);
+    }
+
+    // 格式化摘要显示
+    function formatSummary(text, type) {
+      if (type === 'quick') {
+        // 30秒速读格式
+        return text.replace(/【一句话】/g, '<div style="font-weight:bold;color:#667eea;margin-bottom:8px;">💡 一句话总结</div>')
+                   .replace(/【要点】/g, '<div style="font-weight:bold;color:#667eea;margin:12px 0 8px;">📝 关键要点</div>')
+                   .replace(/• /g, '<div class="bullet-point">')
+                   .replace(/\n/g, '</div>');
+      }
+      return text.replace(/\n/g, '<br>');
+    }
+
+    // 简单的版块切换（保持原有功能）
     function showSection(id) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(id)?.classList.add('active');
       event.target.classList.add('active');
     }
-    
-    // 切换主题
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    }
-    
-    // 恢复主题
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
   </script>
 </body>
 </html>
