@@ -3,136 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daily Digest - 每日精选</title>
+  <title>Daily Digest</title>
   <link rel="stylesheet" href="./style.css">
   <style>
-    /* Section显示控制 */
     .section { display: none; }
     .section.active { display: block; }
-    
-    /* AI摘要样式 */
-    .ai-summary-tabs { display: flex; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; }
-    .ai-tab { padding: 6px 12px; border-radius: 6px; font-size: 0.85em; cursor: pointer; background: #f3f4f6; color: #6b7280; border: none; }
-    .ai-tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-    .ai-summary-content { display: none; }
-    .ai-summary-content.active { display: block; animation: fadeIn 0.3s ease; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .expand-btn { color: #667eea; font-size: 0.9em; cursor: pointer; margin-top: 8px; }
-    .ai-summary-section { margin-top: 12px; padding: 12px; background: #f9fafb; border-radius: 8px; display: none; }
-    .ai-summary-section.expanded { display: block; }
+    .article-card { position: relative; padding: 20px; margin-bottom: 15px; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .score-badge { position: absolute; top: 15px; right: 15px; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: bold; }
   </style>
 </head>
 <body>
-  <!-- 导航栏 -->
   <nav class="navbar">
     <div class="nav-brand"><h1>Daily Digest</h1></div>
     <div class="nav-menu">
-      <button class="nav-btn active" onclick="showSection('rss-articles')">RSS文章</button>
-      <button class="nav-btn" onclick="showSection('ai-news')">AI热点</button>
-      <button class="nav-btn" onclick="showSection('recommendations')">个人推荐</button>
+      <button class="nav-btn active" onclick="showSection('rss')">RSS文章</button>
+      <button class="nav-btn" onclick="showSection('ai')">AI热点</button>
+      <button class="nav-btn" onclick="showSection('rec')">个人推荐</button>
       <button class="nav-btn" onclick="showSection('archive')">往日回顾</button>
-      <button class="nav-btn" onclick="showSection('favorites')">我的收藏</button>
+      <button class="nav-btn" onclick="showSection('fav')">我的收藏</button>
     </div>
   </nav>
 
   <main class="container">
-    <!-- RSS文章 -->
-    <section class="section active" id="rss-articles">
+    <section class="section active" id="rss">
       <div class="panel">
         <div class="panel-header">
           <span class="panel-title">RSS文章</span>
-          <span class="panel-date">2026年02月21日</span>
+          <span class="panel-date">2026-02-21</span>
         </div>
         <div class="article-list">
           <div class="article-card">
-            <div class="article-title">GPT-5.2 在理论物理上给出新结果</div>
+            <div class="article-title">GPT-5.2 理论物理突破</div>
             <div class="article-meta"><span class="article-source">OpenAI</span> <span class="article-date">10:00</span></div>
-            <div class="article-summary">GPT-5.2 提出胶子散射振幅公式</div>
-            <div class="article-footer"><a href="https://openai.com/" target="_blank" class="article-link">阅读全文 →</a></div>
-          </div>
-          <div class="article-card">
-            <div class="article-title">ChatGPT 引入锁定模式</div>
-            <div class="article-meta"><span class="article-source">OpenAI</span> <span class="article-date">09:00</span></div>
-            <div class="article-summary">面向高风险用户的安全设置</div>
-            <div class="article-footer"><a href="https://openai.com/" target="_blank" class="article-link">阅读全文 →</a></div>
+            <div class="article-summary">提出胶子散射振幅公式</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- AI热点 -->
-    <section class="section" id="ai-news">
+    <section class="section" id="ai">
       <div class="panel">
         <div class="panel-header">
           <span class="panel-title">AI热点</span>
-          <span class="panel-date">2026年02月20日</span>
+          <span class="panel-date">2026-02-20</span>
         </div>
         <div class="article-list">
-          <div class="article-card" style="position: relative;">
-            <div style="position: absolute; top: 15px; right: 15px; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: bold;">87</div>
+          <div class="article-card">
+            <div class="score-badge">87</div>
             <div class="article-title">Gemini 3.1 Pro</div>
-            <div class="article-meta"><span class="article-source">simonwillison.net</span> <span class="article-date">21小时前</span></div>
-            <div class="article-summary">谷歌发布Gemini 3.1系列首个模型...</div>
-            <div class="article-footer"><a href="https://simonwillison.net/2026/Feb/19/gemini-31-pro/" target="_blank" class="article-link">阅读全文 →</a></div>
+            <div class="article-meta">simonwillison.net · 21小时前</div>
+            <div class="article-summary">谷歌发布Gemini 3.1系列首个模型</div>
+          </div>
+          <div class="article-card">
+            <div class="score-badge">80</div>
+            <div class="article-title">提示词缓存工程实践</div>
+            <div class="article-meta">simonwillison.net · 8小时前</div>
+            <div class="article-summary">Claude Code系统架构围绕提示词缓存构建</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 个人推荐 -->
-    <section class="section" id="recommendations">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">个人推荐</span>
-        </div>
-        <div class="article-list">
-          <div class="empty-state">暂无推荐</div>
-        </div>
-      </div>
+    <section class="section" id="rec">
+      <div class="panel"><div class="panel-header"><span class="panel-title">个人推荐</span></div><div class="empty-state">暂无推荐</div></div>
     </section>
-
-    <!-- 往日回顾 -->
     <section class="section" id="archive">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">往日回顾</span>
-        </div>
-        <div class="article-list">
-          <div class="empty-state">暂无历史内容</div>
-        </div>
-      </div>
+      <div class="panel"><div class="panel-header"><span class="panel-title">往日回顾</span></div><div class="empty-state">暂无历史</div></div>
     </section>
-
-    <!-- 我的收藏 -->
-    <section class="section" id="favorites">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">我的收藏</span>
-        </div>
-        <div class="article-list">
-          <div class="empty-state">暂无收藏</div>
-        </div>
-      </div>
+    <section class="section" id="fav">
+      <div class="panel"><div class="panel-header"><span class="panel-title">我的收藏</span></div><div class="empty-state">暂无收藏</div></div>
     </section>
   </main>
 
   <script>
-    // 版块切换 - 修复版
     function showSection(id) {
-      // 隐藏所有 section
-      document.querySelectorAll('.section').forEach(function(s) {
-        s.classList.remove('active');
-      });
-      // 移除所有按钮 active
-      document.querySelectorAll('.nav-btn').forEach(function(b) {
-        b.classList.remove('active');
-      });
-      // 显示目标 section
-      var target = document.getElementById(id);
-      if (target) {
-        target.classList.add('active');
-      }
-      // 激活对应按钮
+      document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+      document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
+      var el = document.getElementById(id);
+      if (el) el.classList.add('active');
       event.target.classList.add('active');
     }
   </script>
