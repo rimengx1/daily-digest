@@ -1,4 +1,3 @@
-<!-- BUILD: 2026-02-21T02:45:00 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -24,38 +23,123 @@
       <button class="nav-btn" onclick="showSection('fav')">我的收藏</button>
     </div>
   </nav>
+
   <main class="container">
+    <!-- RSS文章 -->
     <section class="section active" id="rss">
       <div class="panel">
-        <div class="panel-header"><span class="panel-title">RSS文章</span><span class="panel-date">2026-02-21</span></div>
+        <div class="panel-header">
+          <span class="panel-title">RSS文章</span>
+          <span class="panel-date">2026年02月21日</span>
+        </div>
         <div class="article-list">
           <div class="article-card">
-            <div class="article-title">GPT-5.2 理论物理突破</div>
+            <div class="article-title">GPT-5.2 在理论物理上给出新结果</div>
             <div class="article-meta"><span class="article-source">OpenAI</span> <span class="article-date">10:00</span></div>
-            <div class="article-summary">提出胶子散射振幅公式</div>
+            <div class="article-summary">GPT-5.2 提出胶子散射振幅公式</div>
+            <div class="article-footer"><a href="https://openai.com/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+          <div class="article-card">
+            <div class="article-title">ChatGPT 引入锁定模式</div>
+            <div class="article-meta"><span class="article-source">OpenAI</span> <span class="article-date">09:00</span></div>
+            <div class="article-summary">面向高风险用户的安全设置</div>
+            <div class="article-footer"><a href="https://openai.com/" target="_blank" class="article-link">阅读全文 →</a></div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- AI热点 -->
     <section class="section" id="ai">
       <div class="panel">
-        <div class="panel-header"><span class="panel-title">AI热点</span><span class="panel-date">2026-02-20</span></div>
+        <div class="panel-header">
+          <span class="panel-title">AI热点</span>
+          <span class="panel-date">2026年02月20日</span>
+        </div>
         <div class="article-list">
           <div class="article-card">
             <div class="score-badge">87</div>
             <div class="article-title">Gemini 3.1 Pro</div>
-            <div class="article-meta">simonwillison.net · 21小时前</div>
-            <div class="article-summary">谷歌发布Gemini 3.1系列首个模型</div>
+            <div class="article-meta"><span class="article-source">simonwillison.net</span> <span class="article-date">21小时前</span></div>
+            <div class="article-summary">谷歌发布Gemini 3.1系列首个模型，定价与Gemini 3 Pro相同。输入输出每百万tokens价格分别为2美元和12美元。基准测试成绩与Claude Opus 4.6非常接近，但价格不到后者的一半。</div>
+            <div class="article-footer"><a href="https://simonwillison.net/2026/Feb/19/gemini-31-pro/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+          <div class="article-card">
+            <div class="score-badge">80</div>
+            <div class="article-title">提示词缓存的工程实践</div>
+            <div class="article-meta"><span class="article-source">simonwillison.net</span> <span class="article-date">8小时前</span></div>
+            <div class="article-summary">Thariq Shihipar关于提示词缓存在长周期智能体产品中关键作用的观点。Claude Code整个系统架构都围绕提示词缓存构建，通过复用先前轮次的计算显著降低延迟和成本。</div>
+            <div class="article-footer"><a href="https://simonwillison.net/2026/Feb/20/thariq-shihipar/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+          <div class="article-card">
+            <div class="score-badge">77</div>
+            <div class="article-title">Pluralistic：被刺穿的公司面纱</div>
+            <div class="article-meta"><span class="article-source">pluralistic.net</span> <span class="article-date">53分钟前</span></div>
+            <div class="article-summary">探讨限制公司权力的巴西方法——"刺穿公司面纱"。涵盖社交媒体如何将美国政党变成第三方组织的宿主、"公民"成为雇佣演员、保险外骨骼等多个社会与技术议题。</div>
+            <div class="article-footer"><a href="https://pluralistic.net/2026/02/20/karioca-konzernrecht/" target="_blank" class="article-link">阅读全文 →</a></div>
           </div>
         </div>
       </div>
     </section>
-    <section class="section" id="rec"><div class="panel"><div class="panel-header"><span class="panel-title">个人推荐</span></div><div class="empty-state">暂无推荐</div></div></section>
-    <section class="section" id="archive"><div class="panel"><div class="panel-header"><span class="panel-title">往日回顾</span></div><div class="empty-state">暂无历史</div></div></section>
-    <section class="section" id="fav"><div class="panel"><div class="panel-header"><span class="panel-title">我的收藏</span></div><div class="empty-state">暂无收藏</div></div></section>
+
+    <!-- 个人推荐 -->
+    <section class="section" id="rec">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">个人推荐</span>
+          <span class="panel-date"></span>
+        </div>
+        <div class="article-list">
+          <div class="article-card">
+            <div class="article-title">AI Agent记忆管理实战</div>
+            <div class="article-meta"><span class="article-source">x/@xxx111god</span></div>
+            <div class="article-summary">Token降78%的三层架构方案</div>
+            <div class="article-footer"><a href="https://x.com/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+          <div class="article-card">
+            <div class="article-title">别再用提示词去AI味了</div>
+            <div class="article-meta"><span class="article-source">x/@dotey</span></div>
+            <div class="article-summary">提示词同质化问题分析</div>
+            <div class="article-footer"><a href="https://x.com/" target="_blank" class="article-link">阅读全文 →</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 往日回顾 -->
+    <section class="section" id="archive">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">往日回顾</span>
+          <span class="panel-date"></span>
+        </div>
+        <div class="article-list">
+          <div class="empty-state">暂无历史内容</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 我的收藏 -->
+    <section class="section" id="fav">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">我的收藏</span>
+        </div>
+        <div class="article-list">
+          <div class="empty-state">暂无收藏</div>
+        </div>
+      </div>
+    </section>
   </main>
+
   <script>
-    function showSection(id) { document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); }); document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); }); var el = document.getElementById(id); if (el) el.classList.add('active'); event.target.classList.add('active'); }
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+      document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
+      var el = document.getElementById(id);
+      if (el) el.classList.add('active');
+      event.target.classList.add('active');
+    }
   </script>
 </body>
 </html>
