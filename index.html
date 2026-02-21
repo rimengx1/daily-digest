@@ -2,97 +2,97 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daily Digest - 每日精选</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Daily Digest - 移动优先资讯</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
-  <script type="module" crossorigin src="./assets/main-BbfnMW6X.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-4E5Ievst.css">
+  <script type="module" crossorigin src="./assets/main-CAXZBSyA.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-C9ZOkEof.css">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-brand"><h1>Daily Digest</h1></div>
-    <div class="nav-menu">
-      <button class="nav-btn active" data-section="rss-articles">RSS文章</button>
-      <button class="nav-btn" data-section="ai-news">AI热点</button>
-      <button class="nav-btn" data-section="recommendations">个人推荐</button>
-      <button class="nav-btn" data-section="archive">往日回顾</button>
-    </div>
-    <div class="nav-actions">
-      <button id="setApiKey" class="lang-btn" type="button">API Key</button>
-      <button id="langToggle" class="lang-btn" type="button">EN/中</button>
-      <button id="themeToggle" class="theme-btn" type="button">☀</button>
-    </div>
-  </nav>
-
-  <main class="container">
-    <section class="section active" id="rss-articles">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">📡 RSS文章</span>
-          <span class="panel-date" id="currentDate"></span>
-        </div>
-        <div class="article-list" id="rssArticlesContent"></div>
+  <div class="app-bg"></div>
+  <div class="app-shell">
+    <header class="top-bar">
+      <div>
+        <p class="eyebrow">Daily Digest</p>
+        <h1>今日AI资产雷达</h1>
       </div>
-    </section>
+      <button class="icon-btn" id="openFilter" type="button" aria-label="打开筛选">筛选</button>
+    </header>
 
-    <section class="section" id="ai-news">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">🤖 AI热点</span>
-          <span class="panel-date" id="currentDate2"></span>
+    <main class="main-content" id="view-home">
+      <section class="must-read">
+        <div class="section-head">
+          <h2>今日必看</h2>
+          <span id="resultCount">0 条结果</span>
         </div>
-        <div class="article-list" id="aiNewsContent"></div>
-      </div>
-    </section>
-
-    <section class="section" id="thoughts">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">🐦 推特监控</span>
-        </div>
-        <div class="article-list" id="thoughtsContent"></div>
-      </div>
-    </section>
-
-    <section class="section" id="recommendations">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">📌 个人推荐</span>
-        </div>
-        <div class="article-list" id="recommendationsContent"></div>
-      </div>
-    </section>
-
-    <section class="section" id="archive">
-      <div class="panel">
-        <div class="panel-header">
-          <span class="panel-title">📅 往日回顾</span>
-        </div>
-        <div class="article-list" id="archiveList"></div>
-      </div>
-    </section>
-  </main>
-
-  <div id="articleModal" class="detail-modal hidden">
-    <div class="detail-backdrop" data-close-modal="true"></div>
-    <div class="detail-card shadow-2xl rounded-2xl border border-slate-200/80 bg-white/95 backdrop-blur">
-      <button class="detail-close" id="closeDetail" type="button">✕</button>
-      <h2 id="detailTitle" class="text-2xl font-semibold tracking-tight text-slate-900"></h2>
-      <div id="detailMeta" class="text-sm text-slate-500 mt-2"></div>
-      <p id="detailSummary" class="text-slate-700 leading-7 mt-4"></p>
-      <a id="detailLink" class="article-link mt-4 inline-block" target="_blank" rel="noreferrer noopener">阅读全文 →</a>
-
-      <section class="detail-timeline-wrap mt-8">
-        <div class="detail-timeline-title">Related Progress</div>
-        <div id="detailTimeline" class="detail-timeline"></div>
+        <article id="mustReadCard" class="must-read-card"></article>
       </section>
-    </div>
+
+      <section>
+        <div class="section-head">
+          <h2>热点追踪</h2>
+          <button class="ghost-btn" id="openTimeline" type="button">看时间线</button>
+        </div>
+        <div class="hot-scroll" id="hotTopics"></div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>快讯卡片</h2>
+        </div>
+        <div class="news-stack" id="newsList"></div>
+      </section>
+    </main>
   </div>
 
-  <footer class="footer">
-    <p>Daily Digest | 每日精选</p>
-  </footer>
+  <nav class="bottom-nav" aria-label="底部导航">
+    <button class="nav-item active" type="button" data-tab="home">首页</button>
+    <button class="nav-item" type="button" data-tab="hot">热点</button>
+    <button class="nav-item" type="button" data-tab="watchlist">自选</button>
+    <button class="nav-item" type="button" data-tab="alerts">提醒</button>
+    <button class="nav-item" type="button" data-tab="profile">我的</button>
+  </nav>
 
+  <section class="timeline-page hidden" id="timelinePage" aria-label="事件时间线">
+    <header class="timeline-header">
+      <button id="closeTimeline" type="button" class="ghost-btn">返回</button>
+      <h2>事件时间线追踪</h2>
+    </header>
+    <div class="timeline-nodes" id="timelineNodes"></div>
+    <footer class="timeline-footer" id="timelineStocks"></footer>
+  </section>
+
+  <div class="sheet-overlay hidden" id="sheetOverlay"></div>
+
+  <section class="bottom-sheet hidden" id="termSheet" aria-label="术语解释">
+    <div class="sheet-grabber"></div>
+    <div class="sheet-body" id="termSheetBody"></div>
+  </section>
+
+  <section class="bottom-sheet hidden" id="filterSheet" aria-label="筛选条件">
+    <div class="sheet-grabber"></div>
+    <div class="sheet-body">
+      <div class="sheet-head">
+        <h3>智能筛选</h3>
+        <span id="filterCount">匹配 0 条</span>
+      </div>
+      <div class="filter-group">
+        <p>来源类型</p>
+        <div class="chips" id="sourceFilters"></div>
+      </div>
+      <div class="filter-group">
+        <p>影响范围</p>
+        <div class="chips" id="impactFilters"></div>
+      </div>
+      <div class="filter-group">
+        <p>热度等级</p>
+        <div class="chips" id="heatFilters"></div>
+      </div>
+      <button class="primary-btn" id="applyFilters" type="button">应用筛选</button>
+    </div>
+  </section>
 </body>
 </html>
