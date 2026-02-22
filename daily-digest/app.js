@@ -1,18 +1,22 @@
+// Daily Digest - Cloudflare 风格 + 修复导航栏
 const { animate, stagger } = window.Motion || {};
 
+// ============================================
+// 数据
+// ============================================
 const glossary = {
   "Agentic AI": {
-    level: "进阶",
+    level: "⭐⭐",
     explain: "具备任务拆解和自主执行能力的AI系统，不只回答问题，还能主动完成流程。",
     analogy: "像一个会自己列计划、找资料、交付结果的分析师，而不只是随问随答的搜索框。"
   },
   "推理算力": {
-    level: "基础",
+    level: "⭐",
     explain: "模型在生成答案时用于推理的计算资源，直接影响速度和质量。",
     analogy: "像厨房同时开几个灶台，灶台越多，上菜越快。"
   },
   "多模态": {
-    level: "中级",
+    level: "⭐⭐",
     explain: "模型同时理解文本、图像、语音等多种输入并联合输出。",
     analogy: "像一个既能看图又能听音频、还能写报告的全能编辑。"
   }
@@ -81,6 +85,12 @@ const timelineEvents = [
   { time: "14:30", text: "分析师上调行业全年资本开支预期", stock: "SOXX +1.2%" }
 ];
 
+// ============================================
+// 状态
+// ============================================
+let currentView = 'home';
+let activeSheet = null;
+
 const filterState = {
   source: "全部",
   impact: "全部",
@@ -93,293 +103,436 @@ const filterGroups = {
   heat: ["全部", "高", "中", "低"]
 };
 
+// ============================================
+// DOM 引用
+// ============================================
 const refs = {
-  mustRead: document.getElementById("mustReadCard"),
-  hotTopics: document.getElementById("hotTopics"),
-  newsList: document.getElementById("newsList"),
-  resultCount: document.getElementById("resultCount"),
-  timelinePage: document.getElementById("timelinePage"),
-  timelineNodes: document.getElementById("timelineNodes"),
-  timelineStocks: document.getElementById("timelineStocks"),
-  sheetOverlay: document.getElementById("sheetOverlay"),
-  termSheet: document.getElementById("termSheet"),
-  termBody: document.getElementById("termSheetBody"),
-  filterSheet: document.getElementById("filterSheet"),
-  filterCount: document.getElementById("filterCount")
+  featuredCard: document.getElementById('featuredCard'),
+  hotTopics: document.getElementById('hotTopics'),
+  newsList: document.getElementById('newsList'),
+  resultCount: document.getElementById('resultCount'),
+  filterCount: document.getElementById('filterCount'),
+  timelinePage: document.getElementById('timelinePage'),
+  timelineList: document.getElementById('timelineList'),
+  timelineStocks: document.getElementById('timelineStocks'),
+  sheetOverlay: document.getElementById('sheetOverlay'),
+  termSheet: document.getElementById('termSheet'),
+  termContent: document.getElementById('termSheetContent'),
+  filterSheet: document.getElementById('filterSheet')
 };
 
-let activeSheet = null;
-
-function formatChange(value) {
-  const sign = value > 0 ? "+" : "";
-  const cls = value >= 0 ? "chg-up" : "chg-down";
+// ============================================
+// 工具函数
+// ============================================
+const formatChange = (value) => {
+  const sign = value > 0 ? '+' : '';
+  const cls = value >= 0 ? 'chg-up' : 'chg-down';
   return `<span class="${cls}">${sign}${value.toFixed(1)}%</span>`;
-}
+};
 
-function makeTickerRow(tickers) {
-  return `<div class="ticker-row">${tickers
-    .map((ticker) => `<span class="ticker-badge">${ticker.symbol} ${formatChange(ticker.change)}</span>`)
-    .join("")}</div>`;
-}
-
-function getFilteredNews() {
-  return news.filter((item) => {
+const getFilteredNews = () => {
+  return news.filter(item => {
     const sourceMatch = filterState.source === "全部" || item.source === filterState.source;
     const impactMatch = filterState.impact === "全部" || item.impact === filterState.impact;
     const heatMatch = filterState.heat === "全部" || item.heat === filterState.heat;
     return sourceMatch && impactMatch && heatMatch;
   });
-}
+};
 
-function renderMustRead(list) {
+// ============================================
+// 渲染函数
+// ============================================
+const renderFeaturedCard = (list) => {
   const item = list[0];
   if (!item) {
-    refs.mustRead.innerHTML = "<h3>暂无匹配内容</h3><p>请调整筛选条件后重试。</p>";
+    refs.featuredCard.innerHTML = `
+      <div class="card featured-card">
+        <p style="color: var(--cf-text-muted); text-align: center; padding: 40px 0;">
+          暂无匹配内容，请调整筛选条件
+        </p>
+      </div>
+    `;
     return;
   }
-  refs.mustRead.innerHTML = `
-    <h3>${item.title}</h3>
-    <p>${item.summary}</p>
-    ${makeTickerRow(item.tickers)}
-    <button class="analysis-toggle" type="button" data-analysis="${item.id}">展开投资分析</button>
-    <div class="analysis-box" id="analysis-${item.id}">
-      <p>${item.analysis}</p>
-      <p class="risk">${item.risk}</p>
+
+  refs.featuredCard.innerHTML = `
+    <div class="card featured-card">
+      <div class="featured-badge">今日必看</div>
+      <div class="card-header">
+        <div>
+          <div class="card-meta">
+            <span class="tag tag-official">🟢 官方</span>
+            <span>${item.timeline}</span>
+          </div>
+          <h3 class="card-title">${item.title}</h3>
+        </div>
+      </div>
+      <p class="summary">${item.summary}</p>
+      <div class="ticker-row">
+        ${item.tickers.map(t => `
+          <span class="ticker-badge">
+            <span class="ticker-name">${t.symbol}</span>
+            <span class="ticker-change">${formatChange(t.change)}</span>
+          </span>
+        `).join('')}
+      </div>
+      <button class="analysis-toggle" data-analysis="${item.id}">
+        展开投资分析 ↓
+      </button>
+      <div class="analysis-box" id="analysis-${item.id}">
+        <p>${item.analysis}</p>
+        <div class="risk-warning">${item.risk}</div>
+      </div>
     </div>
   `;
-}
+};
 
-function renderHotTopics() {
-  refs.hotTopics.innerHTML = topics
-    .map((topic) => `<article class="topic-pill"><strong>${topic.name}</strong><p>${topic.detail}</p></article>`)
-    .join("");
-}
+const renderHotTopics = () => {
+  refs.hotTopics.innerHTML = topics.map(topic => `
+    <article class="topic-pill">
+      <strong>${topic.name}</strong>
+      <p>${topic.detail}</p>
+    </article>
+  `).join('');
+};
 
-function renderNewsCards(list) {
-  refs.newsList.innerHTML = list
-    .map(
-      (item) => `
-      <article class="news-card" data-id="${item.id}">
-        <header class="news-head">
-          <strong>${item.title}</strong>
-          <button class="collapse-btn" type="button" data-collapse="${item.id}">+</button>
-        </header>
-        <div class="news-body hidden" id="body-${item.id}">
-          <p>${item.summary}</p>
-          ${makeTickerRow(item.tickers)}
-          <button class="analysis-toggle" type="button" data-analysis="${item.id}">展开投资分析</button>
-          <div class="analysis-box" id="analysis-${item.id}">
-            <p>${item.analysis}</p>
-            <p class="risk">${item.risk}</p>
-          </div>
+const renderNewsList = (list) => {
+  refs.newsList.innerHTML = list.map(item => `
+    <article class="news-item">
+      <div class="news-header" data-collapse="${item.id}">
+        <strong>${item.title}</strong>
+        <button class="collapse-btn">+</button>
+      </div>
+      <div class="news-body hidden" id="body-${item.id}">
+        <p class="summary">${item.summary}</p>
+        <div class="ticker-row">
+          ${item.tickers.map(t => `
+            <span class="ticker-badge">
+              <span class="ticker-name">${t.symbol}</span>
+              <span class="ticker-change">${formatChange(t.change)}</span>
+            </span>
+          `).join('')}
         </div>
-      </article>
-    `
-    )
-    .join("");
-}
+        <button class="analysis-toggle" data-analysis="${item.id}">
+          展开投资分析 ↓
+        </button>
+        <div class="analysis-box" id="analysis-${item.id}">
+          <p>${item.analysis}</p>
+          <div class="risk-warning">${item.risk}</div>
+        </div>
+      </div>
+    </article>
+  `).join('');
+};
 
-function renderTimeline() {
-  refs.timelineNodes.innerHTML = timelineEvents
-    .map(
-      (event, idx) => `
-      <article class="timeline-node ${idx === 0 ? "active" : ""}" data-node="${idx}">
-        <time>${event.time}</time>
-        <h3>${event.text}</h3>
-        <p>关联标的：${event.stock}</p>
-      </article>
-    `
-    )
-    .join("");
+const renderTimeline = () => {
+  refs.timelineList.innerHTML = timelineEvents.map((event, idx) => `
+    <article class="timeline-item ${idx === 0 ? 'active' : ''}" data-node="${idx}">
+      <time class="timeline-time">${event.time}</time>
+      <div class="timeline-text">
+        <h4>${event.text}</h4>
+        <p>${event.stock}</p>
+      </div>
+    </article>
+  `).join('');
 
-  refs.timelineStocks.innerHTML = timelineEvents
-    .slice(0, 4)
-    .map((event) => {
-      const [symbol, change] = event.stock.split(" ");
-      return `<div class="timeline-stock"><span>${symbol}</span><strong>${change}</strong></div>`;
-    })
-    .join("");
-}
+  refs.timelineStocks.innerHTML = timelineEvents.slice(0, 4).map(event => {
+    const [symbol, change] = event.stock.split(' ');
+    return `
+      <div>
+        <div style="font-size: 12px; color: var(--cf-text-muted);">${symbol}</div>
+        <div style="font-weight: 600; color: ${change.includes('+') ? 'var(--cf-success)' : 'var(--cf-danger)'};">${change}</div>
+      </div>
+    `;
+  }).join('');
+};
 
-function updateCounts(list) {
-  refs.resultCount.textContent = `${list.length} 条结果`;
-  refs.filterCount.textContent = `匹配 ${list.length} 条`;
-}
-
-function renderFilterOptions() {
-  const mount = (id, key, options) => {
+const renderFilterChips = () => {
+  const createChips = (id, key, options) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.innerHTML = options
-      .map((option) => `<button class="chip ${filterState[key] === option ? "active" : ""}" data-filter="${key}" data-value="${option}" type="button">${option}</button>`)
-      .join("");
+    el.innerHTML = options.map(option => `
+      <button class="chip ${filterState[key] === option ? 'active' : ''}" 
+              data-filter="${key}" 
+              data-value="${option}">
+        ${option}
+      </button>
+    `).join('');
   };
-  mount("sourceFilters", "source", filterGroups.source);
-  mount("impactFilters", "impact", filterGroups.impact);
-  mount("heatFilters", "heat", filterGroups.heat);
-}
 
-function bindCardEvents() {
-  document.querySelectorAll("[data-collapse]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const id = btn.dataset.collapse;
+  createChips('sourceFilters', 'source', filterGroups.source);
+  createChips('impactFilters', 'impact', filterGroups.impact);
+  createChips('heatFilters', 'heat', filterGroups.heat);
+};
+
+const updateCounts = (list) => {
+  refs.resultCount.textContent = `${list.length} 条`;
+  refs.filterCount.textContent = `匹配 ${list.length} 条`;
+};
+
+// ============================================
+// 事件绑定
+// ============================================
+// 关键修复：底部导航栏视图切换
+const bindViewSwitching = () => {
+  const navTabs = document.querySelectorAll('.nav-tab');
+  const views = document.querySelectorAll('.view');
+  
+  navTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const viewName = tab.dataset.view;
+      
+      // 更新导航栏状态
+      navTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // 隐藏所有视图
+      views.forEach(view => {
+        view.classList.remove('active');
+        view.style.display = 'none';
+      });
+      
+      // 显示目标视图
+      const targetView = document.getElementById(`view-${viewName}`);
+      if (targetView) {
+        targetView.style.display = 'block';
+        // 强制重排确保动画生效
+        void targetView.offsetWidth;
+        targetView.classList.add('active');
+        
+        // 动画效果
+        if (animate) {
+          animate(targetView, 
+            { opacity: [0, 1], y: [20, 0] }, 
+            { duration: 0.3 }
+          );
+        }
+      }
+      
+      currentView = viewName;
+      
+      // 滚动到顶部
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      console.log(`[Nav] Switched to view: ${viewName}`);
+    });
+  });
+};
+
+const bindCardEvents = () => {
+  document.addEventListener('click', (e) => {
+    const collapseBtn = e.target.closest('[data-collapse]');
+    if (collapseBtn) {
+      const id = collapseBtn.dataset.collapse;
       const body = document.getElementById(`body-${id}`);
-      if (!body) return;
-      body.classList.toggle("hidden");
-      btn.textContent = body.classList.contains("hidden") ? "+" : "-";
-    });
-  });
-
-  document.querySelectorAll("[data-analysis]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const id = btn.dataset.analysis;
-      const box = document.getElementById(`analysis-${id}`);
-      if (!box) return;
-      box.classList.toggle("show");
-      btn.textContent = box.classList.contains("show") ? "收起投资分析" : "展开投资分析";
-    });
-  });
-}
-
-function bindTermEvents() {
-  document.querySelectorAll(".term-link").forEach((termEl) => {
-    termEl.addEventListener("click", () => {
-      const key = termEl.dataset.term;
-      const term = glossary[key];
-      if (!term) return;
-      refs.termBody.innerHTML = `
-        <h3 class="term-title">${key}</h3>
-        <div class="term-meta"><span class="difficulty">难度：${term.level}</span><span>即点即译</span></div>
-        <p class="term-body">${term.explain}</p>
-        <p class="analogy">类比：${term.analogy}</p>
-      `;
-      openSheet(refs.termSheet);
-    });
-  });
-}
-
-function bindTimelineEvents() {
-  document.getElementById("openTimeline")?.addEventListener("click", () => {
-    refs.timelinePage.classList.remove("hidden");
-    if (animate) animate(".timeline-node", { opacity: [0, 1], y: [14, 0] }, { duration: 0.28, delay: stagger(0.04) });
-  });
-
-  document.getElementById("closeTimeline")?.addEventListener("click", () => {
-    refs.timelinePage.classList.add("hidden");
-  });
-
-  refs.timelineNodes.addEventListener("click", (event) => {
-    const node = event.target.closest("[data-node]");
-    if (!node) return;
-    document.querySelectorAll(".timeline-node").forEach((el) => el.classList.remove("active"));
-    node.classList.add("active");
-  });
-}
-
-function bindFilterEvents() {
-  document.getElementById("openFilter")?.addEventListener("click", () => openSheet(refs.filterSheet));
-
-  refs.filterSheet.addEventListener("click", (event) => {
-    const chip = event.target.closest("[data-filter]");
-    if (!chip) return;
-    const key = chip.dataset.filter;
-    const value = chip.dataset.value;
-    filterState[key] = value;
-    renderFilterOptions();
-    updateCounts(getFilteredNews());
-  });
-
-  document.getElementById("applyFilters")?.addEventListener("click", () => {
-    renderAll();
-    closeActiveSheet();
-  });
-}
-
-function bindBottomNav() {
-  document.querySelectorAll(".nav-item").forEach((item) => {
-    item.addEventListener("click", () => {
-      document.querySelectorAll(".nav-item").forEach((btn) => btn.classList.remove("active"));
-      item.classList.add("active");
-    });
-  });
-}
-
-function openSheet(sheet) {
-  activeSheet = sheet;
-  refs.sheetOverlay.classList.remove("hidden");
-  sheet.classList.remove("hidden");
-  sheet.style.transform = "translateY(100%)";
-  if (animate) {
-    animate(sheet, { y: [300, 0] }, { duration: 0.25, easing: "ease-out" });
-  } else {
-    sheet.style.transform = "translateY(0)";
-  }
-}
-
-function closeActiveSheet() {
-  if (!activeSheet) return;
-  const sheet = activeSheet;
-  const finalize = () => {
-    sheet.classList.add("hidden");
-    refs.sheetOverlay.classList.add("hidden");
-    sheet.style.transform = "translateY(100%)";
-    activeSheet = null;
-  };
-  if (animate) {
-    animate(sheet, { y: [0, 360] }, { duration: 0.2, easing: "ease-in" });
-    setTimeout(finalize, 180);
-  } else {
-    finalize();
-  }
-}
-
-function attachSwipeToClose(sheet) {
-  let startY = 0;
-  let delta = 0;
-
-  sheet.addEventListener("touchstart", (event) => {
-    startY = event.touches[0].clientY;
-    delta = 0;
-  });
-
-  sheet.addEventListener("touchmove", (event) => {
-    delta = Math.max(0, event.touches[0].clientY - startY);
-    sheet.style.transform = `translateY(${delta}px)`;
-  });
-
-  sheet.addEventListener("touchend", () => {
-    if (delta > 90) {
-      closeActiveSheet();
-    } else {
-      sheet.style.transform = "translateY(0)";
+      const btn = collapseBtn.querySelector('.collapse-btn') || collapseBtn;
+      
+      if (body) {
+        body.classList.toggle('hidden');
+        btn.textContent = body.classList.contains('hidden') ? '+' : '−';
+      }
     }
   });
-}
 
-function renderAll() {
+  document.addEventListener('click', (e) => {
+    const analysisBtn = e.target.closest('[data-analysis]');
+    if (analysisBtn) {
+      const id = analysisBtn.dataset.analysis;
+      const box = document.getElementById(`analysis-${id}`);
+      
+      if (box) {
+        box.classList.toggle('show');
+        analysisBtn.textContent = box.classList.contains('show') 
+          ? '收起投资分析 ↑' 
+          : '展开投资分析 ↓';
+      }
+    }
+  });
+};
+
+const bindTermEvents = () => {
+  document.addEventListener('click', (e) => {
+    const termLink = e.target.closest('.term-link');
+    if (termLink) {
+      const term = termLink.dataset.term;
+      const data = glossary[term];
+      
+      if (data) {
+        refs.termContent.innerHTML = `
+          <h3 class="term-title">${term}</h3>
+          <div class="term-meta">
+            <span class="difficulty">难度：${data.level}</span>
+            <span style="color: var(--cf-text-muted); font-size: 12px;">即点即译</span>
+          </div>
+          <p class="term-body">${data.explain}</p>
+          <div class="analogy-box">
+            <small>💡 类比理解</small>
+            <p>${data.analogy}</p>
+          </div>
+        `;
+        openSheet(refs.termSheet);
+      }
+    }
+  });
+};
+
+const bindFilterEvents = () => {
+  document.getElementById('filterBtn')?.addEventListener('click', () => {
+    openSheet(refs.filterSheet);
+  });
+
+  refs.filterSheet?.addEventListener('click', (e) => {
+    const chip = e.target.closest('.chip');
+    if (chip && chip.dataset.filter) {
+      const key = chip.dataset.filter;
+      const value = chip.dataset.value;
+      filterState[key] = value;
+      renderFilterChips();
+      updateCounts(getFilteredNews());
+    }
+  });
+
+  document.getElementById('applyFilters')?.addEventListener('click', () => {
+    renderAll();
+    closeSheet();
+  });
+
+  document.getElementById('resetFilters')?.addEventListener('click', () => {
+    filterState.source = "全部";
+    filterState.impact = "全部";
+    filterState.heat = "全部";
+    renderFilterChips();
+    updateCounts(getFilteredNews());
+  });
+};
+
+const bindTimelineEvents = () => {
+  document.getElementById('openTimeline')?.addEventListener('click', () => {
+    refs.timelinePage.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    if (animate) {
+      animate(refs.timelineList.children, 
+        { opacity: [0, 1], y: [20, 0] }, 
+        { duration: 0.4, delay: stagger(0.1) }
+      );
+    }
+  });
+
+  document.getElementById('closeTimeline')?.addEventListener('click', () => {
+    refs.timelinePage.classList.add('hidden');
+    document.body.style.overflow = '';
+  });
+};
+
+// ============================================
+// 弹层控制
+// ============================================
+const openSheet = (sheet) => {
+  activeSheet = sheet;
+  refs.sheetOverlay.classList.remove('hidden');
+  sheet.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  
+  sheet.style.transform = 'translateY(100%)';
+  
+  requestAnimationFrame(() => {
+    if (animate) {
+      animate(sheet, { y: ['100%', '0%'] }, { duration: 0.3, easing: 'ease-out' });
+    } else {
+      sheet.style.transform = 'translateY(0)';
+    }
+  });
+};
+
+const closeSheet = () => {
+  if (!activeSheet) return;
+  
+  const sheet = activeSheet;
+  
+  if (animate) {
+    animate(sheet, { y: ['0%', '100%'] }, { duration: 0.25, easing: 'ease-in' });
+    setTimeout(() => {
+      sheet.classList.add('hidden');
+      refs.sheetOverlay.classList.add('hidden');
+      document.body.style.overflow = '';
+      activeSheet = null;
+    }, 250);
+  } else {
+    sheet.classList.add('hidden');
+    refs.sheetOverlay.classList.add('hidden');
+    document.body.style.overflow = '';
+    activeSheet = null;
+  }
+};
+
+const bindSheetGestures = () => {
+  refs.sheetOverlay.addEventListener('click', closeSheet);
+  
+  [refs.termSheet, refs.filterSheet].forEach(sheet => {
+    if (!sheet) return;
+    
+    let startY = 0;
+    let currentY = 0;
+    
+    sheet.addEventListener('touchstart', (e) => {
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    sheet.addEventListener('touchmove', (e) => {
+      currentY = e.touches[0].clientY;
+      const delta = Math.max(0, currentY - startY);
+      if (delta > 0) {
+        sheet.style.transform = `translateY(${delta}px)`;
+      }
+    }, { passive: true });
+    
+    sheet.addEventListener('touchend', () => {
+      const delta = currentY - startY;
+      if (delta > 100) {
+        closeSheet();
+      } else {
+        sheet.style.transform = 'translateY(0)';
+      }
+    });
+  });
+};
+
+// ============================================
+// 主渲染
+// ============================================
+const renderAll = () => {
   const filtered = getFilteredNews();
-  renderMustRead(filtered);
+  renderFeaturedCard(filtered);
   renderHotTopics();
-  renderNewsCards(filtered);
+  renderNewsList(filtered);
+  renderTimeline();
+  renderFilterChips();
   updateCounts(filtered);
+};
+
+// ============================================
+// 初始化
+// ============================================
+const init = () => {
+  // 初始显示首页
+  document.querySelectorAll('.view').forEach(view => {
+    view.style.display = view.id === 'view-home' ? 'block' : 'none';
+  });
+  
+  renderAll();
+  bindViewSwitching();      // 关键修复：视图切换
   bindCardEvents();
   bindTermEvents();
-
-  if (animate) {
-    animate(".must-read-card, .topic-pill, .news-card", { opacity: [0, 1], y: [16, 0] }, { duration: 0.26, delay: stagger(0.03) });
-  }
-}
-
-function init() {
-  renderFilterOptions();
-  renderTimeline();
-  renderAll();
   bindFilterEvents();
   bindTimelineEvents();
-  bindBottomNav();
-  attachSwipeToClose(refs.termSheet);
-  attachSwipeToClose(refs.filterSheet);
-  refs.sheetOverlay.addEventListener("click", closeActiveSheet);
-}
+  bindSheetGestures();
+  
+  console.log('[Init] Daily Digest loaded successfully');
+};
 
-init();
+// DOM 加载完成后初始化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
