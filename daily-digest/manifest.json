@@ -1,0 +1,22 @@
+{
+  "name": "Daily Digest - AI 资产雷达",
+  "short_name": "Daily Digest",
+  "description": "追踪 AI 领域核心动态与投资机会",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0b0f",
+  "theme_color": "#0a0b0f",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
