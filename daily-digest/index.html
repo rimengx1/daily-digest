@@ -10,21 +10,11 @@
   <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
   <link rel="stylesheet" href="./style.css">
   <script type="module" src="./app.js"></script>
-  <!-- PWA 配置 -->
-  <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#0a0b0f">
 </head>
 <body>
   <!-- 背景装饰 -->
   <div class="bg-aurora"></div>
   <div class="bg-grid"></div>
-
-  <!-- 更新提示条 -->
-  <div class="update-bar hidden" id="updateBar">
-    <span>🚀 有新内容更新</span>
-    <button id="refreshBtn">立即刷新</button>
-    <button id="dismissUpdate">忽略</button>
-  </div>
 
   <!-- 顶部导航 -->
   <nav class="top-nav glass">
@@ -35,10 +25,10 @@
       <span class="brand-text text-gradient">Daily Digest</span>
     </div>
     <div class="nav-actions">
-      <button class="nav-btn-icon" id="pushToggle" aria-label="开启推送" title="开启推送通知">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="pushIcon">
-          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-          <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+      <button class="nav-btn-icon" id="searchBtn" aria-label="搜索">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
         </svg>
       </button>
       <button class="nav-btn-icon" id="filterBtn" aria-label="筛选">
@@ -56,7 +46,6 @@
       <header class="page-header">
         <h1 class="page-title">今日 AI 资产雷达</h1>
         <p class="page-subtitle">追踪 AI 领域核心动态与投资机会</p>
-        <div class="last-update" id="lastUpdate">最后更新: 加载中...</div>
       </header>
 
       <!-- 今日必看 -->
@@ -100,12 +89,7 @@
       <header class="page-header">
         <h1 class="page-title">热点追踪</h1>
       </header>
-      <div class="hot-full-list" id="hotFullList">
-        <div class="empty-state">
-          <div class="empty-icon">🔥</div>
-          <p>热点内容正在整理中<br>请稍后再来查看</p>
-        </div>
-      </div>
+      <div class="hot-full-list" id="hotFullList"></div>
     </section>
 
     <!-- 自选视图 -->
@@ -113,11 +97,22 @@
       <header class="page-header">
         <h1 class="page-title">我的自选</h1>
       </header>
-      <div class="watchlist-empty" id="watchlistEmpty">
+      <div class="watchlist-empty">
         <div class="empty-icon">⭐</div>
         <p>点击新闻卡片中的股票标签<br>添加到你的自选列表</p>
       </div>
       <div class="watchlist-content hidden" id="watchlistContent"></div>
+    </section>
+
+    <!-- 提醒视图 -->
+    <section class="view" id="view-alerts">
+      <header class="page-header">
+        <h1 class="page-title">价格提醒</h1>
+      </header>
+      <div class="alerts-empty">
+        <div class="empty-icon">🔔</div>
+        <p>设置股价提醒<br>第一时间获取异动通知</p>
+      </div>
     </section>
 
     <!-- 我的视图 -->
@@ -126,10 +121,6 @@
         <h1 class="page-title">个人中心</h1>
       </header>
       <div class="profile-menu">
-        <div class="menu-item" id="pushSettings">
-          <span>推送通知</span>
-          <span class="menu-value" id="pushStatus">未开启</span>
-        </div>
         <div class="menu-item">
           <span>API Key 设置</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -232,14 +223,5 @@
       </div>
     </div>
   </section>
-
-  <!-- Service Worker 注册 -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('[SW] 注册成功'))
-        .catch(err => console.log('[SW] 注册失败:', err));
-    }
-  </script>
 </body>
 </html>
