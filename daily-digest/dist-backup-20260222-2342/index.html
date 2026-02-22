@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Digest - 每日精选</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+  <script type="module" crossorigin src="./assets/main-BbfnMW6X.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-4E5Ievst.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand"><h1>Daily Digest</h1></div>
+    <div class="nav-menu">
+      <button class="nav-btn active" data-section="rss-articles">RSS文章</button>
+      <button class="nav-btn" data-section="ai-news">AI热点</button>
+      <button class="nav-btn" data-section="recommendations">个人推荐</button>
+      <button class="nav-btn" data-section="archive">往日回顾</button>
+    </div>
+    <div class="nav-actions">
+      <button id="setApiKey" class="lang-btn" type="button">API Key</button>
+      <button id="langToggle" class="lang-btn" type="button">EN/中</button>
+      <button id="themeToggle" class="theme-btn" type="button">☀</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="section active" id="rss-articles">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">📡 RSS文章</span>
+          <span class="panel-date" id="currentDate"></span>
+        </div>
+        <div class="article-list" id="rssArticlesContent"></div>
+      </div>
+    </section>
+
+    <section class="section" id="ai-news">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">🤖 AI热点</span>
+          <span class="panel-date" id="currentDate2"></span>
+        </div>
+        <div class="article-list" id="aiNewsContent"></div>
+      </div>
+    </section>
+
+    <section class="section" id="thoughts">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">🐦 推特监控</span>
+        </div>
+        <div class="article-list" id="thoughtsContent"></div>
+      </div>
+    </section>
+
+    <section class="section" id="recommendations">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">📌 个人推荐</span>
+        </div>
+        <div class="article-list" id="recommendationsContent"></div>
+      </div>
+    </section>
+
+    <section class="section" id="archive">
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">📅 往日回顾</span>
+        </div>
+        <div class="article-list" id="archiveList"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="articleModal" class="detail-modal hidden">
+    <div class="detail-backdrop" data-close-modal="true"></div>
+    <div class="detail-card shadow-2xl rounded-2xl border border-slate-200/80 bg-white/95 backdrop-blur">
+      <button class="detail-close" id="closeDetail" type="button">✕</button>
+      <h2 id="detailTitle" class="text-2xl font-semibold tracking-tight text-slate-900"></h2>
+      <div id="detailMeta" class="text-sm text-slate-500 mt-2"></div>
+      <p id="detailSummary" class="text-slate-700 leading-7 mt-4"></p>
+      <a id="detailLink" class="article-link mt-4 inline-block" target="_blank" rel="noreferrer noopener">阅读全文 →</a>
+
+      <section class="detail-timeline-wrap mt-8">
+        <div class="detail-timeline-title">Related Progress</div>
+        <div id="detailTimeline" class="detail-timeline"></div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Daily Digest | 每日精选</p>
+  </footer>
+
+</body>
+</html>
