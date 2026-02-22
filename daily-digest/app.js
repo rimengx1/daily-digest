@@ -536,3 +536,60 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
+
+// API Key 设置
+function bindAPIKeySettings() {
+  let settingsSheet = document.getElementById('settingsSheet');
+  if (!settingsSheet) {
+    settingsSheet = document.createElement('section');
+    settingsSheet.id = 'settingsSheet';
+    settingsSheet.className = 'bottom-sheet hidden';
+    settingsSheet.innerHTML = `
+      <div class="sheet-handle"></div>
+      <div class="sheet-content">
+        <header class="sheet-header"><h3>API Key 设置</h3></header>
+        <div style="padding: 16px 0;">
+          <label style="display: block; margin-bottom: 8px; color: var(--cf-text-muted);">OpenAI API Key</label>
+          <input type="password" id="apiKeyInput" placeholder="sk-..." style="width: 100%; padding: 12px; background: var(--cf-bg-card); border: 1px solid var(--cf-border); border-radius: 8px; color: var(--cf-text-primary);">
+        </div>
+        <div class="sheet-footer">
+          <button class="btn-secondary" onclick="closeSheet()">取消</button>
+          <button class="btn-primary" id="saveApiKey">保存</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(settingsSheet);
+    
+    document.getElementById('saveApiKey').addEventListener('click', () => {
+      const key = document.getElementById('apiKeyInput').value;
+      if (key) {
+        localStorage.setItem('openai_api_key', key);
+        alert('API Key 已保存');
+        settingsSheet.classList.add('hidden');
+      }
+    });
+  }
+  
+  document.querySelectorAll('.menu-item').forEach(item => {
+    if (item.textContent.includes('API')) {
+      item.addEventListener('click', () => {
+        document.getElementById('apiKeyInput').value = localStorage.getItem('openai_api_key') || '';
+        settingsSheet.classList.remove('hidden');
+        document.getElementById('sheetOverlay').classList.remove('hidden');
+      });
+    }
+  });
+}
+
+// 主题切换
+function bindThemeToggle() {
+  document.querySelectorAll('.menu-item').forEach(item => {
+    if (item.textContent.includes('主题')) {
+      item.addEventListener('click', () => alert('主题切换功能即将上线'));
+    }
+  });
+}
+
+// 在初始化后调用
+bindAPIKeySettings();
+bindThemeToggle();
