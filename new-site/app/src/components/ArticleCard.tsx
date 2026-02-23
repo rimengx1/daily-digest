@@ -149,15 +149,16 @@ export function ArticleCard({
                     </div>
                   )}
                   {activeTab === 'simple' && (
-                    <div>
-                      <div className="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg mb-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs font-medium text-amber-600 dark:text-amber-400">小白解释</span>
-                        </div>
-                        <p className="text-sm leading-relaxed">{article.aiExplanation || article.content.slice(0, 200)}...</p>
+                    <div className="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
+                      {/* 小白解释标题 */}
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs font-medium text-amber-600 dark:text-amber-400">小白解释</span>
                       </div>
-                      {/* 股票分析 - 放在小白解释后面 */}
-                      <StockAnalysis stocks={article.aiStocks || []} />
+                      {/* 小白解释内容 */}
+                      <p className="text-sm leading-relaxed mb-4">{article.aiExplanation || article.content.slice(0, 200)}...</p>
+                      
+                      {/* 股票分析 - 融合在同一个格子中 */}
+                      <StockAnalysis stocks={article.aiStocks || []} isExpanded={true} />
                     </div>
                   )}
                 </div>
