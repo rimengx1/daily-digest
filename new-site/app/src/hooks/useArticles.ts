@@ -9,7 +9,7 @@ const USE_RSS_API = import.meta.env.VITE_USE_RSS_API === 'true' || false;
 
 // 更新存储键名，避免与旧数据冲突
 const ARTICLES_KEY = 'ai-news-articles-v2';
-const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+const REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes - 每10分钟自动刷新
 
 // API Configuration for external AI services
 const API_CONFIG = {
