@@ -157,7 +157,7 @@ export function ArticleCard({
                         <p className="text-sm leading-relaxed">{article.aiExplanation || article.content.slice(0, 200)}...</p>
                       </div>
                       {/* 股票分析 - 放在小白解释后面 */}
-                      <StockAnalysis stocks={article.aiStocks} />
+                      <StockAnalysis stocks={article.aiStocks || []} />
                     </div>
                   )}
                 </div>
