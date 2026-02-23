@@ -1,19 +1,27 @@
 """
-Database operations
+Database operations - In-memory for Vercel Serverless
 """
 import sqlite3
 from datetime import datetime, timedelta
 from typing import List, Dict, Optional
 import os
+import json
 
-DATABASE_PATH = os.getenv("DATABASE_PATH", "articles.db")
+# 使用内存数据库（Serverless 环境）
+# 数据通过 GitHub Actions 定期抓取并保存到 artifact
+DATABASE_PATH = ":memory:"
 
+# 全局连接（在 Serverless 中保持）
+_db_connection = None
 
 def get_db_connection():
-    """获取数据库连接"""
-    conn = sqlite3.connect(DATABASE_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
+    """获取数据库连接（内存模式）"""
+    global _db_connection
+    if _db_connection is None:
+        _db_connection = sqlite3.connect(DATABASE_PATH, check_same_thread=False)
+        _db_connection.row_factory = sqlite3.Row
+        init_database()
+    return _db_connection
 
 
 def init_database():
@@ -46,8 +54,7 @@ def init_database():
     cursor.execute('CREATE INDEX IF NOT EXISTS idx_source ON articles(source_id)')
     
     conn.commit()
-    conn.close()
-    print("✓ Database initialized")
+    print("✓ Database initialized (in-memory)")
 
 
 def get_articles(
@@ -79,7 +86,6 @@ def get_articles(
         ''', (since, limit, offset))
     
     rows = cursor.fetchall()
-    conn.close()
     
     return [dict(row) for row in rows]
 
@@ -91,9 +97,35 @@ def get_article_by_id(article_id: str) -> Optional[Dict]:
     
     cursor.execute('SELECT * FROM articles WHERE id = ?', (article_id,))
     row = cursor.fetchone()
-    conn.close()
     
     return dict(row) if row else None
+
+
+def save_articles(articles: List[Dict]):
+    """批量保存文章（用于 RSS 抓取后）"""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    inserted = 0
+    for article in articles:
+        try:
+            cursor.execute('''
+                INSERT OR IGNORE INTO articles 
+                (id, title, url, summary, content, source, source_id, category, language, published_at, fetched_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                article['id'], article['title'], article['url'], 
+                article['summary'], article['content'], article['source'],
+                article['source_id'], article['category'], article['language'],
+                article['published_at'], article['fetched_at']
+            ))
+            if cursor.rowcount > 0:
+                inserted += 1
+        except Exception as e:
+            print(f"Error inserting article {article['id']}: {e}")
+    
+    conn.commit()
+    return inserted
 
 
 def update_article_ai_data(
@@ -113,7 +145,6 @@ def update_article_ai_data(
     ''', (ai_score, ai_summary, ai_explanation, article_id))
     
     conn.commit()
-    conn.close()
 
 
 def get_stats() -> Dict:
@@ -139,26 +170,8 @@ def get_stats() -> Dict:
     ''')
     sources = {row[0]: row[1] for row in cursor.fetchall()}
     
-    conn.close()
-    
     return {
         'total': total,
         'categories': categories,
         'sources': sources
     }
-
-
-def delete_old_articles(days: int = 30):
-    """删除旧文章"""
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
-    before = (datetime.now() - timedelta(days=days)).isoformat()
-    cursor.execute('DELETE FROM articles WHERE published_at < ?', (before,))
-    
-    deleted = cursor.rowcount
-    conn.commit()
-    conn.close()
-    
-    print(f"Deleted {deleted} old articles")
-    return deleted

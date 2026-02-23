@@ -14,9 +14,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from app.services.database import (
     init_database, get_articles, get_article_by_id, 
-    get_stats, update_article_ai_data
+    get_stats, save_articles, update_article_ai_data
 )
-from app.services.rss_fetcher import fetch_all_rss, save_to_database
+from app.services.rss_fetcher import fetch_all_rss
 
 # 创建应用
 app = FastAPI(
@@ -40,10 +40,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 启动时初始化数据库
+# 启动时初始化数据库并抓取数据
 @app.on_event("startup")
 async def startup_event():
     init_database()
+    # 启动时抓取一次 RSS 数据（内存数据库需要）
+    try:
+        print("Fetching initial RSS data...")
+        articles = fetch_all_rss()
+        saved = save_articles(articles)
+        print(f"✓ Loaded {saved} articles")
+    except Exception as e:
+        print(f"Failed to fetch initial data: {e}")
 
 
 @app.get("/")
@@ -134,7 +142,7 @@ async def refresh_articles():
     """
     try:
         articles = fetch_all_rss()
-        inserted = save_to_database(articles)
+        inserted = save_articles(articles)
         return {
             "status": "success",
             "fetched": len(articles),
@@ -149,7 +157,12 @@ async def refresh_articles():
 @app.get("/health")
 async def health_check():
     """健康检查端点"""
-    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+    stats = get_stats()
+    return {
+        "status": "healthy",
+        "articles_count": stats.get('total', 0),
+        "timestamp": datetime.now().isoformat()
+    }
 
 
 # Vercel 入口点
