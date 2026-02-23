@@ -50,8 +50,19 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
     
     const data = await response.json();
     
+    // 调试日志
+    console.log('[RSS API] Response:', data);
+    
+    // 处理不同的响应结构
+    const articlesArray = data.articles || data || [];
+    
+    if (!Array.isArray(articlesArray)) {
+      console.error('[RSS API] Invalid response format:', data);
+      return [];
+    }
+    
     // 转换 API 数据格式为前端格式
-    return data.articles.map((item: any) => ({
+    return articlesArray.map((item: any) => ({
       id: item.id,
       title: item.title,
       aiTitle: item.title, // API 数据没有 aiTitle，使用 title
