@@ -22,7 +22,7 @@ export function ArticleCard({
   onToggleFavorite,
   showNumber = true,
 }: ArticleCardProps) {
-  const [activeTab, setActiveTab] = useState<'quick' | 'full' | 'simple' | null>(null);
+  const [activeTab, setActiveTab] = useState<'quick' | 'full' | 'simple' | 'stocks' | null>(null);
 
   const dateLocale = language === 'zh' ? zhCN : enUS;
   
@@ -114,6 +114,15 @@ export function ArticleCard({
               >
                 {language === 'zh' ? '小白解释' : 'Simple Explain'}
               </Button>
+              {/* 相关股票按钮 - 新增 */}
+              <Button
+                variant={activeTab === 'stocks' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setActiveTab(activeTab === 'stocks' ? null : 'stocks')}
+                className="text-xs h-7"
+              >
+                {language === 'zh' ? '📈 相关股票' : '📈 Stocks'}
+              </Button>
               
               <div className="flex-1" />
               
@@ -149,18 +158,16 @@ export function ArticleCard({
                     </div>
                   )}
                   {activeTab === 'simple' && (
-                    <>
-                      {/* 小白解释格子 */}
-                      <div className="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg mb-3">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs font-medium text-amber-600 dark:text-amber-400">小白解释</span>
-                        </div>
-                        <p className="text-sm leading-relaxed">{article.aiExplanation || article.content.slice(0, 200)}...</p>
+                    <div className="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs font-medium text-amber-600 dark:text-amber-400">小白解释</span>
                       </div>
-                      
-                      {/* 股票分析格子 - 在小白解释后面，分开的格子 */}
-                      <StockAnalysis stocks={article.aiStocks || []} isExpanded={true} />
-                    </>
+                      <p className="text-sm leading-relaxed">{article.aiExplanation || article.content.slice(0, 200)}...</p>
+                    </div>
+                  )}
+                  {/* 相关股票 - 独立的标签 */}
+                  {activeTab === 'stocks' && (
+                    <StockAnalysis stocks={article.aiStocks || []} isExpanded={true} />
                   )}
                 </div>
               </CollapsibleContent>
