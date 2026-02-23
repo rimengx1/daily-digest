@@ -26,6 +26,10 @@ export function ArticleCard({
 
   const dateLocale = language === 'zh' ? zhCN : enUS;
   
+  // 检查是否有股票数据
+  const hasStocks = Boolean(article.aiStocks && article.aiStocks.length > 0);
+  const firstStock = hasStocks ? article.aiStocks![0] : null;
+  
   // 确保评分是0-100的整数
   const displayScore = Math.floor(Math.min(100, Math.max(0, article.aiScore || 70)));
   
@@ -114,15 +118,24 @@ export function ArticleCard({
               >
                 {language === 'zh' ? '小白解释' : 'Simple Explain'}
               </Button>
-              {/* 相关股票按钮 - 新增 */}
-              <Button
-                variant={activeTab === 'stocks' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setActiveTab(activeTab === 'stocks' ? null : 'stocks')}
-                className="text-xs h-7"
-              >
-                {language === 'zh' ? '📈 相关股票' : '📈 Stocks'}
-              </Button>
+              {/* 相关股票按钮：仅在有股票时展示首只股票预览 */}
+              {firstStock && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setActiveTab(activeTab === 'stocks' ? null : 'stocks')}
+                  className={`text-xs h-7 ${
+                    activeTab === 'stocks' ? 'bg-muted' : ''
+                  } ${
+                    firstStock.change >= 0
+                      ? 'border-emerald-200 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:text-emerald-400 dark:hover:bg-emerald-950/30'
+                      : 'border-rose-200 text-rose-700 hover:bg-rose-50 dark:border-rose-800 dark:text-rose-400 dark:hover:bg-rose-950/30'
+                  }`}
+                >
+                  <span className="font-medium">{firstStock.symbol}</span>
+                  <span>{firstStock.change >= 0 ? '+' : ''}{firstStock.change.toFixed(2)}%</span>
+                </Button>
+              )}
               
               <div className="flex-1" />
               
@@ -166,8 +179,8 @@ export function ArticleCard({
                     </div>
                   )}
                   {/* 相关股票 - 独立的标签 */}
-                  {activeTab === 'stocks' && (
-                    <StockAnalysis stocks={article.aiStocks || []} isExpanded={true} />
+                  {activeTab === 'stocks' && hasStocks && (
+                    <StockAnalysis stocks={article.aiStocks!} isExpanded={true} />
                   )}
                 </div>
               </CollapsibleContent>
