@@ -11,7 +11,7 @@ const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 const API_CONFIG = {
   // 设置为 'deepseek' 或 'gpt-codex' 来启用真实API
   // 设置为 'mock' 使用模拟数据
-  provider: 'mock' as 'mock' | 'gpt-codex' | 'deepseek',
+  provider: 'deepseek' as 'mock' | 'gpt-codex' | 'deepseek',
   
   // API Endpoints
   endpoints: {

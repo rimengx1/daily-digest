@@ -1,0 +1,15 @@
+# RSS Backend for xyan.xin
+# FastAPI + SQLite + RSS Parser
+
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+feedparser==6.0.11
+requests==2.32.3
+pydantic==2.9.2
+pydantic-settings==2.6.1
+python-dotenv==1.0.1
+beautifulsoup4==4.12.3
+aiohttp==3.10.10
+aiosqlite==0.20.0
+apscheduler==3.10.4
+httpx==0.27.2

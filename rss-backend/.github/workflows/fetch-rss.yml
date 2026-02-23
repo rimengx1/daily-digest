@@ -1,0 +1,48 @@
+name: Fetch RSS Feeds
+
+on:
+  schedule:
+    # 每 6 小时运行一次
+    - cron: '0 */6 * * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  fetch-rss:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        path: main-repo
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      working-directory: main-repo/rss-backend
+      run: |
+        pip install -r requirements.txt
+    
+    - name: Fetch RSS feeds
+      working-directory: main-repo/rss-backend
+      run: |
+        python fetch_rss.py
+    
+    - name: Upload database artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: articles-db
+        path: main-repo/rss-backend/articles.db
+        retention-days: 30
+    
+    - name: Commit database changes (optional)
+      working-directory: main-repo
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add rss-backend/articles.db
+        git diff --staged --quiet || (git commit -m "Update RSS database" && git push)
+      continue-on-error: true
