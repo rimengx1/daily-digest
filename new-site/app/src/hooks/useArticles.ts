@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import type { Article } from '@/types';
+import type { Article, AIStockAnalysis } from '@/types';
 import { generateMockArticles, generateMoreArticles } from '@/services/mockData';
+import { analyzeStocks } from '@/services/api';
 
 // RSS API 配置
 const RSS_API_BASE_URL = import.meta.env.VITE_RSS_API_URL || 'http://localhost:8000';
@@ -263,6 +264,31 @@ function getMockSummary(type: 'quick' | 'full' | 'simple'): string {
   return simpleExplanations[Math.floor(Math.random() * simpleExplanations.length)];
 }
 
+// 模拟股票数据
+function getMockStocks(): AIStockAnalysis[] {
+  const mockStocks: AIStockAnalysis[] = [
+    {
+      symbol: 'NVDA',
+      name: '英伟达',
+      change: 2.5,
+      reason: 'AI芯片需求增长'
+    },
+    {
+      symbol: 'MSFT',
+      name: '微软',
+      change: 1.2,
+      reason: 'Azure AI服务扩展'
+    },
+    {
+      symbol: 'GOOGL',
+      name: '谷歌',
+      change: -0.8,
+      reason: 'AI竞争加剧'
+    }
+  ];
+  return mockStocks;
+}
+
 // ============================================
 // 主Hook
 // ============================================
@@ -330,7 +356,10 @@ export function useArticles() {
   // AI 处理文章
   const processArticlesWithAI = useCallback(async (newArticles: Article[]): Promise<Article[]> => {
     if (API_CONFIG.provider === 'mock') {
-      return newArticles;
+      return newArticles.map(article => ({
+        ...article,
+        aiStocks: getMockStocks() // Mock 模式下也显示模拟股票
+      }));
     }
     
     const provider = API_CONFIG.provider;
@@ -339,16 +368,18 @@ export function useArticles() {
     for (const article of newArticles) {
       try {
         // 如果文章已经有 AI 数据，跳过
-        if (article.aiScore > 0 && article.aiSummary) {
+        if (article.aiScore > 0 && article.aiSummary && article.aiStocks) {
           processedArticles.push(article);
           continue;
         }
         
-        const [quickSummary, fullSummary, simpleExplanation, score] = await Promise.all([
+        // 并行调用所有 AI 接口（包括股票分析）
+        const [quickSummary, fullSummary, simpleExplanation, score, stocks] = await Promise.all([
           generateAISummary(article.title, article.content, 'quick', provider),
           generateAISummary(article.title, article.content, 'full', provider),
           generateAISummary(article.title, article.content, 'simple', provider),
           generateAIScore(article.title, article.content, provider),
+          analyzeStocks(article.title, article.content, provider),
         ]);
         
         processedArticles.push({
@@ -357,10 +388,14 @@ export function useArticles() {
           aiInterpretation: fullSummary,
           aiExplanation: simpleExplanation,
           aiScore: score,
+          aiStocks: stocks,
         });
       } catch (error) {
         console.error('AI处理文章失败:', error);
-        processedArticles.push(article);
+        processedArticles.push({
+          ...article,
+          aiStocks: getMockStocks() // 失败时也显示模拟股票
+        });
       }
     }
     
@@ -469,6 +504,7 @@ export function useArticles() {
     translateContent,
     generateAISummary,
     generateAIScore,
+    analyzeStocks, // 导出股票分析函数
     apiConfig: API_CONFIG,
   };
 }

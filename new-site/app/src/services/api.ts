@@ -1,4 +1,4 @@
-import type { AIGeneratedContent, APIArticleInput } from '@/types';
+import type { AIGeneratedContent, APIArticleInput, AIStockAnalysis } from '@/types';
 
 /**
  * AI News Aggregator API Service
@@ -7,6 +7,7 @@ import type { AIGeneratedContent, APIArticleInput } from '@/types';
  * - 翻译功能 (translateContent)
  * - AI智能摘要 (generateAISummary) - 30秒速读 / 全文摘要 / 小白解释
  * - AI评分 (generateAIScore) - 0-100分
+ * - AI股票分析 (analyzeStocks) - 关联股票及涨跌分析
  * 
  * 使用方法：
  * 1. 在 .env 文件中设置API密钥：
@@ -282,6 +283,125 @@ export async function processArticleWithAI(
     simpleExplanation,
     score,
   };
+}
+
+// ============================================
+// 4. AI 股票分析 API 接口
+// ============================================
+
+/**
+ * 分析文章关联的股票
+ * @param title 文章标题
+ * @param content 文章内容
+ * @param provider AI提供商: 'deepseek' | 'gpt-codex'
+ * @returns 相关股票列表（含涨跌分析）
+ */
+export async function analyzeStocks(
+  title: string,
+  content: string,
+  provider: 'gpt-codex' | 'deepseek' = 'deepseek'
+): Promise<AIStockAnalysis[]> {
+  const apiKey = API_CONFIG.getApiKey(provider);
+  const endpoint = API_CONFIG.endpoints[provider];
+  
+  if (!apiKey) {
+    console.warn('[AI股票分析] 未配置API密钥，返回模拟数据');
+    return getMockStocks();
+  }
+  
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: provider === 'deepseek' ? 'deepseek-chat' : 'gpt-5.3-codex',
+        messages: [
+          {
+            role: 'system',
+            content: `你是一位专业的股票分析师。请分析这篇文章，识别其中提到的相关上市公司股票。
+
+请按以下 JSON 格式返回（不要包含其他文字）：
+[
+  {
+    "symbol": "股票代码",
+    "name": "公司名称",
+    "change": 涨跌百分比数字（-10 到 +10 之间）,
+    "reason": "与文章关联的简要原因（20字以内）"
+  }
+]
+
+注意：
+- 只返回真正与文章内容相关的股票
+- 如果没有相关股票，返回空数组 []
+- change 为预测今日涨跌，基于文章影响（正数为涨，负数为跌）
+- 美股代码如 AAPL, NVDA, MSFT, GOOGL, TSLA 等
+- 港股/A股代码如 0700.HK, 600519.SH 等`
+          },
+          {
+            role: 'user',
+            content: `标题：${title}\n\n内容：${content.slice(0, 3000)}`
+          }
+        ],
+        temperature: 0.3,
+      }),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`[AI股票分析] 错误: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    const content_text = data.choices[0].message.content.trim();
+    
+    // 解析 JSON 响应
+    try {
+      // 尝试直接解析
+      const stocks: AIStockAnalysis[] = JSON.parse(content_text);
+      return stocks.slice(0, 5); // 最多返回5只股票
+    } catch (e) {
+      // 尝试从 markdown 代码块中提取
+      const jsonMatch = content_text.match(/```(?:json)?\s*([\s\S]*?)```/);
+      if (jsonMatch) {
+        const stocks: AIStockAnalysis[] = JSON.parse(jsonMatch[1]);
+        return stocks.slice(0, 5);
+      }
+      console.warn('[AI股票分析] 解析失败，返回模拟数据');
+      return getMockStocks();
+    }
+  } catch (error) {
+    console.error('[AI股票分析] 失败:', error);
+    return getMockStocks();
+  }
+}
+
+/**
+ * 获取模拟股票数据（用于测试）
+ */
+function getMockStocks(): AIStockAnalysis[] {
+  const mockStocks: AIStockAnalysis[] = [
+    {
+      symbol: 'NVDA',
+      name: '英伟达',
+      change: 2.5,
+      reason: 'AI芯片需求增长'
+    },
+    {
+      symbol: 'MSFT',
+      name: '微软',
+      change: 1.2,
+      reason: 'Azure AI服务扩展'
+    },
+    {
+      symbol: 'GOOGL',
+      name: '谷歌',
+      change: -0.8,
+      reason: 'AI竞争加剧'
+    }
+  ];
+  return mockStocks;
 }
 
 export { API_CONFIG };

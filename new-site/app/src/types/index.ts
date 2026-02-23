@@ -8,6 +8,8 @@ export interface Article {
   aiInterpretation: string; // 全文摘要 - full summary  
   aiExplanation?: string;   // 小白解释 - simple explanation
   aiScore: number;          // 0-100 score
+  // AI 股票分析
+  aiStocks?: AIStockAnalysis[]; // 相关股票及涨跌
   content: string;          // Full article content
   translatedContent?: string;
   url: string;
@@ -17,6 +19,15 @@ export interface Article {
   isFavorited: boolean;
   language: string;
   articleNumber: number;
+}
+
+// AI 股票分析结果
+export interface AIStockAnalysis {
+  symbol: string;        // 股票代码，如 AAPL, NVDA, TSLA
+  name: string;          // 公司名称
+  change: number;        // 涨跌百分比
+  changeAmount?: number; // 涨跌金额
+  reason: string;        // AI 分析关联原因（简短）
 }
 
 export interface RSSFeed {

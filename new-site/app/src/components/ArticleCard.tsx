@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Star, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible';
+import { StockAnalysis } from '@/components/StockAnalysis';
 import type { Article, Language } from '@/types';
 import { format } from 'date-fns';
 import { zhCN, enUS } from 'date-fns/locale';
@@ -148,11 +149,15 @@ export function ArticleCard({
                     </div>
                   )}
                   {activeTab === 'simple' && (
-                    <div className="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xs font-medium text-amber-600 dark:text-amber-400">小白解释</span>
+                    <div>
+                      <div className="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg mb-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-xs font-medium text-amber-600 dark:text-amber-400">小白解释</span>
+                        </div>
+                        <p className="text-sm leading-relaxed">{article.aiExplanation || article.content.slice(0, 200)}...</p>
                       </div>
-                      <p className="text-sm leading-relaxed">{article.aiExplanation || article.content.slice(0, 200)}...</p>
+                      {/* 股票分析 - 放在小白解释后面 */}
+                      <StockAnalysis stocks={article.aiStocks} />
                     </div>
                   )}
                 </div>
