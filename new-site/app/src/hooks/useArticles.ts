@@ -2,27 +2,23 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import type { Article } from '@/types';
 import { generateMockArticles, generateMoreArticles } from '@/services/mockData';
 
+// RSS API 配置
+const RSS_API_BASE_URL = import.meta.env.VITE_RSS_API_URL || 'http://localhost:8000';
+const USE_RSS_API = import.meta.env.VITE_USE_RSS_API === 'true' || false;
+
 // 更新存储键名，避免与旧数据冲突
 const ARTICLES_KEY = 'ai-news-articles-v2';
 const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
 // API Configuration for external AI services
-// 修改这里来启用真实的AI API
 const API_CONFIG = {
-  // 设置为 'deepseek' 或 'gpt-codex' 来启用真实API
-  // 设置为 'mock' 使用模拟数据
   provider: 'deepseek' as 'mock' | 'gpt-codex' | 'deepseek',
   
-  // API Endpoints
   endpoints: {
     'gpt-codex': 'https://api.openai.com/v1/chat/completions',
     'deepseek': 'https://api.deepseek.com/v1/chat/completions',
   },
   
-  // API Keys - 从环境变量读取
-  // 在 .env 文件中设置:
-  // VITE_DEEPSEEK_API_KEY=your_key_here
-  // VITE_GPT_CODEX_API_KEY=your_key_here
   getApiKey(provider: 'gpt-codex' | 'deepseek'): string {
     if (provider === 'deepseek') {
       return import.meta.env.VITE_DEEPSEEK_API_KEY || '';
@@ -32,15 +28,57 @@ const API_CONFIG = {
 };
 
 // ============================================
-// AI API 接口 - 翻译功能
+// RSS API 接口
 // ============================================
 
 /**
- * 翻译文章内容
- * @param content 要翻译的英文内容
- * @param provider AI提供商
- * @returns 翻译后的中文内容
+ * 从 RSS API 获取文章
  */
+async function fetchArticlesFromAPI(category?: string, limit: number = 50): Promise<Article[]> {
+  try {
+    const params = new URLSearchParams();
+    if (category) params.append('category', category);
+    params.append('limit', limit.toString());
+    params.append('days', '7');
+    
+    const response = await fetch(`${RSS_API_BASE_URL}/api/articles?${params}`);
+    
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    // 转换 API 数据格式为前端格式
+    return data.articles.map((item: any) => ({
+      id: item.id,
+      title: item.title,
+      aiTitle: item.title, // API 数据没有 aiTitle，使用 title
+      summary: item.summary || '',
+      content: item.content || item.summary || '',
+      url: item.url,
+      source: item.source,
+      category: item.category,
+      language: item.language,
+      publishedAt: new Date(item.published_at),
+      fetchedAt: new Date(item.fetched_at),
+      isFavorited: false,
+      aiScore: item.ai_score || Math.floor(60 + Math.random() * 40),
+      aiSummary: item.ai_summary || '',
+      aiInterpretation: '',
+      aiExplanation: item.ai_explanation || '',
+      articleNumber: parseInt(item.id, 16) % 10000, // 从 ID 生成文章编号
+    }));
+  } catch (error) {
+    console.error('Failed to fetch from RSS API:', error);
+    throw error;
+  }
+}
+
+// ============================================
+// AI API 接口
+// ============================================
+
 export async function translateContent(
   content: string,
   provider: 'gpt-codex' | 'deepseek' = 'deepseek'
@@ -88,18 +126,6 @@ export async function translateContent(
   }
 }
 
-// ============================================
-// AI API 接口 - 智能摘要功能
-// ============================================
-
-/**
- * 生成AI智能摘要
- * @param title 文章标题
- * @param content 文章内容
- * @param type 摘要类型: 'quick' | 'full' | 'simple'
- * @param provider AI提供商
- * @returns 生成的摘要
- */
 export async function generateAISummary(
   title: string,
   content: string,
@@ -155,17 +181,6 @@ export async function generateAISummary(
   }
 }
 
-// ============================================
-// AI API 接口 - 评分功能
-// ============================================
-
-/**
- * 生成AI评分
- * @param title 文章标题
- * @param content 文章内容
- * @param provider AI提供商
- * @returns 0-100的整数评分
- */
 export async function generateAIScore(
   title: string,
   content: string,
@@ -210,7 +225,6 @@ export async function generateAIScore(
     const scoreText = data.choices[0].message.content.trim();
     const score = parseInt(scoreText);
     
-    // 确保返回0-100的整数
     if (isNaN(score)) {
       return Math.floor(60 + Math.random() * 40);
     }
@@ -222,7 +236,7 @@ export async function generateAIScore(
 }
 
 // ============================================
-// 模拟数据（当API未配置时使用）
+// 模拟数据
 // ============================================
 
 function getMockSummary(type: 'quick' | 'full' | 'simple'): string {
@@ -233,9 +247,9 @@ function getMockSummary(type: 'quick' | 'full' | 'simple'): string {
   ];
   
   const fullSummaries = [
-    '在一项突破性进展中，研究人员揭示了一种有望彻底改变人工智能领域的新架构。这个新模型建立在Transformer技术的基础上，引入了多项关键创新，解决了当前系统的局限性。由全球顶尖机构专家组成的研究团队花费了两年多的时间来开发和完善这一方法。',
-    '人工智能继续重塑全球各行各业，新应用以前所未有的速度涌现。从医疗保健到金融，从教育到娱乐，人工智能技术正在改变我们工作、学习和与周围世界互动的方式。大型语言模型的最新发展特别引起了公众的关注。',
-    '自诞生以来，机器学习已经走过了漫长的道路，从一个小众的学术学科发展成为触及现代生活几乎方方面面的变革性技术。这种演变是由算法、硬件和数据可用性的进步推动的。',
+    '在一项突破性进展中，研究人员揭示了一种有望彻底改变人工智能领域的新架构。这个新模型建立在Transformer技术的基础上，引入了多项关键创新。',
+    '人工智能继续重塑全球各行各业，新应用以前所未有的速度涌现。从医疗保健到金融，从教育到娱乐，人工智能技术正在改变我们的生活方式。',
+    '自诞生以来，机器学习已经走过了漫长的道路，从一个小众的学术学科发展成为触及现代生活几乎方方面面的变革性技术。',
   ];
   
   const simpleExplanations = [
@@ -254,17 +268,14 @@ function getMockSummary(type: 'quick' | 'full' | 'simple'): string {
 // ============================================
 
 export function useArticles() {
-  // 使用新的存储键，避免旧数据干扰
   const [articles, setArticles] = useState<Article[]>(() => {
     if (typeof window !== 'undefined') {
-      // 清除旧版本的数据
       localStorage.removeItem('ai-news-articles');
       
       const saved = localStorage.getItem(ARTICLES_KEY);
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
-          // 确保所有评分都是整数
           const fixed = parsed.map((a: any) => ({
             ...a,
             aiScore: Math.floor(a.aiScore || 70),
@@ -281,36 +292,43 @@ export function useArticles() {
 
   const [lastRefresh, setLastRefresh] = useState<Date | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [useAPI, setUseAPI] = useState(USE_RSS_API);
   const refreshTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Save articles to localStorage
   useEffect(() => {
     localStorage.setItem(ARTICLES_KEY, JSON.stringify(articles));
   }, [articles]);
 
-  // Auto refresh every 5 minutes
-  useEffect(() => {
-    // 立即执行一次刷新
-    refreshArticles();
+  // 从 API 获取文章
+  const fetchFromAPI = useCallback(async () => {
+    if (!useAPI) return;
     
-    // 设置定时刷新
-    refreshTimerRef.current = setInterval(() => {
-      refreshArticles();
-    }, REFRESH_INTERVAL);
+    setIsRefreshing(true);
+    try {
+      // 获取 RSS 和 AI-Hot 分类的文章
+      const [rssArticles, aiHotArticles] = await Promise.all([
+        fetchArticlesFromAPI('rss', 30).catch(() => []),
+        fetchArticlesFromAPI('ai-hot', 30).catch(() => []),
+      ]);
+      
+      const allArticles = [...rssArticles, ...aiHotArticles];
+      
+      // 使用 AI 处理文章（翻译、摘要、评分）
+      const processedArticles = await processArticlesWithAI(allArticles);
+      
+      setArticles(processedArticles);
+      setLastRefresh(new Date());
+    } catch (error) {
+      console.error('Failed to fetch from API:', error);
+      // 失败时使用 mock 数据
+      setArticles(generateMockArticles());
+    } finally {
+      setIsRefreshing(false);
+    }
+  }, [useAPI]);
 
-    return () => {
-      if (refreshTimerRef.current) {
-        clearInterval(refreshTimerRef.current);
-      }
-    };
-  }, []);
-
-  /**
-   * 使用AI处理文章
-   * 调用翻译、摘要、评分API
-   */
+  // AI 处理文章
   const processArticlesWithAI = useCallback(async (newArticles: Article[]): Promise<Article[]> => {
-    // 如果使用mock模式，直接返回
     if (API_CONFIG.provider === 'mock') {
       return newArticles;
     }
@@ -320,7 +338,12 @@ export function useArticles() {
     
     for (const article of newArticles) {
       try {
-        // 并行调用所有AI接口
+        // 如果文章已经有 AI 数据，跳过
+        if (article.aiScore > 0 && article.aiSummary) {
+          processedArticles.push(article);
+          continue;
+        }
+        
         const [quickSummary, fullSummary, simpleExplanation, score] = await Promise.all([
           generateAISummary(article.title, article.content, 'quick', provider),
           generateAISummary(article.title, article.content, 'full', provider),
@@ -344,38 +367,50 @@ export function useArticles() {
     return processedArticles;
   }, []);
 
-  /**
-   * 刷新文章
-   * 每5分钟自动调用
-   */
+  // 刷新文章
   const refreshArticles = useCallback(async () => {
-    if (isRefreshing) return; // 防止重复刷新
+    if (isRefreshing) return;
     
-    setIsRefreshing(true);
-    
-    try {
-      // 生成新文章
-      const newArticles = generateMoreArticles(articles);
-      
-      // 使用AI处理
-      const processedArticles = await processArticlesWithAI(newArticles);
-      
-      setArticles(prev => {
-        const combined = [...processedArticles, ...prev];
-        // 去重并限制数量
-        const unique = combined.filter((article, index, self) =>
-          index === self.findIndex(a => a.id === article.id)
-        );
-        return unique.slice(0, 100);
-      });
-      
-      setLastRefresh(new Date());
-    } catch (error) {
-      console.error('刷新失败:', error);
-    } finally {
-      setIsRefreshing(false);
+    if (useAPI) {
+      await fetchFromAPI();
+    } else {
+      // 使用 mock 数据
+      setIsRefreshing(true);
+      try {
+        const newArticles = generateMoreArticles(articles);
+        const processedArticles = await processArticlesWithAI(newArticles);
+        
+        setArticles(prev => {
+          const combined = [...processedArticles, ...prev];
+          const unique = combined.filter((article, index, self) =>
+            index === self.findIndex(a => a.id === article.id)
+          );
+          return unique.slice(0, 100);
+        });
+        
+        setLastRefresh(new Date());
+      } catch (error) {
+        console.error('刷新失败:', error);
+      } finally {
+        setIsRefreshing(false);
+      }
     }
-  }, [articles, isRefreshing, processArticlesWithAI]);
+  }, [articles, isRefreshing, useAPI, fetchFromAPI, processArticlesWithAI]);
+
+  // 初始加载和定时刷新
+  useEffect(() => {
+    refreshArticles();
+    
+    refreshTimerRef.current = setInterval(() => {
+      refreshArticles();
+    }, REFRESH_INTERVAL);
+
+    return () => {
+      if (refreshTimerRef.current) {
+        clearInterval(refreshTimerRef.current);
+      }
+    };
+  }, []);
 
   const getArticlesByCategory = useCallback((category: Article['category']) => {
     return articles.filter(a => a.category === category);
@@ -414,21 +449,26 @@ export function useArticles() {
     );
   }, []);
 
+  // 切换数据源
+  const toggleDataSource = useCallback(() => {
+    setUseAPI(prev => !prev);
+  }, []);
+
   return {
     articles,
     lastRefresh,
     isRefreshing,
+    useAPI,
     refreshArticles,
     getArticlesByCategory,
     getTopArticlesByScore,
     getTodayTopArticles,
     getFavoriteArticles,
     updateArticle,
-    // 导出API函数供外部使用
+    toggleDataSource,
     translateContent,
     generateAISummary,
     generateAIScore,
-    // 导出API配置
     apiConfig: API_CONFIG,
   };
 }

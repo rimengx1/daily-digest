@@ -1,5 +1,5 @@
 """
-FastAPI Main Application
+FastAPI Main Application for Vercel
 API for xyan.xin
 """
 from fastapi import FastAPI, HTTPException, Query
@@ -7,6 +7,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 from datetime import datetime
 import os
+import sys
+
+# Add app directory to path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from app.services.database import (
     init_database, get_articles, get_article_by_id, 
@@ -29,6 +33,7 @@ app.add_middleware(
         "https://www.xyan.xin",
         "http://localhost:3000",
         "http://localhost:5173",
+        "*",  # 开发时允许所有来源
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -147,6 +152,8 @@ async def health_check():
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
 
 
+# Vercel 入口点
+# 本地开发时使用
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8000))
