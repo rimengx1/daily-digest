@@ -305,27 +305,7 @@ function getMockStocks(): AIStockAnalysis[] {
 // ============================================
 
 export function useArticles() {
-  const [articles, setArticles] = useState<Article[]>(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('ai-news-articles');
-      
-      const saved = localStorage.getItem(ARTICLES_KEY);
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          const fixed = parsed.map((a: any) => ({
-            ...a,
-            aiScore: Math.floor(a.aiScore || 70),
-            publishedAt: new Date(a.publishedAt),
-          }));
-          return fixed;
-        } catch {
-          return generateMockArticles();
-        }
-      }
-    }
-    return generateMockArticles();
-  });
+  const [articles, setArticles] = useState<Article[]>([]); // 初始为空数组，不使用 Mock
 
   const [lastRefresh, setLastRefresh] = useState<Date | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
