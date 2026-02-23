@@ -4,12 +4,13 @@ import { generateMockArticles, generateMoreArticles } from '@/services/mockData'
 import { analyzeStocks } from '@/services/api';
 
 // RSS API 配置
-const RSS_API_BASE_URL = import.meta.env.VITE_RSS_API_URL || 'https://daily-digest-6cyc.vercel.app';
-const USE_RSS_API = true; // 强制使用 RSS API，不再使用 Mock 数据
+// 临时方案：直接从 GitHub 读取 JSON，绕过崩溃的 Vercel API
+const RSS_DATA_URL = 'https://raw.githubusercontent.com/rimengx1/daily-digest/main/data/articles.json';
+const USE_RSS_API = true;
 
 // 更新存储键名，避免与旧数据冲突
-const ARTICLES_KEY = 'ai-news-articles-v2';
-const REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes - 每10分钟自动刷新
+const ARTICLES_KEY = 'ai-news-articles-v3';
+const REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes
 
 // API Configuration for external AI services
 const API_CONFIG = {
@@ -33,44 +34,44 @@ const API_CONFIG = {
 // ============================================
 
 /**
- * 从 RSS API 获取文章
+ * 从 GitHub 直接读取 RSS 数据（绕过崩溃的 Vercel API）
  */
 async function fetchArticlesFromAPI(category?: string, limit: number = 50): Promise<Article[]> {
   try {
-    const params = new URLSearchParams();
-    if (category) params.append('category', category);
-    params.append('limit', limit.toString());
-    params.append('days', '7');
-    
-    const response = await fetch(`${RSS_API_BASE_URL}/api/articles?${params}`);
+    const response = await fetch(`${RSS_DATA_URL}?t=${Date.now()}`);
     
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      throw new Error(`Data fetch error: ${response.status}`);
     }
     
-    const data = await response.json();
+    const allArticles = await response.json();
     
-    // 调试日志
-    console.log('[RSS API] Response:', data);
+    console.log('[RSS Data] Loaded:', allArticles.length, 'articles');
     
-    // 处理不同的响应结构
-    const articlesArray = data.articles || data || [];
-    
-    if (!Array.isArray(articlesArray)) {
-      console.error('[RSS API] Invalid response format:', data);
+    if (!Array.isArray(allArticles)) {
+      console.error('[RSS Data] Invalid format:', allArticles);
       return [];
     }
     
-    // 转换 API 数据格式为前端格式
-    return articlesArray.map((item: any) => ({
+    // 如果指定了分类，过滤文章
+    let filteredArticles = allArticles;
+    if (category) {
+      filteredArticles = allArticles.filter((item: any) => item.category === category);
+    }
+    
+    // 限制数量
+    filteredArticles = filteredArticles.slice(0, limit);
+    
+    // 转换数据格式
+    return filteredArticles.map((item: any) => ({
       id: item.id,
       title: item.title,
-      aiTitle: item.title, // API 数据没有 aiTitle，使用 title
+      aiTitle: item.title,
       summary: item.summary || '',
       content: item.content || item.summary || '',
       url: item.url,
       source: item.source,
-      category: item.category, // 保持 API 返回的 category ('rss' 或 'ai-hot')
+      category: item.category,
       language: item.language || 'en',
       publishedAt: new Date(item.published_at || Date.now()),
       fetchedAt: new Date(item.fetched_at || Date.now()),
@@ -79,10 +80,10 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
       aiSummary: item.ai_summary || item.summary || '',
       aiInterpretation: '',
       aiExplanation: item.ai_explanation || '',
-      articleNumber: parseInt(item.id?.slice(0, 8) || '0', 16) % 10000, // 从 ID 生成文章编号
+      articleNumber: parseInt(item.id?.slice(0, 8) || '0', 16) % 10000,
     }));
   } catch (error) {
-    console.error('Failed to fetch from RSS API:', error);
+    console.error('Failed to fetch RSS data:', error);
     throw error;
   }
 }
