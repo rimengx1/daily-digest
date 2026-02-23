@@ -61,11 +61,14 @@ export const StockAnalysis: React.FC<StockAnalysisProps> = ({ stocks, isExpanded
   };
 
   return (
-    <div className="mt-4 pt-4 border-t border-amber-200/30 dark:border-amber-800/30">
+    // 独立的琥珀色格子，和小白解释一样的样式
+    <div className="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
       {/* 标题行 */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-amber-600 dark:text-amber-400">📈 相关股票</span>
+          <span className="text-xs font-medium text-amber-600 dark:text-amber-400">
+            📈 相关股票
+          </span>
           <span className="text-[10px] text-amber-500/70 dark:text-amber-400/70">
             AI预测 · 每分钟刷新
           </span>
@@ -81,10 +84,9 @@ export const StockAnalysis: React.FC<StockAnalysisProps> = ({ stocks, isExpanded
           <div
             key={index}
             onClick={() => handleStockClick(stock.symbol)}
-            className="group flex items-center justify-between p-3 bg-amber-100/50 dark:bg-amber-950/40 
-                       rounded-lg cursor-pointer hover:bg-amber-200/50 dark:hover:bg-amber-900/40 
-                       transition-all duration-200 border border-transparent 
-                       hover:border-amber-300 dark:hover:border-amber-700"
+            className="group flex items-center justify-between p-2.5 bg-white/50 dark:bg-slate-800/50 
+                       rounded-lg cursor-pointer hover:bg-amber-100/50 dark:hover:bg-amber-900/20 
+                       transition-all duration-200"
           >
             {/* 左侧：股票信息 */}
             <div className="flex items-center gap-3">
@@ -98,7 +100,7 @@ export const StockAnalysis: React.FC<StockAnalysisProps> = ({ stocks, isExpanded
 
               {/* 涨跌幅标签 */}
               <div
-                className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold ${
+                className={`flex items-center gap-1 px-2 py-0.5 rounded text-xs font-semibold ${
                   stock.change >= 0
                     ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'
                     : 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400'
@@ -115,7 +117,7 @@ export const StockAnalysis: React.FC<StockAnalysisProps> = ({ stocks, isExpanded
 
             {/* 右侧：原因和跳转图标 */}
             <div className="flex items-center gap-2">
-              <span className="text-xs text-slate-500 dark:text-slate-400 max-w-[150px] truncate text-right">
+              <span className="text-xs text-slate-500 dark:text-slate-400 max-w-[140px] truncate text-right">
                 {stock.reason}
               </span>
               <ExternalLink className="w-3 h-3 text-amber-500/50 opacity-0 group-hover:opacity-100 transition-opacity" />
