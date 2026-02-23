@@ -123,11 +123,11 @@ def fetch_rss_feed(source_id: str, source_config: Dict) -> List[Dict]:
             }
             articles.append(article)
         
-        print(f"  ✓ Fetched {len(articles)} articles from {source_config['name']}")
+        print(f"  [OK] Fetched {len(articles)} articles from {source_config['name']}")
         return articles
         
     except Exception as e:
-        print(f"  ✗ Error fetching {source_config['name']}: {e}")
+        print(f"  [ERR] Error fetching {source_config['name']}: {e}")
         return []
 
 
