@@ -30,9 +30,21 @@ RSS_SOURCES = {
         'category': 'ai-hot',
         'language': 'en'
     },
+    'deepmind': {
+        'name': 'DeepMind Blog',
+        'url': 'https://deepmind.google/blog/rss.xml',
+        'category': 'ai-hot',
+        'language': 'en'
+    },
     'huggingface': {
         'name': 'HuggingFace Blog',
         'url': 'https://huggingface.co/blog/feed.xml',
+        'category': 'ai-hot',
+        'language': 'en'
+    },
+    'stability-ai': {
+        'name': 'Stability AI',
+        'url': 'https://stability.ai/blog/rss.xml',
         'category': 'ai-hot',
         'language': 'en'
     },
@@ -51,6 +63,24 @@ RSS_SOURCES = {
     'venturebeat-ai': {
         'name': 'VentureBeat AI',
         'url': 'https://venturebeat.com/category/ai/feed/',
+        'category': 'ai-hot',
+        'language': 'en'
+    },
+    'arxiv-ai': {
+        'name': 'arXiv AI',
+        'url': 'http://export.arxiv.org/rss/cs.AI',
+        'category': 'ai-hot',
+        'language': 'en'
+    },
+    'nvidia-blog': {
+        'name': 'NVIDIA Blog',
+        'url': 'https://blogs.nvidia.com/blog/feed/',
+        'category': 'rss',
+        'language': 'en'
+    },
+    'microsoft-ai': {
+        'name': 'Microsoft AI Blog',
+        'url': 'https://blogs.microsoft.com/ai/feed/',
         'category': 'ai-hot',
         'language': 'en'
     },
