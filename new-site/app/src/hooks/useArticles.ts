@@ -70,16 +70,16 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
       content: item.content || item.summary || '',
       url: item.url,
       source: item.source,
-      category: item.category,
-      language: item.language,
-      publishedAt: new Date(item.published_at),
-      fetchedAt: new Date(item.fetched_at),
+      category: item.category, // 保持 API 返回的 category ('rss' 或 'ai-hot')
+      language: item.language || 'en',
+      publishedAt: new Date(item.published_at || Date.now()),
+      fetchedAt: new Date(item.fetched_at || Date.now()),
       isFavorited: false,
       aiScore: item.ai_score || Math.floor(60 + Math.random() * 40),
-      aiSummary: item.ai_summary || '',
+      aiSummary: item.ai_summary || item.summary || '',
       aiInterpretation: '',
       aiExplanation: item.ai_explanation || '',
-      articleNumber: parseInt(item.id, 16) % 10000, // 从 ID 生成文章编号
+      articleNumber: parseInt(item.id?.slice(0, 8) || '0', 16) % 10000, // 从 ID 生成文章编号
     }));
   } catch (error) {
     console.error('Failed to fetch from RSS API:', error);
