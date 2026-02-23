@@ -20,7 +20,7 @@ import type { AIGeneratedContent, APIArticleInput } from '@/types';
 // API 配置
 const API_CONFIG = {
   // 设置为 'deepseek' 或 'gpt-codex' 启用真实API，'mock' 使用模拟数据
-  provider: 'mock' as 'mock' | 'gpt-codex' | 'deepseek',
+  provider: 'deepseek' as 'mock' | 'gpt-codex' | 'deepseek',
   
   endpoints: {
     'gpt-codex': 'https://api.openai.com/v1/chat/completions',
