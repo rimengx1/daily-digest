@@ -4,8 +4,8 @@ import { generateMockArticles, generateMoreArticles } from '@/services/mockData'
 import { analyzeStocks } from '@/services/api';
 
 // RSS API 配置
-const RSS_API_BASE_URL = import.meta.env.VITE_RSS_API_URL || 'http://localhost:8000';
-const USE_RSS_API = import.meta.env.VITE_USE_RSS_API === 'true' || false;
+const RSS_API_BASE_URL = import.meta.env.VITE_RSS_API_URL || 'https://daily-digest-6cyc.vercel.app';
+const USE_RSS_API = true; // 强制使用 RSS API，不再使用 Mock 数据
 
 // 更新存储键名，避免与旧数据冲突
 const ARTICLES_KEY = 'ai-news-articles-v2';
