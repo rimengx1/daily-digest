@@ -75,10 +75,11 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
       publishedAt: new Date(item.published_at || Date.now()),
       fetchedAt: new Date(item.fetched_at || Date.now()),
       isFavorited: false,
-      aiScore: item.ai_score || Math.floor(60 + Math.random() * 40),
-      aiSummary: item.ai_summary || item.summary || '',
-      aiInterpretation: '',
-      aiExplanation: item.ai_explanation || '',
+      aiScore: item.aiScore || item.ai_score || Math.floor(60 + Math.random() * 40),
+      aiSummary: item.aiSummary || item.ai_summary || item.summary || '',
+      aiInterpretation: item.aiInterpretation || '',
+      aiExplanation: item.aiExplanation || item.ai_explanation || '',
+      aiStocks: item.aiStocks || item.ai_stocks || [],  // 优先使用AI生成的股票数据
       articleNumber: parseInt(item.id?.slice(0, 8) || '0', 16) % 10000,
     }));
   } catch (error) {
@@ -340,12 +341,13 @@ export function useArticles() {
     }
   }, [useAPI]);
 
-  // AI 处理文章（已禁用，直接返回原始数据）
+  // AI 处理文章（保留已有AI数据，不覆盖）
   const processArticlesWithAI = useCallback(async (newArticles: Article[]): Promise<Article[]> => {
-    // 直接返回原始文章，不调用 AI API（避免阻塞和失败）
+    // 保留文章已有的AI数据（如果有），不覆盖
     return newArticles.map(article => ({
       ...article,
-      aiStocks: getMockStocks() // 添加模拟股票数据
+      // 如果文章已有aiStocks，保留；否则使用mock（仅作为fallback）
+      aiStocks: article.aiStocks && article.aiStocks.length > 0 ? article.aiStocks : getMockStocks()
     }));
   }, []);
 

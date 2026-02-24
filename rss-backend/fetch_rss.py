@@ -212,25 +212,25 @@ def process_article_with_ai(article, api_key):
     # 生成AI摘要
     ai_summary = generate_ai_summary(title, content, api_key)
     if ai_summary:
-        article['ai_summary'] = ai_summary
+        article['aiSummary'] = ai_summary  # 驼峰命名，前端兼容
         print(f"    ✓ AI摘要生成成功")
     
     # 生成小白解释
     ai_explanation = generate_simple_explanation(title, content, api_key)
     if ai_explanation:
-        article['ai_explanation'] = ai_explanation
+        article['aiExplanation'] = ai_explanation  # 驼峰命名
         print(f"    ✓ 小白解释生成成功")
     
     # 生成AI评分
     ai_score = generate_ai_score(title, content, api_key)
     if ai_score:
-        article['ai_score'] = ai_score
+        article['aiScore'] = ai_score  # 驼峰命名
         print(f"    ✓ AI评分: {ai_score}")
     
     # 提取并分析股票
     stocks = extract_and_analyze_stocks(title, content, api_key)
     if stocks:
-        article['ai_stocks'] = stocks
+        article['aiStocks'] = stocks  # 驼峰命名
         print(f"    ✓ 股票分析: {len(stocks)}只")
     
     return article

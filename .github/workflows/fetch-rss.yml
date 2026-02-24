@@ -47,16 +47,21 @@ jobs:
         # 显示数据文件大小
         echo "📄 Data file size: $(du -h rss-backend/data/articles.json | cut -f1)"
         
+        # 复制数据文件到前端目录（确保前端使用最新数据）
+        cp rss-backend/data/articles.json new-site/app/public/articles.json
+        echo "📂 已同步数据到 new-site/app/public/articles.json"
+        
         # 配置 Git
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
         # 添加并提交更改
         git add rss-backend/data/articles.json
+        git add new-site/app/public/articles.json
         if git diff --staged --quiet; then
           echo "ℹ️ No changes to commit"
         else
-          git commit -m "Update RSS data [$(date +%Y-%m-%d\ %H:%M)]"
+          git commit -m "Update RSS data with AI processing [$(date +%Y-%m-%d\ %H:%M)]"
           git push
           echo "✅ RSS data updated and pushed"
         fi
