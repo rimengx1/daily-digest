@@ -353,53 +353,13 @@ export function useArticles() {
     }
   }, [useAPI]);
 
-  // AI 处理文章
+  // AI 处理文章（已禁用，直接返回原始数据）
   const processArticlesWithAI = useCallback(async (newArticles: Article[]): Promise<Article[]> => {
-    if (API_CONFIG.provider === 'mock') {
-      return newArticles.map(article => ({
-        ...article,
-        aiStocks: getMockStocks() // Mock 模式下也显示模拟股票
-      }));
-    }
-    
-    const provider = API_CONFIG.provider;
-    const processedArticles: Article[] = [];
-    
-    for (const article of newArticles) {
-      try {
-        // 如果文章已经有 AI 数据，跳过
-        if (article.aiScore > 0 && article.aiSummary && article.aiStocks) {
-          processedArticles.push(article);
-          continue;
-        }
-        
-        // 并行调用所有 AI 接口（包括股票分析）
-        const [quickSummary, fullSummary, simpleExplanation, score, stocks] = await Promise.all([
-          generateAISummary(article.title, article.content, 'quick', provider),
-          generateAISummary(article.title, article.content, 'full', provider),
-          generateAISummary(article.title, article.content, 'simple', provider),
-          generateAIScore(article.title, article.content, provider),
-          analyzeStocks(article.title, article.content, provider),
-        ]);
-        
-        processedArticles.push({
-          ...article,
-          aiSummary: quickSummary,
-          aiInterpretation: fullSummary,
-          aiExplanation: simpleExplanation,
-          aiScore: score,
-          aiStocks: stocks,
-        });
-      } catch (error) {
-        console.error('AI处理文章失败:', error);
-        processedArticles.push({
-          ...article,
-          aiStocks: getMockStocks() // 失败时也显示模拟股票
-        });
-      }
-    }
-    
-    return processedArticles;
+    // 直接返回原始文章，不调用 AI API（避免阻塞和失败）
+    return newArticles.map(article => ({
+      ...article,
+      aiStocks: getMockStocks() // 添加模拟股票数据
+    }));
   }, []);
 
   // 刷新文章
