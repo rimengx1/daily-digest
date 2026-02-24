@@ -87,7 +87,7 @@ jobs:
         echo "🚀 重新构建前端..."
         cd new-site/app
         npm install
-        npm run build
+        npx vite build
         
         # 复制构建后的文件
         cp -r dist/* ../../
