@@ -330,8 +330,17 @@ export function useArticles() {
       
       const allArticles = [...rssArticles, ...aiHotArticles];
       
-      // 使用 AI 处理文章（翻译、摘要、评分）
-      const processedArticles = await processArticlesWithAI(allArticles);
+      // 尝试使用 AI 处理文章，失败则直接使用原始数据
+      let processedArticles: Article[];
+      try {
+        processedArticles = await processArticlesWithAI(allArticles);
+      } catch (aiError) {
+        console.warn('AI processing failed, using raw articles:', aiError);
+        processedArticles = allArticles.map(article => ({
+          ...article,
+          aiStocks: getMockStocks() // 添加模拟股票数据
+        }));
+      }
       
       setArticles(processedArticles);
       setLastRefresh(new Date());
