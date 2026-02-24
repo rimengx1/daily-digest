@@ -38,6 +38,13 @@ jobs:
     
     - name: Verify and commit changes
       run: |
+        # 配置 Git（先配置，避免后续命令失败）
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # 先拉取最新更改（避免冲突，在复制数据之前！）
+        git pull origin main --rebase || true
+        
         # 检查数据文件是否存在
         if [ ! -f "rss-backend/data/articles.json" ]; then
           echo "❌ Error: rss-backend/data/articles.json not found!"
@@ -47,16 +54,9 @@ jobs:
         # 显示数据文件大小
         echo "📄 Data file size: $(du -h rss-backend/data/articles.json | cut -f1)"
         
-        # 复制数据文件到前端目录（确保前端使用最新数据）
+        # 复制数据文件到前端目录（在pull之后，确保不会被覆盖！）
         cp rss-backend/data/articles.json new-site/app/public/articles.json
         echo "📂 已同步数据到 new-site/app/public/articles.json"
-        
-        # 配置 Git
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        
-        # 先拉取最新更改，避免冲突
-        git pull origin main --rebase || true
         
         # 添加并提交更改
         git add rss-backend/data/articles.json
