@@ -24,8 +24,18 @@ export function RSSSection({
   const [topArticles, setTopArticles] = useState<Article[]>([]);
 
   useEffect(() => {
+    // DEBUG: 添加详细日志
+    console.log('[RSSSection] articles prop:', articles);
+    console.log('[RSSSection] articles.length:', articles.length);
+    console.log('[RSSSection] articles sample:', articles.slice(0, 3));
+    
     // 直接显示所有 RSS 分类文章，不强制排序
     const filtered = articles.filter(a => a.category === 'rss');
+    
+    console.log('[RSSSection] filtered:', filtered);
+    console.log('[RSSSection] filtered.length:', filtered.length);
+    console.log('[RSSSection] filtered categories:', filtered.map(a => a.category));
+    
     setTopArticles(filtered.slice(0, 50));
   }, [articles]);
 
