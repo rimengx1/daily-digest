@@ -13,11 +13,25 @@ jobs:
   fetch-rss:
     runs-on: ubuntu-latest
     
+    # 将 API Key 提升到 job 级别，确保所有步骤都能访问
+    env:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
+    
+    - name: Verify API Key
+      run: |
+        if [ -z "$DEEPSEEK_API_KEY" ]; then
+          echo "❌ Error: DEEPSEEK_API_KEY is not set!"
+          echo "   请在 GitHub Secrets 中配置 DEEPSEEK_API_KEY"
+          exit 1
+        else
+          echo "✅ DEEPSEEK_API_KEY is configured"
+        fi
     
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -31,8 +45,6 @@ jobs:
     
     - name: Fetch RSS feeds
       working-directory: rss-backend
-      env:
-        DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
       run: |
         python fetch_rss.py
     
