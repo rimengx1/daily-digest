@@ -3,9 +3,7 @@ import type { Article, AIStockAnalysis } from '@/types';
 import { generateMockArticles, generateMoreArticles } from '@/services/mockData';
 import { analyzeStocks } from '@/services/api';
 
-// RSS API 配置
-// 使用 rss-backend Vercel API
-const RSS_API_BASE_URL = import.meta.env.VITE_RSS_API_URL || 'https://rss-backend-xi.vercel.app';
+// RSS API 配置（已切换到纯静态方案）
 const USE_RSS_API = true;
 
 // 更新存储键名，避免与旧数据冲突
@@ -34,31 +32,23 @@ const API_CONFIG = {
 // ============================================
 
 /**
- * 从 RSS Backend API 获取文章
+ * 从本地 JSON 文件获取文章（纯静态方案，不依赖后端 API）
  */
 async function fetchArticlesFromAPI(category?: string, limit: number = 50): Promise<Article[]> {
   try {
-    // 使用 rss-backend API
-    const url = new URL(`${RSS_API_BASE_URL}/api/articles`);
-    if (category) {
-      url.searchParams.set('category', category);
-    }
-    url.searchParams.set('limit', limit.toString());
-    url.searchParams.set('t', Date.now().toString()); // 防止缓存
-    
-    const response = await fetch(url.toString());
+    // 从本地 JSON 文件读取数据
+    const response = await fetch('/articles.json?t=' + Date.now());
     
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      throw new Error(`Failed to load articles: ${response.status}`);
     }
     
-    const data = await response.json();
-    const allArticles = data.articles || [];
+    const allArticles = await response.json();
     
-    console.log('[RSS API] Loaded:', allArticles.length, 'articles');
+    console.log('[RSS Static] Loaded:', allArticles.length, 'articles');
     
     if (!Array.isArray(allArticles)) {
-      console.error('[RSS API] Invalid format:', allArticles);
+      console.error('[RSS Static] Invalid format:', allArticles);
       return [];
     }
     
@@ -92,7 +82,7 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
       articleNumber: parseInt(item.id?.slice(0, 8) || '0', 16) % 10000,
     }));
   } catch (error) {
-    console.error('Failed to fetch RSS data:', error);
+    console.error('Failed to load RSS data:', error);
     throw error;
   }
 }
