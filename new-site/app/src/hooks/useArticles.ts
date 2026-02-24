@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import type { Article, AIStockAnalysis } from '@/types';
+import type { Article } from '@/types';
 import { generateMockArticles, generateMoreArticles } from '@/services/mockData';
 import { analyzeStocks } from '@/services/api';
 
@@ -274,31 +274,6 @@ function getMockSummary(type: 'quick' | 'full' | 'simple'): string {
   if (type === 'quick') return quickSummaries[Math.floor(Math.random() * quickSummaries.length)];
   if (type === 'full') return fullSummaries[Math.floor(Math.random() * fullSummaries.length)];
   return simpleExplanations[Math.floor(Math.random() * simpleExplanations.length)];
-}
-
-// 模拟股票数据
-function getMockStocks(): AIStockAnalysis[] {
-  const mockStocks: AIStockAnalysis[] = [
-    {
-      symbol: 'NVDA',
-      name: '英伟达',
-      change: 2.5,
-      reason: 'AI芯片需求增长'
-    },
-    {
-      symbol: 'MSFT',
-      name: '微软',
-      change: 1.2,
-      reason: 'Azure AI服务扩展'
-    },
-    {
-      symbol: 'GOOGL',
-      name: '谷歌',
-      change: -0.8,
-      reason: 'AI竞争加剧'
-    }
-  ];
-  return mockStocks;
 }
 
 // ============================================
