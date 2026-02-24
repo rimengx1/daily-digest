@@ -4,6 +4,11 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+  # 当 Fetch RSS Feeds 工作流成功完成后触发
+  workflow_run:
+    workflows: ["Fetch RSS Feeds"]
+    types:
+      - completed
 
 permissions:
   contents: write

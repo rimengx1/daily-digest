@@ -80,21 +80,4 @@ jobs:
           git push origin main
           echo "✅ RSS data updated and pushed"
         fi
-
-    - name: Build and deploy frontend
-      if: success()
-      run: |
-        echo "🚀 重新构建前端..."
-        cd new-site/app
-        npm install
-        npx vite build
-        
-        # 复制构建后的文件
-        cp -r dist/* ../../
-        
-        # 提交构建结果
-        git add ../../dist -f || true
-        git add ../../index.html -f || true
-        git add ../../assets -f || true
-        git commit -m "Deploy: 更新前端构建 [$(date +%Y-%m-%d\ %H:%M)]" || echo "No changes to deploy"
-        git push origin main || echo "Push failed"
+        # 注：前端构建部署由 deploy.yml 通过 workflow_run 触发
