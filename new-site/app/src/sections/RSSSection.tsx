@@ -24,12 +24,9 @@ export function RSSSection({
   const [topArticles, setTopArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    // Get top 30 articles by AI score
-    const sorted = [...articles]
-      .filter(a => a.category === 'rss')
-      .sort((a, b) => b.aiScore - a.aiScore)
-      .slice(0, 30);
-    setTopArticles(sorted);
+    // 直接显示所有 RSS 分类文章，不强制排序
+    const filtered = articles.filter(a => a.category === 'rss');
+    setTopArticles(filtered.slice(0, 50));
   }, [articles]);
 
   return (
