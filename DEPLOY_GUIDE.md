@@ -79,7 +79,7 @@ npm run build
 **问题**：Vercel 是无服务器环境，写入的文件在请求结束后会丢失。
 
 **当前解决方案**：
-- GitHub Actions 每6小时抓取 RSS 并提交 `data/articles.json` 到仓库
+- GitHub Actions 每6小时抓取 RSS 并提交 `rss-backend/data/articles.json` 到仓库
 - Vercel 部署时包含该数据文件
 - 数据更新需要重新部署
 
