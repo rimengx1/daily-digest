@@ -8,8 +8,8 @@ import os
 # 添加项目路径
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from app.services.database import init_database
-from app.services.rss_fetcher import fetch_all_rss, save_to_database
+from app.services.database import init_database, save_articles
+from app.services.rss_fetcher import fetch_all_rss
 
 
 def main():
@@ -26,7 +26,7 @@ def main():
     
     # 保存到数据库
     print("\nSaving to database...")
-    inserted = save_to_database(articles)
+    inserted = save_articles(articles)
     
     print("\n" + "=" * 50)
     print(f"Done! Inserted {inserted} new articles")

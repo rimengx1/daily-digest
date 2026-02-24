@@ -4,8 +4,8 @@ import { generateMockArticles, generateMoreArticles } from '@/services/mockData'
 import { analyzeStocks } from '@/services/api';
 
 // RSS API 配置
-// 临时方案：直接从 GitHub 读取 JSON，绕过崩溃的 Vercel API
-const RSS_DATA_URL = 'https://raw.githubusercontent.com/rimengx1/daily-digest/main/data/articles.json';
+// 使用 rss-backend Vercel API
+const RSS_API_BASE_URL = import.meta.env.VITE_RSS_API_URL || 'https://rss-backend-xi.vercel.app';
 const USE_RSS_API = true;
 
 // 更新存储键名，避免与旧数据冲突
@@ -34,22 +34,31 @@ const API_CONFIG = {
 // ============================================
 
 /**
- * 从 GitHub 直接读取 RSS 数据（绕过崩溃的 Vercel API）
+ * 从 RSS Backend API 获取文章
  */
 async function fetchArticlesFromAPI(category?: string, limit: number = 50): Promise<Article[]> {
   try {
-    const response = await fetch(`${RSS_DATA_URL}?t=${Date.now()}`);
+    // 使用 rss-backend API
+    const url = new URL(`${RSS_API_BASE_URL}/api/articles`);
+    if (category) {
+      url.searchParams.set('category', category);
+    }
+    url.searchParams.set('limit', limit.toString());
+    url.searchParams.set('t', Date.now().toString()); // 防止缓存
+    
+    const response = await fetch(url.toString());
     
     if (!response.ok) {
-      throw new Error(`Data fetch error: ${response.status}`);
+      throw new Error(`API error: ${response.status}`);
     }
     
-    const allArticles = await response.json();
+    const data = await response.json();
+    const allArticles = data.articles || [];
     
-    console.log('[RSS Data] Loaded:', allArticles.length, 'articles');
+    console.log('[RSS API] Loaded:', allArticles.length, 'articles');
     
     if (!Array.isArray(allArticles)) {
-      console.error('[RSS Data] Invalid format:', allArticles);
+      console.error('[RSS API] Invalid format:', allArticles);
       return [];
     }
     

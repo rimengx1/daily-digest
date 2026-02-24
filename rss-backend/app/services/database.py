@@ -6,7 +6,9 @@ import os
 from datetime import datetime, timedelta
 from typing import List, Dict, Optional
 
-# 数据文件路径（相对于项目根目录）
+# 数据文件路径（rss-backend/data/ 文件夹）
+# 从 database.py 所在位置: rss-backend/app/services/
+# 向上两级到达 rss-backend 目录
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'data')
 ARTICLES_FILE = os.path.join(DATA_DIR, 'articles.json')
 
@@ -115,8 +117,33 @@ def get_stats() -> Dict:
         'last_updated': datetime.now().isoformat()
     }
 
+def update_article_ai_data(article_id: str, ai_score: int, ai_summary: str, ai_explanation: str) -> bool:
+    """更新文章的 AI 分析数据
+    
+    Args:
+        article_id: 文章 ID
+        ai_score: AI 评分 (0-100)
+        ai_summary: AI 摘要
+        ai_explanation: AI 解释
+    
+    Returns:
+        bool: 是否更新成功
+    """
+    articles = _load_articles()
+    
+    for article in articles:
+        if article.get('id') == article_id:
+            article['ai_score'] = ai_score
+            article['ai_summary'] = ai_summary
+            article['ai_explanation'] = ai_explanation
+            article['ai_updated_at'] = datetime.now().isoformat()
+            _save_articles(articles)
+            return True
+    
+    return False
+
 # 为了兼容原有接口
 def init_database():
     """初始化数据库（创建数据目录）"""
     _ensure_data_dir()
-    print("✓ Database initialized (JSON file storage)")
+    print("OK: Database initialized (JSON file storage)")
