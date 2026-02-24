@@ -322,27 +322,14 @@ export function useArticles() {
     
     setIsRefreshing(true);
     try {
-      // 获取 RSS 和 AI-Hot 分类的文章
-      const [rssArticles, aiHotArticles] = await Promise.all([
-        fetchArticlesFromAPI('rss', 30).catch(() => []),
-        fetchArticlesFromAPI('ai-hot', 30).catch(() => []),
-      ]);
+      // 一次性获取所有文章，不在此处过滤
+      const allArticles = await fetchArticlesFromAPI(undefined, 100);
       
-      const allArticles = [...rssArticles, ...aiHotArticles];
+      console.log('[useArticles] Loaded articles:', allArticles.length);
+      console.log('[useArticles] Categories:', allArticles.map(a => a.category));
       
-      // 尝试使用 AI 处理文章，失败则直接使用原始数据
-      let processedArticles: Article[];
-      try {
-        processedArticles = await processArticlesWithAI(allArticles);
-      } catch (aiError) {
-        console.warn('AI processing failed, using raw articles:', aiError);
-        processedArticles = allArticles.map(article => ({
-          ...article,
-          aiStocks: getMockStocks() // 添加模拟股票数据
-        }));
-      }
-      
-      setArticles(processedArticles);
+      // 直接使用原始数据，不进行 AI 处理（避免数据丢失）
+      setArticles(allArticles);
       setLastRefresh(new Date());
     } catch (error) {
       console.error('Failed to fetch from API:', error);
