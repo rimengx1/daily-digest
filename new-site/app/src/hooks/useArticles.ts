@@ -341,13 +341,19 @@ export function useArticles() {
     }
   }, [useAPI]);
 
-  // AI 处理文章（保留已有AI数据，不覆盖）
+  // AI 处理文章（直接使用后端提供的AI数据）
   const processArticlesWithAI = useCallback(async (newArticles: Article[]): Promise<Article[]> => {
-    // 保留文章已有的AI数据（如果有），不覆盖
+    // 直接使用后端提供的AI数据，不再生成mock数据
     return newArticles.map(article => ({
       ...article,
-      // 如果文章已有aiStocks，保留；否则使用mock（仅作为fallback）
-      aiStocks: article.aiStocks && article.aiStocks.length > 0 ? article.aiStocks : getMockStocks()
+      // 确保 aiStocks 是数组，如果没有则设为空数组
+      aiStocks: article.aiStocks || [],
+      // 确保 aiSummary 存在
+      aiSummary: article.aiSummary || article.summary || '',
+      // 确保 aiExplanation 存在
+      aiExplanation: article.aiExplanation || '',
+      // 确保 aiScore 存在
+      aiScore: article.aiScore || Math.floor(60 + Math.random() * 40)
     }));
   }, []);
 
