@@ -55,6 +55,9 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
+        # 先拉取最新更改，避免冲突
+        git pull origin main --rebase || true
+        
         # 添加并提交更改
         git add rss-backend/data/articles.json
         git add new-site/app/public/articles.json
@@ -62,6 +65,6 @@ jobs:
           echo "ℹ️ No changes to commit"
         else
           git commit -m "Update RSS data with AI processing [$(date +%Y-%m-%d\ %H:%M)]"
-          git push
+          git push origin main
           echo "✅ RSS data updated and pushed"
         fi
