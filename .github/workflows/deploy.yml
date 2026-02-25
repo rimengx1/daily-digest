@@ -9,6 +9,7 @@ on:
     workflows: ["Fetch RSS Feeds"]
     types:
       - completed
+    branches: [main]  # 添加分支限制
 
 permissions:
   contents: write
