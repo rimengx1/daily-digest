@@ -37,7 +37,7 @@ const API_CONFIG = {
 async function fetchArticlesFromAPI(category?: string, limit: number = 50): Promise<Article[]> {
   try {
     // 从本地 JSON 文件读取数据
-    const response = await fetch('/articles.json?t=' + Date.now());
+    const response = await fetch('./articles.json?t=' + Date.now());
     
     if (!response.ok) {
       throw new Error(`Failed to load articles: ${response.status}`);
