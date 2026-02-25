@@ -37,8 +37,20 @@ jobs:
       - name: Install dependencies
         run: cd new-site/app && npm ci
 
+      - name: Copy data file
+        run: |
+          echo "Copying articles.json to public..."
+          cp rss-backend/data/articles.json new-site/app/public/articles.json
+          ls -la new-site/app/public/articles.json
+
       - name: Build
         run: cd new-site/app && npm run build
+
+      - name: Verify dist contents
+        run: |
+          echo "Verifying dist contents..."
+          ls -la new-site/app/dist/
+          ls -la new-site/app/dist/articles.json
 
       - name: Copy custom domain config
         run: cp CNAME new-site/app/dist/CNAME
