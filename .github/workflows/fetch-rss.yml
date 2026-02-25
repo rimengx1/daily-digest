@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  actions: write  # 添加 actions 权限，用于触发其他工作流
 
 jobs:
   fetch-rss:
@@ -80,4 +81,14 @@ jobs:
           git push origin main
           echo "✅ RSS data updated and pushed"
         fi
-        # 注：前端构建部署由 deploy.yml 通过 workflow_run 触发
+
+    - name: Trigger Deploy
+      if: success()
+      run: |
+        echo "🚀 触发 Deploy 工作流..."
+        curl -X POST \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy.yml/dispatches \
+          -d '{"ref":"main"}'
+        echo "✅ Deploy 触发完成"
