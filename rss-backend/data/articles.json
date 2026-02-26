@@ -36,7 +36,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-23T05:30:00",
-    "fetched_at": "2026-02-23T23:52:44.465196"
+    "fetched_at": "2026-02-23T23:52:44.465196",
+    "aiSummary": "OpenAI宣布成立前沿联盟伙伴计划，旨在帮助企业将AI试点项目转化为规模化生产部署，提供安全、可扩展的智能体解决方案。",
+    "aiExplanation": "OpenAI成立新联盟，帮企业安全高效地将AI试点项目规模化落地。",
+    "aiScore": 85
   },
   {
     "id": "6c584df9c30ba600",
@@ -62,7 +65,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-20T14:30:00",
-    "fetched_at": "2026-02-23T23:52:44.465196"
+    "fetched_at": "2026-02-23T23:52:44.465196",
+    "aiSummary": "我们首次公开AI模型对“第一证明”数学挑战的解题尝试，旨在测试其在专家级难题上的研究级推理能力。",
+    "aiExplanation": "我们展示了AI模型尝试解答高难度数学题的过程，测试它在专业问题上的推理能力。",
+    "aiScore": 75
   },
   {
     "id": "aec5c5ef3fb7809c",
@@ -127,7 +133,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-20T00:00:00",
-    "fetched_at": "2026-02-23T23:52:56.347860"
+    "fetched_at": "2026-02-23T23:52:56.347860",
+    "aiSummary": "GGML与llama.cpp加入Hugging Face，共同推动本地AI长期发展。此举将整合开源AI工具，优化模型部署效率，确保技术生态持续进步。",
+    "aiExplanation": "GGML和llama.cpp加入Hugging Face，共同推动本地AI技术发展，确保开源AI生态长期进步。",
+    "aiScore": 85
   },
   {
     "id": "c937756811dc50f4",
@@ -140,7 +149,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-20T00:00:00",
-    "fetched_at": "2026-02-23T23:52:56.347860"
+    "fetched_at": "2026-02-23T23:52:56.347860",
+    "aiSummary": "Hugging Face与Unsloth合作，提供免费AI模型训练服务。用户可通过Hugging Face Jobs平台，利用Unsloth的优化技术高效训练模型，显著提升速度并降低内存消耗。该服务旨在降低AI开发门槛，推动技术创新。",
+    "aiExplanation": "用免费工具Unsloth和Hugging Face Jobs，轻松训练AI模型，无需昂贵设备。",
+    "aiScore": 75
   },
   {
     "id": "ae581a67d20c50d2",
@@ -153,7 +165,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-19T17:00:00",
-    "fetched_at": "2026-02-23T23:53:00.446256"
+    "fetched_at": "2026-02-23T23:53:00.446256",
+    "aiSummary": "AI正重塑开发者技术选择。GitHub Octoverse 2025数据显示，TypeScript首次超越Python和JavaScript成为最常用语言，年增长66%。这背后是AI工具（如Copilot）降低了复杂语言使用门槛，80%新开发者首周即用AI编程，便利性正改变生态偏好。",
+    "aiExplanation": "AI正改变开发者选择：2025年TypeScript首次超越Python和JavaScript，成为GitHub最常用语言。",
+    "aiScore": 85
   },
   {
     "id": "922155b35c24e193",
@@ -166,7 +181,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-19T16:06:14",
-    "fetched_at": "2026-02-23T23:52:54.507862"
+    "fetched_at": "2026-02-23T23:52:54.507862",
+    "aiSummary": "谷歌发布Gemini 3.1 Pro模型，专为处理复杂任务设计，超越简单问答，提供更智能的解决方案。",
+    "aiExplanation": "谷歌推出Gemini 3.1 Pro模型，专为处理复杂任务设计，能提供比简单回答更深入的解决方案。",
+    "aiScore": 75
   },
   {
     "id": "222225c1c23d5f87",
@@ -231,7 +249,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-19T10:00:00",
-    "fetched_at": "2026-02-23T23:52:44.465196"
+    "fetched_at": "2026-02-23T23:52:44.465196",
+    "aiSummary": "OpenAI投入750万美元资助独立AI对齐研究项目，旨在加强全球应对通用人工智能安全风险的协作能力。",
+    "aiExplanation": "OpenAI投入750万美元资助独立研究，旨在确保未来超级人工智能的安全可控，防范潜在风险。",
+    "aiScore": 85
   },
   {
     "id": "c68a5b800e814449",
@@ -244,7 +265,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-18T21:00:00",
-    "fetched_at": "2026-02-23T23:52:44.465196"
+    "fetched_at": "2026-02-23T23:52:44.465196",
+    "aiSummary": "OpenAI正式进入印度市场，将建设本地基础设施、赋能企业并提升劳动力AI技能，以扩大人工智能在全国的普及应用。",
+    "aiExplanation": "OpenAI在印度建立本地基础设施，帮助企业应用AI并培训人才，让更多人能使用人工智能技术。",
+    "aiScore": 85
   },
   {
     "id": "bab31472f8640895",
@@ -257,7 +281,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-18T18:41:42",
-    "fetched_at": "2026-02-23T23:53:00.446256"
+    "fetched_at": "2026-02-23T23:53:00.446256",
+    "aiSummary": "2026年开源趋势展望：全球开发者参与度持续提升，印度、巴西等地增长显著，跨地域协作成为常态，项目需强化沟通规范以支持全球化社区。AI工具降低编程门槛，加速贡献，但也带来“AI噪音”挑战。开源项目需平衡创新与质量，构建可持续的协作生态。",
+    "aiExplanation": "开源软件正走向全球化，面临跨时区、语言和文化协作的挑战。未来成功项目需建立清晰的沟通规范，以支持全球开发者共同参与。",
+    "aiScore": 65
   },
   {
     "id": "79723049af005588",
@@ -270,7 +297,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-18T16:15:45",
-    "fetched_at": "2026-02-23T23:52:56.348860"
+    "fetched_at": "2026-02-23T23:52:56.348860",
+    "aiSummary": "IBM与加州大学伯克利分校合作，利用IT-Bench和MAST工具分析企业AI代理失败原因，发现主要问题在于复杂任务执行中的逻辑错误与外部工具调用障碍。研究旨在提升AI代理在商业环境中的可靠性。",
+    "aiExplanation": "IBM与加州大学伯克利分校研究发现，企业AI助手常因理解复杂指令和工具使用不当而失败。他们通过新测试方法找到了问题根源。",
+    "aiScore": 85
   },
   {
     "id": "2c76860b7169a145",
@@ -283,7 +313,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-18T16:01:38",
-    "fetched_at": "2026-02-23T23:52:54.507862"
+    "fetched_at": "2026-02-23T23:52:54.507862",
+    "aiSummary": "谷歌Gemini应用推出Lyria 3音乐生成模型，用户可通过输入文字或图片，快速创作30秒音乐片段。",
+    "aiExplanation": "谷歌Gemini应用新增Lyria 3音乐生成功能，用户只需输入文字或上传图片，就能轻松创作30秒的音乐片段。",
+    "aiScore": 85
   },
   {
     "id": "c69e516194e952a4",
@@ -296,7 +329,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-18T00:00:00",
-    "fetched_at": "2026-02-23T23:52:44.465196"
+    "fetched_at": "2026-02-23T23:52:44.465196",
+    "aiSummary": "OpenAI与Paradigm联合推出EVMbench基准测试，用于评估AI代理检测、修复和利用高严重性智能合约漏洞的能力。",
+    "aiExplanation": "OpenAI推出EVMbench，用于测试AI在智能合约中发现、修复和利用高危漏洞的能力。",
+    "aiScore": 85
   },
   {
     "id": "ed2272353e6c8db9",
@@ -309,7 +345,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-18T00:00:00",
-    "fetched_at": "2026-02-23T23:52:56.348860"
+    "fetched_at": "2026-02-23T23:52:56.348860",
+    "aiSummary": "Gradio推出gr.HTML组件，支持一键嵌入任何网页应用，简化AI界面开发，提升交互体验。",
+    "aiExplanation": "用Gradio的gr.HTML组件，只需一次操作就能将任何网页应用快速嵌入到你的AI项目中，轻松实现界面展示。",
+    "aiScore": 85
   },
   {
     "id": "a0eb582b1e50031e",
@@ -322,7 +361,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-17T19:00:00",
-    "fetched_at": "2026-02-23T23:53:00.446256"
+    "fetched_at": "2026-02-23T23:53:00.446256",
+    "aiSummary": "GitHub启动开源安全基金，旨在为67个关键开源项目提供资金与安全支持，以加固AI及数字供应链的软件基础。开源组件是现代软件的核心，其安全漏洞影响广泛，如Log4Shell事件所示。该计划通过将资金与可验证的安全成果挂钩，为维护者提供资源与培训，从而降低整个生态系统的风险。",
+    "aiExplanation": "开源软件是AI等现代软件的基石，其安全至关重要。GitHub基金旨在保护这些关键项目，确保数字供应链安全，为开发者提供可信赖的基础。",
+    "aiScore": 85
   },
   {
     "id": "aec2a60cce404ad1",
@@ -335,7 +377,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-17T13:42:20",
-    "fetched_at": "2026-02-23T23:52:54.507862"
+    "fetched_at": "2026-02-23T23:52:54.507862",
+    "aiSummary": "谷歌DeepMind在印度启动“国家人工智能合作伙伴计划”，旨在通过人工智能技术推动科学和教育领域的加速发展。",
+    "aiExplanation": "谷歌DeepMind在印度启动AI合作计划，用人工智能加速科学研究和教育发展，帮助当地更快取得新发现。",
+    "aiScore": 85
   },
   {
     "id": "a826f8ff1f398c14",
@@ -348,7 +393,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-13T14:00:00",
-    "fetched_at": "2026-02-23T23:53:00.446256"
+    "fetched_at": "2026-02-23T23:53:00.446256",
+    "aiSummary": "GitHub推出Agentic Workflows技术预览版，这是一种基于AI编码代理的自动化工作流。用户可通过Markdown编写意图驱动的工作流，在GitHub Actions中自动执行问题分类、CI故障排查、文档更新等仓库任务，同时保持人工对自动化边界的控制。该功能旨在提升个人开发者至企业级团队的仓库管理效率。",
+    "aiExplanation": "GitHub推出智能工作流，能用AI自动处理代码库的日常任务，比如整理问题、修复错误和更新文档，让你更省心。",
+    "aiScore": 85
   },
   {
     "id": "fc1365a5ae72faea",
@@ -361,7 +409,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-13T11:00:00",
-    "fetched_at": "2026-02-23T23:52:44.465196"
+    "fetched_at": "2026-02-23T23:52:44.465196",
+    "aiSummary": "GPT-5.2在理论物理领域取得突破，提出新的胶子振幅公式，该结果已获OpenAI与学术合作者正式证明与验证。",
+    "aiExplanation": "AI助手GPT-5.2在物理研究中提出新公式，经专家验证正确，展示了AI在科学探索中的潜力。",
+    "aiScore": 85
   },
   {
     "id": "4ab6b10c993a02b5",
@@ -374,7 +425,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-13T10:00:00",
-    "fetched_at": "2026-02-23T23:52:44.465196"
+    "fetched_at": "2026-02-23T23:52:44.465196",
+    "aiSummary": "ChatGPT推出\"锁定模式\"与\"高风险提示\"功能，旨在帮助组织防范提示词注入攻击和AI驱动的数据窃取行为。",
+    "aiExplanation": "ChatGPT新增“锁定模式”和“高风险标签”功能，帮助组织防范恶意指令攻击和AI数据泄露风险。",
+    "aiScore": 85
   },
   {
     "id": "c2ffe0dfce4d7a5e",
@@ -413,7 +467,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-13T00:00:00",
-    "fetched_at": "2026-02-23T23:52:56.348860"
+    "fetched_at": "2026-02-23T23:52:56.348860",
+    "aiSummary": "Codex与Claude推出通用定制内核，为各类应用提供灵活高效的AI计算解决方案，提升处理性能与能效。",
+    "aiExplanation": "这篇文章介绍了如何利用Codex和Claude等AI工具，为不同用户定制个性化的计算机内核（核心程序），让每个人都能轻松获得适合自己需求的系统优化方案。",
+    "aiScore": 75
   },
   {
     "id": "9ab9f120ab5abb27",
@@ -426,7 +483,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-12T20:14:11",
-    "fetched_at": "2026-02-23T23:53:00.446256"
+    "fetched_at": "2026-02-23T23:53:00.446256",
+    "aiSummary": "开源项目正面临“永恒九月”困境：AI等技术大幅降低贡献门槛，海量低质量提交使维护者不堪重负。文章指出，贡献成本下降但审核成本未变，信任机制受到冲击。开源社区需在降低门槛与维持质量间寻找新平衡。",
+    "aiExplanation": "开源项目正面临新人涌入的挑战，就像网络社区曾经的“永恒九月”。过去参与门槛高，现在AI等技术降低了贡献成本，但维护者审核压力大增。我们计划帮助维护者应对这一变化。",
+    "aiScore": 85
   },
   {
     "id": "11fb137aabf6faad",
@@ -439,7 +499,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-12T16:15:09",
-    "fetched_at": "2026-02-23T23:52:54.507862"
+    "fetched_at": "2026-02-23T23:52:54.507862",
+    "aiSummary": "谷歌DeepMind发布Gemini 3 Deep Think推理模式，专门针对现代科学、研究和工程领域的复杂挑战进行优化升级。",
+    "aiExplanation": "谷歌Gemini 3推理模式升级，能更好地解决现代科学研究和工程难题。",
+    "aiScore": 85
   },
   {
     "id": "ee136765f07a975d",
@@ -465,7 +528,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-12T00:00:00",
-    "fetched_at": "2026-02-23T23:52:56.348860"
+    "fetched_at": "2026-02-23T23:52:56.348860",
+    "aiSummary": "OpenEnv实践：评估工具使用智能体在真实环境中的表现。研究聚焦于智能体利用外部工具解决复杂任务的能力，通过模拟真实场景测试其决策与执行效率，为AI应用落地提供关键评估框架。",
+    "aiExplanation": "这篇文章介绍了如何在实际环境中测试使用工具的AI助手，评估它们解决现实问题的能力。",
+    "aiScore": 85
   },
   {
     "id": "e041906033438f25",
@@ -478,7 +544,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-11T23:12:34",
-    "fetched_at": "2026-02-23T23:53:00.446256"
+    "fetched_at": "2026-02-23T23:53:00.446256",
+    "aiSummary": "GitHub 2026年1月服务报告：发生两起事故。1月13日，因配置错误导致Copilot服务中断46分钟，影响相关IDE工具。1月15日，因数据库升级引发资源争用，导致多项服务延迟或超时约100分钟。GitHub已采取回滚等措施恢复，并计划加强监控与测试流程。",
+    "aiExplanation": "GitHub在1月发生两次服务故障：一次因AI模型更新配置错误，另一次因数据库升级导致系统变慢。已通过回滚修复，并加强监控预防。",
+    "aiScore": 65
   },
   {
     "id": "715db612059388bd",
@@ -491,7 +560,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-09T16:12:06",
-    "fetched_at": "2026-02-23T23:52:54.507862"
+    "fetched_at": "2026-02-23T23:52:54.507862",
+    "aiSummary": "谷歌Gemini Deep Think技术加速数学与科学发现，研究显示其在多领域影响日益显著。",
+    "aiExplanation": "Gemini Deep Think能加速数学和科学发现，帮助研究人员更快取得突破。",
+    "aiScore": 85
   },
   {
     "id": "375593e552e51e03",
@@ -504,7 +576,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-09T00:00:00",
-    "fetched_at": "2026-02-23T23:52:56.348860"
+    "fetched_at": "2026-02-23T23:52:56.348860",
+    "aiSummary": "Transformers.js v4预览版已发布，支持在浏览器中直接运行AI模型，无需服务器。新版本优化了性能并增加了更多预训练模型，方便开发者快速集成。",
+    "aiExplanation": "Transformers.js v4 预览版已发布，让AI模型能在浏览器中直接运行，无需服务器支持。",
+    "aiScore": 85
   },
   {
     "id": "1b54ab789c3389cd",
@@ -517,7 +592,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-05T17:00:00",
-    "fetched_at": "2026-02-23T23:53:00.446256"
+    "fetched_at": "2026-02-23T23:53:00.446256",
+    "aiSummary": "GitHub Next提出“持续AI”概念，旨在通过AI代理处理传统CI无法覆盖的、需要判断和推理的开发任务，如代码审查、文档更新和依赖管理等，以弥补基于规则的CI在复杂工程场景中的不足。",
+    "aiExplanation": "AI能帮程序员自动处理需要判断的工作，比如代码审查、文档更新等，而传统自动化工具只能处理有明确规则的任务。",
+    "aiScore": 85
   },
   {
     "id": "27108bd9edaace8d",
@@ -530,7 +608,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-05T16:52:28",
-    "fetched_at": "2026-02-23T23:52:56.348860"
+    "fetched_at": "2026-02-23T23:52:56.348860",
+    "aiSummary": "【SyGra Studio发布】全新图形设计平台上线，集成AI辅助创作工具，支持多格式输出，旨在提升设计师工作效率与创意表现。",
+    "aiExplanation": "SyGra Studio是一款图形设计工具，能轻松制作图表、流程图等，让复杂信息一目了然。",
+    "aiScore": 50
   },
   {
     "id": "3003712541d5abbd",
@@ -543,7 +624,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-04T17:00:19",
-    "fetched_at": "2026-02-23T23:53:00.446256"
+    "fetched_at": "2026-02-23T23:53:00.446256",
+    "aiSummary": "GitHub Copilot推出Agent HQ平台，允许用户在GitHub、VS Code等开发环境中直接调用Claude、Codex等多种AI编程助手。该功能旨在减少开发中的上下文切换，支持不同任务使用不同代理，保持工作上下文与历史记录。目前面向Copilot Pro+和企业用户开放，需在设置中启用第三方代理。",
+    "aiExplanation": "GitHub推出Agent HQ，让开发者能在同一平台内使用Claude、Codex等多种AI编程助手，无需切换工具，提升开发效率。",
+    "aiScore": 85
   },
   {
     "id": "f1b771d039b31e59",
@@ -556,7 +640,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-04T00:00:00",
-    "fetched_at": "2026-02-23T23:52:56.348860"
+    "fetched_at": "2026-02-23T23:52:56.348860",
+    "aiSummary": "社区评估兴起：不再依赖黑箱排行榜，转向社区驱动的AI模型评测，强调透明与协作。",
+    "aiExplanation": "社区评测：我们不再盲目相信封闭的排行榜，而是依靠社区的真实反馈来评估AI模型。",
+    "aiScore": 75
   },
   {
     "id": "28520d1d9697b7a9",
@@ -569,7 +656,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-03T17:00:00",
-    "fetched_at": "2026-02-23T23:53:00.446256"
+    "fetched_at": "2026-02-23T23:53:00.446256",
+    "aiSummary": "GitHub最新报告显示，2025年软件开发的焦点已从代码量转向降低开发摩擦。TypeScript超越Python和JavaScript成为最常用语言，年增超百万贡献者。AI辅助开发正推动类型语言成为新项目首选，开发者更关注工具的速度与可复现性。",
+    "aiExplanation": "AI正改变软件开发：TypeScript因AI协作成为最热门语言，工具更注重效率与可复现性，新手参与门槛降低。",
+    "aiScore": 85
   },
   {
     "id": "eb023c82d768da03",
@@ -595,7 +685,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-01-29T17:01:05",
-    "fetched_at": "2026-02-23T23:52:54.507862"
+    "fetched_at": "2026-02-23T23:52:54.507862",
+    "aiSummary": "谷歌AI向美国高级订阅用户开放实验项目Genie，用户可创建并探索无限交互世界。该项目仍处研究原型阶段。",
+    "aiExplanation": "谷歌推出Project Genie，美国用户可以尝试用AI创造和探索无限虚拟世界。",
+    "aiScore": 75
   },
   {
     "id": "b029b9f3c7c7c9ad",
@@ -608,7 +701,24 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-01-22T14:00:00",
-    "fetched_at": "2026-02-23T23:53:02.872881"
+    "fetched_at": "2026-02-23T23:53:02.872881",
+    "aiSummary": "旧金山云平台Railway获1亿美元B轮融资，挑战AWS等传统云服务商。该公司以AI原生云基础设施为卖点，解决开发者对传统云平台复杂性和成本的不满。其平台部署时间缩短至1分钟内，以应对AI编程助手时代的需求。目前月处理超千万次部署，估值在AI基础设施初创公司中领先。",
+    "aiExplanation": "Railway获1亿美元融资，挑战亚马逊云服务。它用AI优化云平台，让部署更快更便宜，吸引开发者。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "AMZN",
+        "name": "Amazon",
+        "reason": "Railway挑战其AWS云服务",
+        "change": -1
+      },
+      {
+        "symbol": "GOOGL",
+        "name": "Alphabet",
+        "reason": "Railway挑战其Google Cloud",
+        "change": -1
+      }
+    ]
   },
   {
     "id": "957f137eabf2d91d",
@@ -621,7 +731,24 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-01-19T14:00:00",
-    "fetched_at": "2026-02-23T23:53:02.872881"
+    "fetched_at": "2026-02-23T23:53:02.872881",
+    "aiSummary": "AI编程工具Claude Code月费高达200美元引发开发者不满。开源免费替代品Goose应运而生，提供类似功能且完全本地运行，无需订阅费、不依赖云端、无使用限制，已获GitHub超2.6万星标。开发者称其能完全掌控数据和工作流程，甚至支持离线使用。",
+    "aiExplanation": "AI编程工具Claude Code每月收费20-200美元，而开源工具Goose功能相似却完全免费，还能离线使用，保护用户数据隐私。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "ANTH",
+        "name": "Anthropic",
+        "reason": "文章讨论其产品Claude Code的定价争议",
+        "change": -2
+      },
+      {
+        "symbol": "SQ",
+        "name": "Block (formerly Square)",
+        "reason": "其开发的免费开源AI工具Goose是文章焦点",
+        "change": 1
+      }
+    ]
   },
   {
     "id": "16e52cb4c51bcc6c",
@@ -634,7 +761,18 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-01-16T14:01:00",
-    "fetched_at": "2026-02-23T23:53:02.872881"
+    "fetched_at": "2026-02-23T23:53:02.872881",
+    "aiSummary": "Listen Labs通过创意招聘广告牌吸引人才，成功完成6900万美元B轮融资，估值达5亿美元。该公司利用AI进行客户访谈，将传统市场调研时间从数周缩短至数小时，已实现八位数年收入并完成超百万次AI访谈。",
+    "aiExplanation": "Listen Labs用广告牌谜题招聘工程师，获得6900万美元投资。他们用AI进行客户访谈，帮助企业了解用户需求，年收入增长15倍。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "META",
+        "name": "Meta Platforms",
+        "reason": "文章提及扎克伯格的高薪AI招聘",
+        "change": 0
+      }
+    ]
   },
   {
     "id": "711d99dfadee1a9a",
@@ -647,7 +785,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-01-16T10:39:00",
-    "fetched_at": "2026-02-23T23:52:54.507862"
+    "fetched_at": "2026-02-23T23:52:54.507862",
+    "aiSummary": "D4RT推出高效4D重建与追踪技术，速度较现有方法提升高达300倍，实现AI对动态世界的快速感知。",
+    "aiExplanation": "D4RT让AI快速理解三维空间随时间的变化，重建和追踪速度提升高达300倍。",
+    "aiScore": 85
   },
   {
     "id": "96a40b34f7325753",
@@ -660,7 +801,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-01-13T17:00:18",
-    "fetched_at": "2026-02-23T23:52:54.507862"
+    "fetched_at": "2026-02-23T23:52:54.507862",
+    "aiSummary": "谷歌发布Veo 3.1视频生成模型，新版本提升了视频的连贯性、创意性和可控性，能生成更自然生动的动态片段，并支持竖屏视频制作。",
+    "aiExplanation": "谷歌Veo 3.1视频生成模型升级，能制作更连贯、有创意的动态视频，并支持竖屏格式。",
+    "aiScore": 85
   },
   {
     "id": "f1bd5d4c1218fa07",
@@ -673,7 +817,30 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-01-13T13:00:00",
-    "fetched_at": "2026-02-23T23:53:02.872881"
+    "fetched_at": "2026-02-23T23:53:02.872881",
+    "aiSummary": "Salesforce推出全新AI版Slackbot，将其从通知工具升级为能搜索企业数据、起草文件并代表员工执行任务的AI智能体。该产品面向付费客户，采用Anthropic的Claude大模型驱动，标志着Salesforce在职场AI领域与微软、谷歌展开竞争。",
+    "aiExplanation": "Salesforce将Slackbot升级为AI助手，能搜索数据、起草文件并替员工执行任务，以应对微软和谷歌的竞争。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "CRM",
+        "name": "Salesforce",
+        "reason": "发布新版Slackbot AI助手",
+        "change": 1
+      },
+      {
+        "symbol": "MSFT",
+        "name": "Microsoft",
+        "reason": "职场AI领域竞争对手",
+        "change": 0
+      },
+      {
+        "symbol": "GOOGL",
+        "name": "Alphabet",
+        "reason": "职场AI领域竞争对手",
+        "change": 0
+      }
+    ]
   },
   {
     "id": "0ca4e5d53d30cbce",
@@ -686,7 +853,30 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-01-12T11:30:00",
-    "fetched_at": "2026-02-23T23:53:02.872881"
+    "fetched_at": "2026-02-23T23:53:02.872881",
+    "aiSummary": "Anthropic发布Cowork，将Claude Code功能扩展至非技术用户。该AI代理能直接处理文件，无需编码，可自动完成整理收据生成报告等任务。目前作为研究预览版，仅向Claude Max订阅用户提供。公司称该功能主要使用Claude Code自身开发，耗时约一周半。",
+    "aiExplanation": "Anthropic公司推出了Cowork功能，让普通用户也能像程序员一样用AI处理文件。它能自动整理收据、生成报告等，无需编码。这标志着AI助手正从聊天工具转向实用办公助手。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "ANTH",
+        "name": "Anthropic",
+        "reason": "文章主要介绍其新产品Cowork",
+        "change": 3
+      },
+      {
+        "symbol": "MSFT",
+        "name": "Microsoft",
+        "reason": "提及Copilot作为竞争对手",
+        "change": 0
+      },
+      {
+        "symbol": "GOOGL",
+        "name": "Alphabet",
+        "reason": "提及Google作为竞争对手",
+        "change": 0
+      }
+    ]
   },
   {
     "id": "4b5273159d45c570",
@@ -699,7 +889,30 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-01-07T20:00:00",
-    "fetched_at": "2026-02-23T23:53:02.872881"
+    "fetched_at": "2026-02-23T23:53:02.872881",
+    "aiSummary": "开源AI初创公司Nous Research发布编程模型NousCoder-14B，在LiveCodeBench v6评测中准确率达67.87%，性能媲美或超越部分大型专有系统。该模型仅用4天、48块英伟达B200芯片训练完成，正值竞争对手Anthropic的Claude Code引发热议之际，凸显AI编程工具竞争白热化。",
+    "aiExplanation": "Nous Research公司发布了一款开源AI编程模型NousCoder-14B，仅用4天训练就达到67.87%的准确率，性能媲美大型商业系统。这正值竞争对手Anthropic的Claude Code引发热议之际，显示AI编程助手领域竞争激烈。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "NVDA",
+        "name": "Nvidia",
+        "reason": "提供训练模型使用的B200显卡",
+        "change": 1
+      },
+      {
+        "symbol": "BABA",
+        "name": "Alibaba",
+        "reason": "提供基础模型Qwen3-14B",
+        "change": 0
+      },
+      {
+        "symbol": "GOOGL",
+        "name": "Alphabet",
+        "reason": "工程师提及Gemini API",
+        "change": 0
+      }
+    ]
   },
   {
     "id": "809da02c96f15de1",
@@ -712,7 +925,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-01-05T07:45:00",
-    "fetched_at": "2026-02-23T23:53:02.872881"
+    "fetched_at": "2026-02-23T23:53:02.872881",
+    "aiSummary": "Claude Code 创始人公开其工作流，引发开发者热议。他同时运行5个Claude AI代理，通过系统通知管理并行任务，将编码从线性流程转变为实时战略指挥。这种“以少胜多”的模式让单人具备小型工程团队的产出能力，被业界视为软件开发范式的突破。",
+    "aiExplanation": "Claude Code的创始人分享了他的工作流，同时运行五个AI代理，像玩星际争霸一样指挥它们协同工作，极大提升了编程效率，引发开发者热议。",
+    "aiScore": 85
   },
   {
     "id": "7052517f67d2a3b9",
@@ -725,7 +941,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2025-12-23T17:01:02",
-    "fetched_at": "2026-02-23T23:52:54.507862"
+    "fetched_at": "2026-02-23T23:52:54.507862",
+    "aiSummary": "谷歌2025年研究回顾：在AI、量子计算、健康科技等八大领域取得突破，推动技术前沿发展。",
+    "aiExplanation": "谷歌2025年研究盘点：AI更智能、搜索更精准、健康与环保技术取得新突破。",
+    "aiScore": 75
   },
   {
     "id": "add2cf98551fcf50",
@@ -738,7 +957,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2025-12-17T11:58:17",
-    "fetched_at": "2026-02-23T23:52:54.507862"
+    "fetched_at": "2026-02-23T23:52:54.507862",
+    "aiSummary": "谷歌推出Gemini 3 Flash模型，主打高速推理能力，旨在以较低成本提供前沿AI智能。",
+    "aiExplanation": "谷歌推出Gemini 3 Flash模型，它速度快、成本低，能提供前沿的智能服务。",
+    "aiScore": 85
   },
   {
     "id": "1a763d96f135f27e",
@@ -751,7 +973,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2022-12-06T17:29:09",
-    "fetched_at": "2026-02-23T23:53:07.556806"
+    "fetched_at": "2026-02-23T23:53:07.556806",
+    "aiSummary": "微软首席技术官凯文·斯科特展望AI未来，强调AI将更普及、更负责任，并深入融合到日常工具中，以增强人类能力。",
+    "aiExplanation": "微软AI负责人展望未来：AI将更普及、更易用，并融入日常生活。",
+    "aiScore": 85
   },
   {
     "id": "c6178cccabfce873",
@@ -764,7 +989,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2022-10-12T16:00:02",
-    "fetched_at": "2026-02-23T23:53:07.556806"
+    "fetched_at": "2026-02-23T23:53:07.556806",
+    "aiSummary": "微软AI助力品牌提升生产力与创意，如Hot Wheels利用AI优化内容处理，展示AI在商业应用中的多样化潜力。",
+    "aiExplanation": "微软AI正帮助品牌提升效率与创意，从玩具设计到内容处理都能实现。",
+    "aiScore": 65
   },
   {
     "id": "775b01433952a149",
@@ -777,7 +1005,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2022-10-06T14:58:15",
-    "fetched_at": "2026-02-23T23:53:07.556806"
+    "fetched_at": "2026-02-23T23:53:07.556806",
+    "aiSummary": "微软开源其“未来农场”工具包，旨在通过人工智能技术帮助农民优化农业管理，提高生产效率。",
+    "aiExplanation": "微软开源了“未来农场”工具包，用AI帮助农民更高效地种植作物。",
+    "aiScore": 75
   },
   {
     "id": "2f7906af6c5292f1",
@@ -790,7 +1021,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2022-07-25T14:49:33",
-    "fetched_at": "2026-02-23T23:53:07.556806"
+    "fetched_at": "2026-02-23T23:53:07.556806",
+    "aiSummary": "微软博客指出，数据与AI将重塑金融服务联络中心，通过智能分析提升客服效率与个性化体验。",
+    "aiExplanation": "数据与AI将帮助金融客服中心更智能地预测客户需求，提供个性化服务，提升效率。",
+    "aiScore": 65
   },
   {
     "id": "781794ebb86c798d",
@@ -803,7 +1037,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2022-07-21T14:50:33",
-    "fetched_at": "2026-02-23T23:53:07.556806"
+    "fetched_at": "2026-02-23T23:53:07.556806",
+    "aiSummary": "AI无人机助力濒危海豚研究。通过搭载人工智能技术，无人机可高效追踪并分析海豚种群数量、行为及栖息地状况，为保护濒危物种提供关键数据支持。",
+    "aiExplanation": "用AI无人机追踪濒危海豚，帮助科学家高效保护它们。",
+    "aiScore": 85
   },
   {
     "id": "35d6ce1c501a583e",
@@ -816,7 +1053,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2022-07-13T12:59:50",
-    "fetched_at": "2026-02-23T23:53:07.556806"
+    "fetched_at": "2026-02-23T23:53:07.556806",
+    "aiSummary": "在线数学辅导服务利用AI技术，通过个性化练习和即时反馈，帮助学生提升数学技能与自信心。",
+    "aiExplanation": "在线数学辅导服务利用AI技术，通过个性化练习和即时反馈，帮助学生提升数学技能和自信心。",
+    "aiScore": 70
   },
   {
     "id": "a7a38108acaf8af0",
@@ -829,7 +1069,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2022-07-06T14:51:23",
-    "fetched_at": "2026-02-23T23:53:07.556806"
+    "fetched_at": "2026-02-23T23:53:07.556806",
+    "aiSummary": "微软AI项目AI-Mimi正为日本听障人士打造包容性电视体验，通过技术创新提升电视节目的可访问性。",
+    "aiExplanation": "微软在日本推出AI-Mimi项目，通过人工智能技术为听障人士提供更包容的电视观看体验，让字幕和声音提示更智能易用。",
+    "aiScore": 75
   },
   {
     "id": "65e7bd1570971d4e",
@@ -842,7 +1085,18 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2022-06-21T17:50:03",
-    "fetched_at": "2026-02-23T23:53:07.556806"
+    "fetched_at": "2026-02-23T23:53:07.556806",
+    "aiSummary": "微软发布负责任AI系统构建框架，旨在确保人工智能开发符合伦理标准，强调公平性、可靠性与透明度。",
+    "aiExplanation": "微软推出了一套负责任开发AI的框架，旨在确保AI系统安全、公平且透明。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "MSFT",
+        "name": "Microsoft",
+        "reason": "文章介绍微软的AI责任框架",
+        "change": 1
+      }
+    ]
   },
   {
     "id": "4d22bdd9574c9c55",
@@ -855,7 +1109,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2022-06-08T21:04:42",
-    "fetched_at": "2026-02-23T23:53:07.556806"
+    "fetched_at": "2026-02-23T23:53:07.556806",
+    "aiSummary": "新加坡推出亚洲首款基于AI的鲨鱼和鳐鱼鳍识别手机应用，旨在打击非法野生动物贸易。该应用利用人工智能技术快速识别物种，帮助执法人员和公众辨别受保护物种，提升监管效率。",
+    "aiExplanation": "新加坡推出亚洲首个AI应用，用手机拍照即可识别鲨鱼和鳐鱼鱼鳍，帮助打击非法野生动物贸易。",
+    "aiScore": 85
   },
   {
     "id": "e35509a202ba4962",
@@ -868,7 +1125,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2022-05-31T21:06:06",
-    "fetched_at": "2026-02-23T23:53:07.556806"
+    "fetched_at": "2026-02-23T23:53:07.556806",
+    "aiSummary": "微软探讨AI如何推动个人助理设备创新，并助力手语识别技术发展，以提升无障碍服务。",
+    "aiExplanation": "AI能帮助开发更懂手语的家庭助手，让听障人士生活更便利。",
+    "aiScore": 75
   },
   {
     "id": "851cdbde60708d51",
@@ -1011,7 +1271,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-24T00:00:21",
-    "fetched_at": "2026-02-24T07:01:44.436314"
+    "fetched_at": "2026-02-24T07:01:44.436314",
+    "aiSummary": "英伟达Jetson平台成功部署开源视觉语言模型（VLM），为边缘设备带来强大图像理解和自然语言交互能力，推动AI在机器人、自动驾驶等领域的应用。",
+    "aiExplanation": "这篇文章教你如何在英伟达Jetson设备上安装和运行开源的视觉语言模型，让设备能看懂图像并回答问题。",
+    "aiScore": 75
   },
   {
     "id": "5d67786a63c276b5",
@@ -1050,7 +1313,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-23T11:00:00",
-    "fetched_at": "2026-02-24T07:01:41.804285"
+    "fetched_at": "2026-02-24T07:01:41.804285",
+    "aiSummary": "SWE-bench Verified因测试缺陷和数据泄露问题，已无法准确衡量前沿编码进展，建议改用SWE-bench Pro。",
+    "aiExplanation": "SWE-bench Verified因测试缺陷和数据泄露问题，无法准确评估前沿编码进展，建议改用SWE-bench Pro。",
+    "aiScore": 70
   },
   {
     "id": "55f172c8f477da0d",
@@ -1103,7 +1369,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-24T16:00:00",
-    "fetched_at": "2026-02-24T19:03:57.553885"
+    "fetched_at": "2026-02-24T19:03:57.553885",
+    "aiSummary": "多智能体工作流常因状态、顺序等隐性假设失败。文章指出，应将其视为分布式系统，通过定义明确的数据模式、接口和指令来确保可靠性，避免因自然语言混乱或格式不一致导致的错误。",
+    "aiExplanation": "多智能体协作常因缺乏明确规则而失败，需像分布式系统一样设计，明确状态、顺序和接口。",
+    "aiScore": 85
   },
   {
     "id": "7dc7a92436d4e9dc",
@@ -1129,7 +1398,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-24T22:00:00",
-    "fetched_at": "2026-02-25T02:11:41.888829"
+    "fetched_at": "2026-02-25T02:11:41.888829",
+    "aiSummary": "MIT研究人员受日本剪纸启发，开发出一种新型3D结构设计方法：通过算法将3D模型转化为由铰链连接的平面瓷砖阵列，只需拉动一根特制绳索，就能让平面结构瞬间展开成立体形态。这项技术可应用于折叠头盔、医疗设备、应急庇护所乃至火星栖息地等场景，实现低成本存储运输和快速部署。",
+    "aiExplanation": "MIT研究人员受剪纸启发，发明了一种新型可折叠结构。只需拉动一根线，就能让平面瓷砖瞬间变成立体物品，可用于制造折叠头盔、救灾帐篷等。",
+    "aiScore": 85
   },
   {
     "id": "d3e9686fad3a6e68",
@@ -1142,7 +1414,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-24T22:00:00",
-    "fetched_at": "2026-02-25T02:11:41.888841"
+    "fetched_at": "2026-02-25T02:11:41.888841",
+    "aiSummary": "MIT研究团队在小鼠实验中发现，通过短暂麻醉弱视眼视网膜两天，可恢复大脑视觉系统的神经连接，改善成年弱视。该疗法无需遮盖健康眼，有望为传统方法无效的成年患者提供新治疗方向。",
+    "aiExplanation": "研究发现，成年弱视（“懒眼”）小鼠的患病眼睛视网膜被麻醉两天后，大脑视觉连接可恢复，这为成人弱视治疗带来新希望。",
+    "aiScore": 85
   },
   {
     "id": "19a0fcdfc39466e3",
@@ -1155,7 +1430,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-24T22:00:00",
-    "fetched_at": "2026-02-25T02:11:41.888850"
+    "fetched_at": "2026-02-25T02:11:41.888850",
+    "aiSummary": "MIT与博德研究所的研究人员开发出一种新方法，通过向肝脏递送mRNA，使其暂时产生促进T细胞成熟的蛋白质，从而逆转衰老导致的免疫系统衰退。在老年小鼠实验中，该方法显著提升了T细胞的数量、多样性及对疫苗和癌症免疫疗法的反应。该技术有望未来帮助人类延长健康寿命。",
+    "aiExplanation": "科学家发现，通过向肝脏注射特殊mRNA，能让肝脏暂时替代衰老的胸腺功能，帮助老年小鼠增强免疫细胞活性和多样性，未来或可帮助人类延长健康寿命。",
+    "aiScore": 85
   },
   {
     "id": "a13191f0fe432c9d",
@@ -1168,7 +1446,18 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-24T22:00:00",
-    "fetched_at": "2026-02-25T02:11:41.888857"
+    "fetched_at": "2026-02-25T02:11:41.888857",
+    "aiSummary": "MIT与微软研究人员利用AI设计出可检测癌症的分子传感器。该传感器通过尿液测试识别癌细胞中过度活跃的蛋白酶，生成可排泄的标记分子。AI优化了传感器的灵敏度和特异性，有望用于早期癌症筛查及治疗。",
+    "aiExplanation": "MIT用AI设计蛋白质，制成尿液检测试纸，可在家筛查30种早期癌症。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "MSFT",
+        "name": "Microsoft",
+        "reason": "研究合作方，AI模型开发",
+        "change": 1
+      }
+    ]
   },
   {
     "id": "74bd5744902f70aa",
@@ -1181,7 +1470,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-02-24T22:00:00",
-    "fetched_at": "2026-02-25T02:11:41.888865"
+    "fetched_at": "2026-02-25T02:11:41.888865",
+    "aiSummary": "MIT团队开发新技术，可将抗体药物浓缩成半固体颗粒，实现标准注射器皮下注射，无需静脉输液，有望大幅简化癌症等疾病的治疗流程。",
+    "aiExplanation": "科学家开发出可注射的浓缩抗体药物，有望替代耗时静脉注射，让癌症等治疗更便捷。",
+    "aiScore": 85
   },
   {
     "id": "a9f2cd2a025b011e",
@@ -1259,7 +1551,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-02-24T13:40:00",
-    "fetched_at": "2026-02-25T02:11:38.319244"
+    "fetched_at": "2026-02-25T02:11:38.319244",
+    "aiSummary": "OpenAI任命Arvind KC为首席人事官，他将负责帮助公司扩大规模、强化企业文化，并引领人工智能时代的工作方式变革。",
+    "aiExplanation": "OpenAI任命Arvind KC为首席人事官，他将帮助公司扩大规模、强化文化，并引领AI时代的工作方式变革。",
+    "aiScore": 75
   },
   {
     "id": "900d1733cee453d5",
