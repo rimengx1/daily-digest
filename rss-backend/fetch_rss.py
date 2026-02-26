@@ -15,10 +15,10 @@ from app.services.database import init_database, save_articles
 from app.services.rss_fetcher import fetch_all_rss
 
 
-def generate_ai_summary(title, content, api_key):
-    """使用DeepSeek生成AI摘要"""
+def generate_ai_summaries(title, content, api_key):
+    """使用DeepSeek生成两种摘要（30秒速读 + 全文摘要）- 合并API调用"""
     if not api_key:
-        return None
+        return None, None
     
     try:
         response = requests.post(
@@ -32,29 +32,45 @@ def generate_ai_summary(title, content, api_key):
                 'messages': [
                     {
                         'role': 'system',
-                        'content': '你是一个专业的科技新闻摘要生成助手。请用中文生成简洁的新闻摘要（100字以内），突出重点。'
+                        'content': '你是一个专业的科技新闻摘要生成助手。请为这篇文章生成两种摘要，用JSON格式返回：\n{\n  "quick": "30秒速读版，80字以内，3-4句话，突出重点",\n  "full": "全文摘要版，200-300字，详细说明核心观点、关键细节和重要性"\n}'
                     },
                     {
                         'role': 'user',
-                        'content': f'标题：{title}\n\n内容：{content[:3000]}'
+                        'content': f'标题：{title}\n\n内容：{content[:5000]}'
                     }
                 ],
                 'temperature': 0.7,
-                'max_tokens': 200
+                'max_tokens': 500
             },
             timeout=30
         )
         
         if response.status_code == 200:
             data = response.json()
-            summary = data['choices'][0]['message']['content'].strip()
-            return summary
+            result = data['choices'][0]['message']['content'].strip()
+            
+            # 解析JSON
+            try:
+                # 提取JSON部分
+                if '```json' in result:
+                    result = result.split('```json')[1].split('```')[0]
+                elif '```' in result:
+                    result = result.split('```')[1].split('```')[0]
+                
+                summaries = json.loads(result)
+                quick = summaries.get('quick', '').strip()
+                full = summaries.get('full', '').strip()
+                return quick, full
+            except Exception as e:
+                print(f"解析摘要JSON失败: {e}")
+                # 如果解析失败，把整个结果作为quick summary
+                return result[:100], result
         else:
             print(f"AI摘要API错误: {response.status_code}")
-            return None
+            return None, None
     except Exception as e:
         print(f"生成AI摘要失败: {e}")
-        return None
+        return None, None
 
 
 def generate_simple_explanation(title, content, api_key):
@@ -209,11 +225,14 @@ def process_article_with_ai(article, api_key):
     
     print(f"  处理AI: {title[:50]}...")
     
-    # 生成AI摘要
-    ai_summary = generate_ai_summary(title, content, api_key)
-    if ai_summary:
-        article['aiSummary'] = ai_summary  # 驼峰命名，前端兼容
-        print(f"    ✓ AI摘要生成成功")
+    # 生成AI摘要（两种：30秒速读 + 全文摘要）- 合并API调用
+    quick_summary, full_summary = generate_ai_summaries(title, content, api_key)
+    if quick_summary:
+        article['aiSummary'] = quick_summary  # 30秒速读
+        print(f"    ✓ AI摘要(30秒速读)生成成功")
+    if full_summary:
+        article['aiInterpretation'] = full_summary  # 全文摘要
+        print(f"    ✓ 全文摘要生成成功")
     
     # 生成小白解释
     ai_explanation = generate_simple_explanation(title, content, api_key)
