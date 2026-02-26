@@ -167,7 +167,7 @@ export function ArticleCard({
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-xs font-medium text-muted-foreground">全文摘要</span>
                       </div>
-                      <p className="text-sm leading-relaxed">{article.aiInterpretation}</p>
+                      <p className="text-sm leading-relaxed">{article.aiInterpretation || article.aiSummary}</p>
                     </div>
                   )}
                   {activeTab === 'simple' && (
