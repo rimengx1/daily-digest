@@ -928,7 +928,15 @@
     "fetched_at": "2026-02-23T23:53:02.872881",
     "aiSummary": "Claude Code 创始人公开其工作流，引发开发者热议。他同时运行5个Claude AI代理，通过系统通知管理并行任务，将编码从线性流程转变为实时战略指挥。这种“以少胜多”的模式让单人具备小型工程团队的产出能力，被业界视为软件开发范式的突破。",
     "aiExplanation": "Claude Code的创始人分享了他的工作流，同时运行五个AI代理，像玩星际争霸一样指挥它们协同工作，极大提升了编程效率，引发开发者热议。",
-    "aiScore": 85
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "ANTH",
+        "name": "Anthropic",
+        "reason": "文章主要讨论其产品Claude Code",
+        "change": 3
+      }
+    ]
   },
   {
     "id": "7052517f67d2a3b9",
