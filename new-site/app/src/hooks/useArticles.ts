@@ -76,9 +76,9 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
       fetchedAt: new Date(item.fetched_at || Date.now()),
       isFavorited: false,
       aiScore: item.aiScore || item.ai_score || Math.floor(60 + Math.random() * 40),
-      aiSummary: item.aiSummary?.trim() || item.ai_summary?.trim() || item.summary || '',
-      aiInterpretation: item.aiInterpretation?.trim() || item.aiSummary?.trim() || '',
-      aiExplanation: item.aiExplanation?.trim() || item.ai_explanation?.trim() || '',
+      aiSummary: item.aiSummary || item.ai_summary || item.summary || '',
+      aiInterpretation: item.aiInterpretation || '',
+      aiExplanation: item.aiExplanation || item.ai_explanation || '',
       aiStocks: item.aiStocks || item.ai_stocks || [],  // 优先使用AI生成的股票数据
       articleNumber: parseInt(item.id?.slice(0, 8) || '0', 16) % 10000,
     }));

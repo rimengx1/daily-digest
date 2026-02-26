@@ -16,7 +16,7 @@ from app.services.rss_fetcher import fetch_all_rss
 
 
 def generate_ai_summary(title, content, api_key):
-    """使用DeepSeek生成AI摘要（30秒速读 - 简短版）"""
+    """使用DeepSeek生成AI摘要"""
     if not api_key:
         return None
     
@@ -32,7 +32,7 @@ def generate_ai_summary(title, content, api_key):
                 'messages': [
                     {
                         'role': 'system',
-                        'content': '你是一个专业的科技新闻摘要生成助手。请用中文生成简洁的新闻摘要（80字以内，3-4句话），突出重点，适合快速浏览。'
+                        'content': '你是一个专业的科技新闻摘要生成助手。请用中文生成简洁的新闻摘要（100字以内），突出重点。'
                     },
                     {
                         'role': 'user',
@@ -40,7 +40,7 @@ def generate_ai_summary(title, content, api_key):
                     }
                 ],
                 'temperature': 0.7,
-                'max_tokens': 150
+                'max_tokens': 200
             },
             timeout=30
         )
@@ -54,48 +54,6 @@ def generate_ai_summary(title, content, api_key):
             return None
     except Exception as e:
         print(f"生成AI摘要失败: {e}")
-        return None
-
-
-def generate_full_summary(title, content, api_key):
-    """生成全文摘要（详细版 - 200-300字）"""
-    if not api_key:
-        return None
-    
-    try:
-        response = requests.post(
-            'https://api.deepseek.com/v1/chat/completions',
-            headers={
-                'Authorization': f'Bearer {api_key}',
-                'Content-Type': 'application/json'
-            },
-            json={
-                'model': 'deepseek-chat',
-                'messages': [
-                    {
-                        'role': 'system',
-                        'content': '你是一个专业的科技新闻分析师。请用中文提供详细的文章摘要（200-300字），包含：1)核心观点 2)关键细节 3)重要性分析。语言流畅，信息完整。'
-                    },
-                    {
-                        'role': 'user',
-                        'content': f'标题：{title}\n\n内容：{content[:5000]}'
-                    }
-                ],
-                'temperature': 0.7,
-                'max_tokens': 400
-            },
-            timeout=30
-        )
-        
-        if response.status_code == 200:
-            data = response.json()
-            summary = data['choices'][0]['message']['content'].strip()
-            return summary
-        else:
-            print(f"全文摘要API错误: {response.status_code}")
-            return None
-    except Exception as e:
-        print(f"生成全文摘要失败: {e}")
         return None
 
 
@@ -251,17 +209,11 @@ def process_article_with_ai(article, api_key):
     
     print(f"  处理AI: {title[:50]}...")
     
-    # 生成AI摘要（30秒速读）
+    # 生成AI摘要
     ai_summary = generate_ai_summary(title, content, api_key)
     if ai_summary:
         article['aiSummary'] = ai_summary  # 驼峰命名，前端兼容
-        print(f"    ✓ AI摘要(30秒速读)生成成功")
-    
-    # 生成全文摘要
-    full_summary = generate_full_summary(title, content, api_key)
-    if full_summary:
-        article['aiInterpretation'] = full_summary  # 全文摘要
-        print(f"    ✓ 全文摘要生成成功")
+        print(f"    ✓ AI摘要生成成功")
     
     # 生成小白解释
     ai_explanation = generate_simple_explanation(title, content, api_key)
