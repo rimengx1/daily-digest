@@ -1500,5 +1500,21 @@
     "aiSummary": "最新威胁报告揭示，恶意行为者正将AI模型与网站及社交平台结合，对检测与防御构成新挑战。报告呼吁加强技术应对。",
     "aiExplanation": "恶意分子正利用AI模型结合网络平台进行攻击，最新报告探讨了如何检测和防御这类威胁。",
     "aiScore": 85
+  },
+  {
+    "id": "afaf77b093401535",
+    "title": "Roundtables: Why 2026 Is the Year for Sodium-Ion Batteries",
+    "url": "https://www.technologyreview.com/2026/02/25/1132873/roundtables-why-2026-is-the-year-for-sodium-ion-batteries/",
+    "summary": "Listen to the session or watch below Sodium-based batteries could be a cheaper, safer alternative to lithium-ion, and the technology is finally making its way into cars—and energy storage arrays on the grid. Sodium-ion batteries are one of MIT Technology Review&#8217;s 10 Breakthrough Technologies of 2026 list, and this subscriber-only discussion explains why. Watch a&#8230;",
+    "content": "<p><strong>Listen to the session or watch below</strong></p>\n\n\n\n<figure class=\"wp-block-audio\"><audio controls=\"controls\" src=\"https://wp.technologyreview.com/wp-content/uploads/2026/02/GMT20260225-180003_Recording.cutfile.20260225202106540.m4a\"></audio></figure>\n\n\n\n<p>Sodium-based batteries could be a cheaper, safer alternative to lithium-ion, and the technology is finally making its way into cars—and energy storage arrays on the grid. Sodium-ion batteries are one of MIT Technology Review&#8217;s <em><a href=\"https://www.technologyreview.com/2026/01/12/1130697/10-breakthrough-technologies-2026/\">10 Breakthrough Technologies of 2026</a></em> list, and this subscriber-only discussion explains why. </p>\n\n\n\n<p>Watch a discussion exploring the present moment for sodium-ion batteries—and what’s coming next.</p>\n\n\n\n<p><strong>Speakers:</strong> <strong>Mary Beth Griggs</strong>, Science Editor; <strong><a href=\"https://www.technologyreview.com/author/casey-crownhart\" rel=\"noreferrer noopener\" target=\"_blank\">Casey Crownhart</a></strong>, Senior Climate Reporter; and <strong><a href=\"https://www.technologyreview.com/author/caiwei-chen/\">Caiwei Chen</a></strong>, China Reporter</p>\n\n\n\n<figure class=\"wp-block-embed is-type-video is-provider-vimeo wp-block-embed-vimeo wp-embed-aspect-16-9 wp-has-aspect-ratio\"><div class=\"wp-block-embed__wrapper\">\n\n</div></figure>\n\n\n\n<p><strong><em><strong>Recorded on February 25, 2026<br /></strong></em></strong></p>\n\n\n\n<p><strong>Related Stories:</strong></p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><a href=\"https://www.technologyreview.com/2026/01/12/1129991/sodium-ion-batteries-2026-breakthrough-technology/\">Sodium-ion batteries: 10 Breakthrough Technologies 2026</a></li>\n\n\n\n<li><a href=\"https://www.technologyreview.com/2026/02/02/1132042/whats-next-for-ev-batteries-in-2026/\">What’s next for EV batteries in 2026 | MIT Technology Review</a></li>\n\n\n\n<li><a href=\"https://www.technologyreview.com/2025/06/12/1118556/sodium-batteries-niche/\">These new batteries are finding a niche | MIT Technology Review</a></li>\n\n\n\n<li><a href=\"https://www.technologyreview.com/2025/10/06/1124270/2025-climate-tech-companies-to-watch-hina-battery-salt-cells/\">2025 Climate Tech Companies to Watch: HiNa Battery Technology and its effort to commercialize salt cells</a></li>\n</ul>",
+    "source": "MIT Technology Review",
+    "source_id": "mit-tech-review",
+    "category": "rss",
+    "language": "en",
+    "published_at": "2026-02-25T21:15:27",
+    "fetched_at": "2026-02-26T02:07:26.131126",
+    "aiSummary": "钠离子电池因成本更低、安全性更高，有望替代锂离子电池，并正应用于汽车和电网储能。该技术入选《麻省理工科技评论》2026年十大突破性技术，标志着其商业化进程加速。",
+    "aiExplanation": "钠离子电池比锂电池更便宜安全，2026年将用于汽车和电网储能，是重要技术突破。",
+    "aiScore": 85
   }
 ]
