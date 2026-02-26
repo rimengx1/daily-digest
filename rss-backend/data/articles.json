@@ -1262,7 +1262,15 @@
     "aiSummary": "Claude Code创始人Boris Cherny公开其革命性工作流：同时运行5个Claude AI代理并行工作，使用最慢但最智能的Opus 4.5模型，并通过CLAUDE.md文件让AI从错误中学习。开发者社区称这是软件开发的分水岭时刻，将编码从传统打字转变为实时战略游戏般的指挥体验。",
     "aiInterpretation": "Anthropic旗下Claude Code的创始人Boris Cherny在X平台分享的个人工作流程引发了开发社区的狂热讨论，被业内人士称为软件开发领域的“分水岭时刻”。该工作流的核心创新在于三个方面：首先，Cherny同时运行5个Claude AI代理并行工作，通过iTerm2系统通知管理多个工作流，将传统线性编码转变为类似《星际争霸》游戏的实时战略指挥体验，让单人的产出能力堪比小型工程部门。其次，他反直觉地选择使用最慢但最智能的Opus 4.5模型，认为虽然模型更大更慢，但由于需要更少的人工纠正且工具使用能力更强，总体效率反而高于使用更小更快的模型，这揭示了现代AI开发的瓶颈不在于令牌生成速度，而在于纠正AI错误所花费的人力时间。第三，他的团队通过维护一个名为CLAUDE.md的共享文件，将AI的每次错误记录其中，使代码库成为自我修正的系统，解决了AI的“健忘症”问题。这一工作流验证了Anthropic“以少做多”的战略，表明通过优化现有模型的协调使用，而非盲目追求基础设施扩张，可以实现指数级的生产力提升。行业观察者认为，这可能是Anthropic的“ChatGPT时刻”，标志着软件开发范式从手动编码向AI指挥的根本转变。",
     "aiExplanation": "Claude Code创始人分享了他的工作流程：同时运行五个AI助手，像玩即时战略游戏一样指挥它们协作编程，极大提升了开发效率。",
-    "aiScore": 85
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "ANTHROPIC",
+        "name": "Anthropic",
+        "reason": "Claude Code的母公司",
+        "change": 3
+      }
+    ]
   },
   {
     "id": "7052517f67d2a3b9",
@@ -1458,5 +1466,22 @@
     "aiInterpretation": "微软在其官方博客中探讨了人工智能在家庭场景下的创新机遇，重点关注两个方向：一是提升个人助理设备（如智能音箱）的智能化水平，使其更好地融入家庭生活；二是利用AI技术推动手语识别与翻译的创新，为听障人士创造更无障碍的家居环境。文章指出，AI可以通过计算机视觉和自然语言处理技术，实现实时的手语翻译，这将极大改善听障人士与智能设备及他人的沟通效率。这一方向不仅具有重要的社会意义，体现了科技普惠的价值，也为AI在无障碍领域的应用开辟了新的市场空间。微软强调，将AI与可访问性技术结合，是推动技术创新和社会包容性的关键机遇。",
     "aiExplanation": "AI能推动智能家居助手创新，帮助听障人士通过手语与设备交互。",
     "aiScore": 75
+  },
+  {
+    "id": "fe64bb89fec8dfe9",
+    "title": "Pacific Northwest National Laboratory and OpenAI partner to accelerate federal permitting",
+    "url": "https://openai.com/index/pacific-northwest-national-laboratory",
+    "summary": "OpenAI and Pacific Northwest National Laboratory introduce DraftNEPABench, a new benchmark evaluating how AI coding agents can accelerate federal permitting—showing potential to reduce NEPA drafting time by up to 15% and modernize infrastructure reviews.",
+    "content": "OpenAI and Pacific Northwest National Laboratory introduce DraftNEPABench, a new benchmark evaluating how AI coding agents can accelerate federal permitting—showing potential to reduce NEPA drafting time by up to 15% and modernize infrastructure reviews.",
+    "source": "OpenAI Blog",
+    "source_id": "openai",
+    "category": "ai-hot",
+    "language": "en",
+    "published_at": "2026-02-26T10:00:00",
+    "fetched_at": "2026-02-26T20:26:58.160362",
+    "aiSummary": "OpenAI与太平洋西北国家实验室合作推出DraftNEPABench基准测试，评估AI编码助手在加速联邦许可流程中的应用。初步结果显示，AI可将《国家环境政策法》草案撰写时间缩短高达15%，有望推动基础设施审查现代化。",
+    "aiInterpretation": "OpenAI与太平洋西北国家实验室（PNNL）近日宣布合作推出名为DraftNEPABench的新基准测试，专门用于评估人工智能编码助手在加速联邦政府许可流程中的实际效能。该测试聚焦于《国家环境政策法》（NEPA）相关文件的自动化生成，这是美国基础设施项目审批的关键环节，通常涉及大量技术文档的撰写与合规审查。初步研究数据显示，AI辅助工具能够将NEPA草案的撰写时间减少最高15%，显著提升审批效率。这一合作标志着AI技术正深入政府行政与监管流程，旨在通过自动化部分文书工作，帮助联邦机构应对日益增长的基础设施项目审查需求，推动许可流程的现代化与提速。",
+    "aiExplanation": "美国实验室与AI公司合作开发新工具，可将政府项目审批文件的起草时间缩短15%，有望加快基础设施建设。",
+    "aiScore": 85
   }
 ]
