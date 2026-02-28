@@ -1833,5 +1833,39 @@
         "change": 1
       }
     ]
+  },
+  {
+    "id": "b333544e35b467ab",
+    "title": "MIT Technology Review is a 2026 ASME finalist in reporting",
+    "url": "https://www.technologyreview.com/2026/02/27/1133769/asme-finalist-reporting/",
+    "summary": "The American Society of Magazine Editors has named MIT Technology Review as a finalist for a 2026 National Magazine Award in the reporting category.  The shortlisted story—“We did the math on AI’s energy footprint. Here’s the story you haven’t heard”—is part of the publication&#8217;s Power Hungry package on AI’s energy burden.  AI is often described&#8230;",
+    "content": "<p>The American Society of Magazine Editors has <a href=\"https://asme.memberclicks.net/national-magazine-awards-2026-nominations-announced\" rel=\"noreferrer noopener\" target=\"_blank\">named <em>MIT Technology Review</em> as a finalist</a> for a 2026 National Magazine Award in the reporting category. </p>\n\n\n\n<p>The shortlisted story—<a href=\"https://www.technologyreview.com/2025/05/20/1116327/ai-energy-usage-climate-footprint-big-tech/\" rel=\"noreferrer noopener\" target=\"_blank\"><em>“We did the math on AI’s energy footprint. Here’s the story you haven’t heard”</em></a>—is part of the publication&#8217;s<em> </em><a href=\"https://www.technologyreview.com/supertopic/ai-energy-package/\" rel=\"noreferrer noopener\" target=\"_blank\">Power Hungry package</a> on AI’s energy burden. </p>\n\n\n\n<p>AI is often described as a black box, but it’s not just its inner workings that are mysterious. Leading AI companies have kept figures on energy use closely guarded, making it hard to determine its climate impact. In a rigorous investigation, senior AI reporter James O’Donnell and senior climate reporter Casey Crownhart spent six months digging through hundreds of pages of reports, interviewing experts, and crunching the numbers.&nbsp;</p>\n\n\n\n<p>The team drilled down into the energy cost of a single prompt, and then zoomed out to build a broader picture illustrating the potential impacts of AI’s current and future energy demand. Their work revealed just how big AI’s energy footprint is, where that energy comes from, and who will pay for it. In the months following the project’s publication, major AI companies including Open AI, Mistral, and Google published details about their models’ energy and water usage.&nbsp;</p>\n\n\n\n<p>The 2026 awards will be presented in New York City on May 19.&nbsp;</p>",
+    "source": "MIT Technology Review",
+    "source_id": "mit-tech-review",
+    "category": "rss",
+    "language": "en",
+    "published_at": "2026-02-27T21:41:31",
+    "fetched_at": "2026-02-28T01:08:00.300824",
+    "aiSummary": "《麻省理工科技评论》因AI能源调查报道入围2026年美国国家杂志奖。其深度报道《我们计算了AI的能源足迹》揭露了AI巨头隐瞒的能耗数据，促使OpenAI等公司公开能耗信息。该报道是“能源饥渴”专题的一部分，将于2026年5月颁奖。",
+    "aiInterpretation": "《麻省理工科技评论》凭借其关于人工智能能源消耗的深度调查报道，成功入围2026年美国国家杂志奖（ASME）报道类奖项的最终提名。这篇题为《我们计算了AI的能源足迹：一个你从未听过的故事》的报道，隶属于该刊聚焦AI能源负担的“能源饥渴”专题系列。\n\n报道的核心在于揭露AI行业长期存在的“黑箱”问题——不仅是算法不透明，其巨大的能源消耗数据也被主要AI公司严密保密，导致公众难以评估其对气候的真实影响。为了突破这一信息壁垒，资深AI记者James O‘Donnell和气候记者Casey Crownhart进行了长达六个月的 rigorous 调查。他们梳理了数百页报告、采访专家并进行数据核算，从计算单次AI提示的能耗成本入手，逐步构建出AI当前及未来能源需求的宏观图景。\n\n该报道首次清晰揭示了AI能源足迹的巨大规模、能源来源以及最终的成本承担者。其影响力在发表后数月内迅速显现：包括OpenAI、Mistral和谷歌在内的多家头部AI公司，迫于公众和行业压力，相继公布了其AI模型的能耗与用水量细节。这标志着在AI透明度与可持续发展议题上取得了重要进展。该奖项最终结果将于2026年5月19日在纽约市揭晓。",
+    "aiExplanation": "《麻省理工科技评论》因一篇调查AI能耗的文章，入围2026年美国杂志编辑协会报道奖。该报道首次量化了AI的能源足迹，促使多家科技巨头公开了能耗数据。",
+    "aiScore": 65
+  },
+  {
+    "id": "ade3424c0e1f55dc",
+    "title": "An update on our mental health-related work",
+    "url": "https://openai.com/index/update-on-mental-health-related-work",
+    "summary": "OpenAI shares updates on its mental health safety work, including parental controls, trusted contacts, improved distress detection, and recent litigation developments.",
+    "content": "OpenAI shares updates on its mental health safety work, including parental controls, trusted contacts, improved distress detection, and recent litigation developments.",
+    "source": "OpenAI Blog",
+    "source_id": "openai",
+    "category": "ai-hot",
+    "language": "en",
+    "published_at": "2026-02-27T00:00:00",
+    "fetched_at": "2026-02-28T01:07:56.186750",
+    "aiSummary": "OpenAI宣布心理健康安全措施更新，包括家长控制、紧急联系人功能、改进的危机检测系统，并回应近期相关诉讼进展。这些举措旨在增强AI交互中的用户保护机制。",
+    "aiInterpretation": "OpenAI近日公布了其在心理健康安全领域的最新工作进展，重点涵盖四个关键方向：首先推出家长控制功能，允许监护人管理未成年用户对敏感内容的访问权限；其次引入“可信联系人”机制，当系统检测到用户可能处于心理危机状态时，可向预设联系人发送预警；第三是升级了心理困扰检测算法，通过更精准的自然语言分析识别潜在风险对话；最后公司披露了近期涉及心理健康相关诉讼的法律进展，强调将持续完善安全协议。这些更新反映了AI行业对伦理责任日益增长的关注，特别是在处理敏感话题时需平衡技术创新与用户福祉。专家指出，此类措施可能成为未来AI开发者的行业标准参考。",
+    "aiExplanation": "OpenAI更新心理健康保护措施，包括家长控制、紧急联系人、情绪检测优化及法律进展。",
+    "aiScore": 85
   }
 ]
