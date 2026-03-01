@@ -16,17 +16,13 @@ const API_CONFIG = {
   endpoints: {
     'deepseek': 'https://api.deepseek.com/v1/chat/completions',
     'kimi': 'https://api.moonshot.cn/v1/chat/completions',
-    'mock': '', // mock 模式不需要端点
   },
   
-  getApiKey(provider: 'mock' | 'deepseek' | 'kimi'): string {
+  getApiKey(provider: 'deepseek' | 'kimi'): string {
     if (provider === 'deepseek') {
       return import.meta.env.VITE_DEEPSEEK_API_KEY || '';
     }
-    if (provider === 'kimi') {
-      return import.meta.env.VITE_KIMI_API_KEY || '';
-    }
-    return ''; // mock 模式不需要 API key
+    return import.meta.env.VITE_KIMI_API_KEY || '';
   },
 };
 
