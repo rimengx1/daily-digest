@@ -83,8 +83,8 @@ export function Navbar({
 
           {/* Controls */}
           <div className="flex items-center gap-0.5">
-            {/* Studio Mode Toggle - Only show on AI Hot section */}
-            {activeSection === 'ai-hot' && toggleViewMode && (
+            {/* Studio Mode Toggle - Show on all pages */}
+            {toggleViewMode && (
               <Button
                 variant="ghost"
                 size="sm"
