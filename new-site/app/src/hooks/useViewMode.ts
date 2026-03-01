@@ -51,10 +51,12 @@ export function useViewMode() {
     setViewMode(mode === 'normal' ? 'studio' : 'normal');
   }, [mode, setViewMode]);
 
-  // 初始化 body class
+  // 初始化 body class - 在 mode 变化时更新
   useEffect(() => {
     if (mode === 'studio') {
       document.body.classList.add('mode-studio');
+    } else {
+      document.body.classList.remove('mode-studio');
     }
   }, [mode]);
 
