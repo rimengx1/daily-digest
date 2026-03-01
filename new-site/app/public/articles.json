@@ -1867,5 +1867,22 @@
     "aiInterpretation": "OpenAI近日公布了其在心理健康安全领域的最新工作进展，重点涵盖四个关键方向：首先推出家长控制功能，允许监护人管理未成年用户对敏感内容的访问权限；其次引入“可信联系人”机制，当系统检测到用户可能处于心理危机状态时，可向预设联系人发送预警；第三是升级了心理困扰检测算法，通过更精准的自然语言分析识别潜在风险对话；最后公司披露了近期涉及心理健康相关诉讼的法律进展，强调将持续完善安全协议。这些更新反映了AI行业对伦理责任日益增长的关注，特别是在处理敏感话题时需平衡技术创新与用户福祉。专家指出，此类措施可能成为未来AI开发者的行业标准参考。",
     "aiExplanation": "OpenAI更新心理健康保护措施，包括家长控制、紧急联系人、情绪检测优化及法律进展。",
     "aiScore": 85
+  },
+  {
+    "id": "66ced47db431953b",
+    "title": "Our agreement with the Department of War",
+    "url": "https://openai.com/index/our-agreement-with-the-department-of-war",
+    "summary": "Details on OpenAI’s contract with the Department of War, outlining safety red lines, legal protections, and how AI systems will be deployed in classified environments.",
+    "content": "Details on OpenAI’s contract with the Department of War, outlining safety red lines, legal protections, and how AI systems will be deployed in classified environments.",
+    "source": "OpenAI Blog",
+    "source_id": "openai",
+    "category": "ai-hot",
+    "language": "en",
+    "published_at": "2026-02-28T12:30:00",
+    "fetched_at": "2026-03-01T01:23:37.505134",
+    "aiSummary": "OpenAI与美国国防部签署合作协议，明确AI部署的安全红线与法律保护框架。协议详细规定了AI系统在机密环境中的使用规范，强调技术应用需符合伦理准则。这是商业AI公司首次与军方建立正式合作机制。",
+    "aiInterpretation": "OpenAI近日公布了与美国国防部（文中称“战争部”为历史表述）的正式合作协议细节。该协议核心围绕三大维度：首先确立安全红线，明确禁止将AI技术用于武器开发、人员伤害等场景；其次构建法律保护框架，界定军方使用AI系统的责任边界与数据隐私条款；最后详细说明AI系统在机密军事环境中的部署方案，包括安全审计流程与人员培训机制。\n\n值得关注的是，协议特别强调所有AI应用需遵循国际人道主义法和伦理准则，并设立第三方监督委员会。此次合作标志着商业AI公司首次系统性地参与国防体系建设，既体现了AI技术向高安全需求领域的渗透趋势，也引发关于科技公司军事化合作的伦理讨论。分析认为，这可能成为全球AI军事化应用的标准参考案例。",
+    "aiExplanation": "OpenAI与美国国防部签订协议，明确AI在军事应用中的安全底线、法律保护及机密环境部署规则。",
+    "aiScore": 85
   }
 ]
