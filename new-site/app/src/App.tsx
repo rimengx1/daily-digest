@@ -113,6 +113,7 @@ function App() {
             isRefreshing={isRefreshing}
             language={language}
             onToggleFavorite={handleToggleFavorite}
+            viewMode={viewMode}
           />
         );
       case 'recommended':

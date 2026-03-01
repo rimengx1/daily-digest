@@ -83,33 +83,28 @@ export function Navbar({
 
           {/* Controls */}
           <div className="flex items-center gap-0.5">
-            {/* Studio Mode Toggle - Show on all pages */}
-            {toggleViewMode && (
+            {/* Studio Mode Toggle - Only show on AI Hot page */}
+            {toggleViewMode && activeSection === 'ai-hot' && (
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => {
-                  console.log('[DEBUG] Toggle button clicked');
-                  console.log('[DEBUG] Current viewMode:', viewMode);
-                  toggleViewMode();
-                  console.log('[DEBUG] toggleViewMode called');
-                }}
+                onClick={toggleViewMode}
                 className={`h-8 px-2 rounded-full text-xs font-medium transition-all ${
                   viewMode === 'studio'
                     ? 'bg-primary text-primary-foreground hover:bg-primary/90'
                     : 'hover:bg-muted'
                 }`}
-                title={viewMode === 'studio' ? 'Switch to normal mode' : 'Switch to studio mode'}
+                title={viewMode === 'studio' ? '切换到阅读模式' : '切换到录屏模式'}
               >
                 {viewMode === 'studio' ? (
                   <>
                     <BookOpen className="w-3.5 h-3.5 mr-1" />
-                    <span className="hidden sm:inline">阅读模式</span>
+                    <span className="hidden sm:inline">📖 阅读模式</span>
                   </>
                 ) : (
                   <>
                     <Monitor className="w-3.5 h-3.5 mr-1" />
-                    <span className="hidden sm:inline">录屏模式</span>
+                    <span className="hidden sm:inline">🎥 录屏模式</span>
                   </>
                 )}
               </Button>

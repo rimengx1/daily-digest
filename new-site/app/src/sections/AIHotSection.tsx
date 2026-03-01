@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArticleCard } from '@/components/ArticleCard';
 import { RefreshIndicator } from '@/components/RefreshIndicator';
 import { EmptyState } from '@/components/EmptyState';
-import type { Article, Language } from '@/types';
+import type { Article, Language, ViewMode } from '@/types';
 
 interface AIHotSectionProps {
   articles: Article[];
@@ -11,6 +11,7 @@ interface AIHotSectionProps {
   isRefreshing: boolean;
   language: Language;
   onToggleFavorite: (id: string) => void;
+  viewMode?: ViewMode;
 }
 
 export function AIHotSection({
@@ -20,6 +21,7 @@ export function AIHotSection({
   isRefreshing,
   language,
   onToggleFavorite,
+  viewMode = 'normal',
 }: AIHotSectionProps) {
   const [topArticles, setTopArticles] = useState<Article[]>([]);
 
@@ -56,7 +58,7 @@ export function AIHotSection({
       {topArticles.length === 0 ? (
         <EmptyState type="articles" language={language} />
       ) : (
-        <div className="border rounded-lg overflow-hidden">
+        <div className={`border rounded-lg overflow-hidden ${viewMode === 'studio' ? 'studio-cards-container' : ''}`}>
           {topArticles.map((article) => (
             <ArticleCard
               key={article.id}
@@ -64,6 +66,7 @@ export function AIHotSection({
               language={language}
               isFavorited={favorites.includes(article.id)}
               onToggleFavorite={() => onToggleFavorite(article.id)}
+              viewMode={viewMode}
             />
           ))}
         </div>

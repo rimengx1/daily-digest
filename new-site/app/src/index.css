@@ -171,3 +171,225 @@ a:focus-visible,
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================
+   Studio Mode (录屏模式) Styles
+   ============================================ */
+
+/* 根节点样式 */
+.mode-studio {
+  /* 全局字体放大 */
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+/* 主内容区域 */
+.mode-studio main {
+  padding-top: 5rem;
+}
+
+/* 录屏模式下的导航栏简化 */
+.mode-studio nav {
+  /* 保持导航简洁 */
+}
+
+.mode-studio nav .max-w-7xl,
+.mode-studio nav .max-w-4xl {
+  max-width: 100% !important;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* 录屏模式下的卡片容器 */
+.studio-cards-container {
+  border: none;
+  background: transparent;
+}
+
+/* 录屏模式下的卡片样式 */
+.studio-card {
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid hsl(var(--border) / 0.5);
+  background: hsl(var(--card));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.studio-card:last-child {
+  border-bottom: 1px solid hsl(var(--border) / 0.5);
+}
+
+/* 录屏模式下的标题高亮效果 */
+.studio-card h3 {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.studio-card h3:hover {
+  background-color: hsl(35 95% 53% / 0.15);
+  padding: 0.5rem;
+  margin: -0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* 录屏模式下的关键句样式 */
+.studio-card .key-sentence {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, hsl(35 95% 53% / 0.1) 0%, hsl(35 95% 53% / 0.05) 100%);
+  border-left: 4px solid hsl(35 95% 53%);
+  border-radius: 0 0.5rem 0.5rem 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.studio-card .key-sentence:hover {
+  background: linear-gradient(135deg, hsl(35 95% 53% / 0.2) 0%, hsl(35 95% 53% / 0.1) 100%);
+  transform: translateX(4px);
+}
+
+/* 录屏模式下的操作按钮 */
+.studio-actions {
+  gap: 0.75rem;
+}
+
+.studio-actions button {
+  font-size: 0.9375rem;
+  padding: 0.5rem 1rem;
+  height: 2.25rem;
+}
+
+/* 录屏模式下的展开内容 */
+.mode-studio [data-state="open"] {
+  animation: studioExpand 0.3s ease-out;
+}
+
+@keyframes studioExpand {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 录屏模式下的口播稿样式 */
+.studio-broadcast-script {
+  font-family: system-ui, -apple-system, sans-serif;
+  white-space: pre-wrap;
+  line-height: 2;
+  font-size: 1rem;
+}
+
+.studio-broadcast-script [class*="【"] {
+  color: hsl(35 95% 45%);
+  font-weight: 600;
+}
+
+/* 录屏模式下的评分圆圈 */
+.studio-card .score-circle {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1rem;
+}
+
+/* 录屏模式下的配图 */
+.studio-card .article-image {
+  max-width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.studio-card .article-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.studio-card .article-image:hover img {
+  transform: scale(1.02);
+}
+
+/* 录屏模式下的原文链接 */
+.studio-card .read-original {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--primary) / 0.3);
+  color: hsl(var(--primary));
+  font-size: 0.9375rem;
+  transition: all 0.2s ease;
+}
+
+.studio-card .read-original:hover {
+  background: hsl(var(--primary) / 0.1);
+  text-decoration: none;
+}
+
+/* 录屏模式下的股票按钮 */
+.studio-card .stock-button {
+  font-size: 0.9375rem;
+  padding: 0.5rem 1rem;
+}
+
+/* 录屏模式下的折叠/展开按钮 */
+.studio-toggle-btn {
+  background: hsl(35 95% 53% / 0.1);
+  border-color: hsl(35 95% 53% / 0.3);
+  color: hsl(35 95% 45%);
+}
+
+.studio-toggle-btn:hover {
+  background: hsl(35 95% 53% / 0.2);
+}
+
+/* 录屏模式下的页脚简化 */
+.mode-studio footer {
+  display: none;
+}
+
+/* 响应式调整 */
+@media (max-width: 640px) {
+  .mode-studio {
+    font-size: 1rem;
+  }
+  
+  .studio-card {
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+  }
+  
+  .studio-card h3 {
+    font-size: 1.125rem;
+  }
+  
+  .studio-card .key-sentence {
+    font-size: 1rem;
+    padding: 0.875rem 1rem;
+  }
+}
+
+/* 暗色模式下的录屏模式调整 */
+.dark .mode-studio .studio-card {
+  background: hsl(var(--card));
+  border-color: hsl(var(--border) / 0.3);
+}
+
+.dark .mode-studio .studio-card h3:hover {
+  background-color: hsl(35 95% 53% / 0.2);
+}
+
+.dark .mode-studio .studio-card .key-sentence {
+  background: linear-gradient(135deg, hsl(35 95% 53% / 0.15) 0%, hsl(35 95% 53% / 0.05) 100%);
+}
+
+.dark .mode-studio .studio-card .key-sentence:hover {
+  background: linear-gradient(135deg, hsl(35 95% 53% / 0.25) 0%, hsl(35 95% 53% / 0.1) 100%);
+}

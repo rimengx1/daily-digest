@@ -19,6 +19,10 @@ export interface Article {
   isFavorited: boolean;
   language: string;
   articleNumber: number;
+  // 新增字段
+  aiKeySentence?: string;   // 关键句（1-2句）
+  aiBroadcastScript?: string; // 30秒口播稿（4句结构）
+  imageUrl?: string;        // 文章配图URL
 }
 
 // AI 股票分析结果
@@ -39,6 +43,7 @@ export interface RSSFeed {
 
 export type Theme = 'light' | 'dark';
 export type Language = 'zh' | 'en';
+export type ViewMode = 'normal' | 'studio';
 
 export interface AppState {
   theme: Theme;
