@@ -156,6 +156,8 @@ function App() {
         toggleLanguage={toggleLanguage}
         activeSection={activeSection}
         onSectionChange={handleSectionChange}
+        viewMode={viewMode}
+        toggleViewMode={toggleViewMode}
       />
 
       <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
