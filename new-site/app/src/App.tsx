@@ -9,6 +9,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useFavorites } from '@/hooks/useFavorites';
 import { useArticles } from '@/hooks/useArticles';
+import { useViewMode } from '@/hooks/useViewMode';
 import { generateRecommendedArticles } from '@/services/mockData';
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
@@ -20,6 +21,7 @@ function App() {
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage } = useLanguage();
   const { favorites, toggleFavorite } = useFavorites();
+  const { mode: viewMode, toggleMode: toggleViewMode } = useViewMode();
   const {
     articles,
     lastRefresh,

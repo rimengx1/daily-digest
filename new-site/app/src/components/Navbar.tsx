@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Sun, Moon, Globe, Sparkles } from 'lucide-react';
+import { Sun, Moon, Globe, Sparkles, Monitor, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { Theme, Language } from '@/types';
 
@@ -10,6 +10,8 @@ interface NavbarProps {
   toggleLanguage: () => void;
   activeSection: string;
   onSectionChange: (section: string) => void;
+  viewMode?: 'normal' | 'studio';
+  toggleViewMode?: () => void;
 }
 
 const sections = [
@@ -27,6 +29,8 @@ export function Navbar({
   toggleLanguage,
   activeSection,
   onSectionChange,
+  viewMode = 'normal',
+  toggleViewMode,
 }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
 
@@ -79,6 +83,33 @@ export function Navbar({
 
           {/* Controls */}
           <div className="flex items-center gap-0.5">
+            {/* Studio Mode Toggle - Only show on AI Hot section */}
+            {activeSection === 'ai-hot' && toggleViewMode && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleViewMode}
+                className={`h-8 px-2 rounded-full text-xs font-medium transition-all ${
+                  viewMode === 'studio'
+                    ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                    : 'hover:bg-muted'
+                }`}
+                title={viewMode === 'studio' ? 'Switch to normal mode' : 'Switch to studio mode'}
+              >
+                {viewMode === 'studio' ? (
+                  <>
+                    <BookOpen className="w-3.5 h-3.5 mr-1" />
+                    <span className="hidden sm:inline">阅读模式</span>
+                  </>
+                ) : (
+                  <>
+                    <Monitor className="w-3.5 h-3.5 mr-1" />
+                    <span className="hidden sm:inline">录屏模式</span>
+                  </>
+                )}
+              </Button>
+            )}
+            
             <Button
               variant="ghost"
               size="icon"
