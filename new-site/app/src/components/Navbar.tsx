@@ -88,7 +88,12 @@ export function Navbar({
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={toggleViewMode}
+                onClick={() => {
+                  console.log('[DEBUG] Toggle button clicked');
+                  console.log('[DEBUG] Current viewMode:', viewMode);
+                  toggleViewMode();
+                  console.log('[DEBUG] toggleViewMode called');
+                }}
                 className={`h-8 px-2 rounded-full text-xs font-medium transition-all ${
                   viewMode === 'studio'
                     ? 'bg-primary text-primary-foreground hover:bg-primary/90'

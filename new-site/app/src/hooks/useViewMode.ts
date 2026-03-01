@@ -25,27 +25,34 @@ export function useViewMode() {
   });
 
   const setViewMode = useCallback((newMode: ViewMode) => {
+    console.log('[DEBUG] setViewMode called with:', newMode);
+    console.log('[DEBUG] Current mode:', mode);
+    
     setMode(newMode);
     
     // 保存到 localStorage
     try {
       localStorage.setItem('xyan_view_mode', newMode);
+      console.log('[DEBUG] Saved to localStorage');
     } catch {
-      // 忽略错误
+      console.log('[DEBUG] Failed to save to localStorage');
     }
     
     // 更新 URL（不刷新页面）
     const url = new URL(window.location.href);
     url.searchParams.set('mode', newMode);
     window.history.replaceState({}, '', url);
+    console.log('[DEBUG] URL updated');
     
     // 更新 body class
     if (newMode === 'studio') {
       document.body.classList.add('mode-studio');
+      console.log('[DEBUG] Added mode-studio class. Body classes:', document.body.className);
     } else {
       document.body.classList.remove('mode-studio');
+      console.log('[DEBUG] Removed mode-studio class. Body classes:', document.body.className);
     }
-  }, []);
+  }, [mode]);
 
   const toggleMode = useCallback(() => {
     setViewMode(mode === 'normal' ? 'studio' : 'normal');
