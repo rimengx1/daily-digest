@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>XYAN.AI</title>
+    <script>
+        // 单页应用路由处理
+        // 将 404 重定向到 index.html，保留路径和参数
+        var path = window.location.pathname;
+        var search = window.location.search;
+        var hash = window.location.hash;
+        
+        // 重定向到根路径，但保留 query 参数
+        window.location.href = '/' + search + hash;
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>
