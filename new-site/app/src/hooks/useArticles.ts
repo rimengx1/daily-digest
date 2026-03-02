@@ -11,19 +11,20 @@ const ARTICLES_KEY = 'ai-news-articles-v3';
 const REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes
 
 // API Configuration for external AI services
+type AIProvider = 'deepseek';
+
 const API_CONFIG = {
-  provider: 'deepseek' as 'mock' | 'gpt-codex' | 'deepseek',
+  provider: 'deepseek' as AIProvider,
   
   endpoints: {
-    'gpt-codex': 'https://api.openai.com/v1/chat/completions',
     'deepseek': 'https://api.deepseek.com/v1/chat/completions',
-  },
+  } as Record<AIProvider, string>,
   
-  getApiKey(provider: 'gpt-codex' | 'deepseek'): string {
+  getApiKey(provider: AIProvider): string {
     if (provider === 'deepseek') {
       return import.meta.env.VITE_DEEPSEEK_API_KEY || '';
     }
-    return import.meta.env.VITE_GPT_CODEX_API_KEY || '';
+    return '';
   },
 };
 

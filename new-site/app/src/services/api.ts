@@ -19,21 +19,21 @@ import type { AIGeneratedContent, APIArticleInput, AIStockAnalysis } from '@/typ
  */
 
 // API 配置
+type AIProvider = 'deepseek';
+
 const API_CONFIG = {
-  // 设置为 'deepseek' 或 'gpt-codex' 启用真实API，'mock' 使用模拟数据
-  provider: 'deepseek' as 'mock' | 'gpt-codex' | 'deepseek',
+  provider: 'deepseek' as AIProvider,
   
   endpoints: {
-    'gpt-codex': 'https://api.openai.com/v1/chat/completions',
     'deepseek': 'https://api.deepseek.com/v1/chat/completions',
-  },
+  } as Record<AIProvider, string>,
   
   // 获取API密钥
-  getApiKey(provider: 'gpt-codex' | 'deepseek'): string {
+  getApiKey(provider: AIProvider): string {
     if (provider === 'deepseek') {
       return import.meta.env.VITE_DEEPSEEK_API_KEY || '';
     }
-    return import.meta.env.VITE_GPT_CODEX_API_KEY || '';
+    return '';
   },
 };
 

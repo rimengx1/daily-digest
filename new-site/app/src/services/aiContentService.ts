@@ -10,15 +10,17 @@
 import type { Article } from '@/types';
 
 // API 配置
+type AIProvider = 'deepseek' | 'kimi';
+
 const API_CONFIG = {
-  provider: 'deepseek' as 'mock' | 'deepseek' | 'kimi',
+  provider: 'deepseek' as AIProvider,
   
   endpoints: {
     'deepseek': 'https://api.deepseek.com/v1/chat/completions',
     'kimi': 'https://api.moonshot.cn/v1/chat/completions',
-  },
+  } as Record<AIProvider, string>,
   
-  getApiKey(provider: 'deepseek' | 'kimi'): string {
+  getApiKey(provider: AIProvider): string {
     if (provider === 'deepseek') {
       return import.meta.env.VITE_DEEPSEEK_API_KEY || '';
     }
@@ -202,7 +204,6 @@ export async function generateBroadcastScript(
 function generateFallbackScript(title: string, summary: string): string {
   const sentences = summary.split('。').filter(s => s.trim());
   const firstSentence = sentences[0] || '';
-  const secondSentence = sentences[1] || '';
   
   return `【这条是什么】${title}
 【翻成人话】${firstSentence}。
@@ -360,7 +361,7 @@ Content: ${summary.slice(0, 200)}`;
     
     // 注意：这里假设API返回图片URL
     // 实际实现可能需要调用专门的图片生成API（如DALL-E, Midjourney等）
-    const data = await response.json();
+    // const data = await response.json();
     
     // 如果API支持图片生成，返回图片URL
     // 否则返回null
