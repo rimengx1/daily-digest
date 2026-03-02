@@ -10,21 +10,21 @@
 import type { Article } from '@/types';
 
 // API 配置
-type AIProvider = 'deepseek' | 'kimi';
+type AIProvider = 'deepseek' | 'gpt-codex';
 
 const API_CONFIG = {
   provider: 'deepseek' as AIProvider,
   
   endpoints: {
     'deepseek': 'https://api.deepseek.com/v1/chat/completions',
-    'kimi': 'https://api.moonshot.cn/v1/chat/completions',
+    'gpt-codex': 'https://api.openai.com/v1/chat/completions',
   } as Record<AIProvider, string>,
   
   getApiKey(provider: AIProvider): string {
     if (provider === 'deepseek') {
       return import.meta.env.VITE_DEEPSEEK_API_KEY || '';
     }
-    return import.meta.env.VITE_KIMI_API_KEY || '';
+    return import.meta.env.VITE_GPT_CODEX_API_KEY || '';
   },
 };
 
