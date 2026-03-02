@@ -252,7 +252,7 @@ export async function fetchArticleImage(
 
   // 使用 AI 生成图片（如果有API密钥）
   const apiKey = API_CONFIG.getApiKey(API_CONFIG.provider);
-  if (apiKey && API_CONFIG.provider === 'kimi') {
+  if (apiKey) {
     try {
       const generatedUrl = await generateImageWithAI(title, summary);
       if (generatedUrl) {
@@ -321,7 +321,8 @@ async function fetchFromUnsplash(keywords: string): Promise<string | null> {
  * 注意：这需要 Kimi 或其他支持图片生成的 API
  */
 async function generateImageWithAI(title: string, summary: string): Promise<string | null> {
-  const apiKey = API_CONFIG.getApiKey('kimi');
+  const provider = API_CONFIG.provider;
+  const apiKey = API_CONFIG.getApiKey(provider);
   
   if (!apiKey) {
     return null;
@@ -333,14 +334,14 @@ async function generateImageWithAI(title: string, summary: string): Promise<stri
 Style: Modern, clean, tech-focused, suitable for news article.
 Content: ${summary.slice(0, 200)}`;
 
-    const response = await fetch(API_CONFIG.endpoints.kimi, {
+    const response = await fetch(API_CONFIG.endpoints[provider], {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'moonshot-v1-8k',
+        model: provider === 'deepseek' ? 'deepseek-chat' : 'gpt-5.3-codex',
         messages: [
           {
             role: 'system',
@@ -382,7 +383,7 @@ Content: ${summary.slice(0, 200)}`;
 export async function processArticleBatch(
   articles: Article[]
 ): Promise<Map<string, { keySentence?: string; broadcastScript?: string; imageUrl?: string }>> {
-  const results = new Map();
+  const results = new Map<string, { keySentence?: string; broadcastScript?: string; imageUrl?: string }>();
   
   // 使用 Promise.allSettled 并行处理
   const promises = articles.map(async (article) => {
@@ -395,7 +396,7 @@ export async function processArticleBatch(
     results.set(article.id, {
       keySentence: keySentence.status === 'fulfilled' ? keySentence.value : undefined,
       broadcastScript: broadcastScript.status === 'fulfilled' ? broadcastScript.value : undefined,
-      imageUrl: imageUrl.status === 'fulfilled' ? imageUrl.value : undefined,
+      imageUrl: imageUrl.status === 'fulfilled' ? (imageUrl.value ?? undefined) : undefined,
     });
   });
   

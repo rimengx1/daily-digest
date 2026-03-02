@@ -50,7 +50,7 @@ const API_CONFIG = {
  */
 export async function translateContent(
   content: string,
-  provider: 'gpt-codex' | 'deepseek' = 'deepseek'
+  provider: AIProvider = 'deepseek'
 ): Promise<string> {
   const apiKey = API_CONFIG.getApiKey(provider);
   const endpoint = API_CONFIG.endpoints[provider];
@@ -111,7 +111,7 @@ export async function generateAISummary(
   title: string,
   content: string,
   type: 'quick' | 'full' | 'simple' = 'quick',
-  provider: 'gpt-codex' | 'deepseek' = 'deepseek'
+  provider: AIProvider = 'deepseek'
 ): Promise<string> {
   const apiKey = API_CONFIG.getApiKey(provider);
   const endpoint = API_CONFIG.endpoints[provider];
@@ -176,7 +176,7 @@ export async function generateAISummary(
 export async function generateAIScore(
   title: string,
   content: string,
-  provider: 'gpt-codex' | 'deepseek' = 'deepseek'
+  provider: AIProvider = 'deepseek'
 ): Promise<number> {
   const apiKey = API_CONFIG.getApiKey(provider);
   const endpoint = API_CONFIG.endpoints[provider];
@@ -269,7 +269,7 @@ function getMockSummary(type: 'quick' | 'full' | 'simple'): string {
  */
 export async function processArticleWithAI(
   article: APIArticleInput,
-  provider: 'gpt-codex' | 'deepseek' = 'deepseek'
+  provider: AIProvider = 'deepseek'
 ): Promise<AIGeneratedContent> {
   const [quickSummary, fullSummary, simpleExplanation, score] = await Promise.all([
     generateAISummary(article.title, article.content, 'quick', provider),
@@ -300,7 +300,7 @@ export async function processArticleWithAI(
 export async function analyzeStocks(
   title: string,
   content: string,
-  provider: 'gpt-codex' | 'deepseek' = 'deepseek'
+  provider: AIProvider = 'deepseek'
 ): Promise<AIStockAnalysis[]> {
   const apiKey = API_CONFIG.getApiKey(provider);
   const endpoint = API_CONFIG.endpoints[provider];
@@ -362,7 +362,7 @@ export async function analyzeStocks(
       // 尝试直接解析
       const stocks: AIStockAnalysis[] = JSON.parse(content_text);
       return stocks.slice(0, 5); // 最多返回5只股票
-    } catch (e) {
+    } catch {
       // 尝试从 markdown 代码块中提取
       const jsonMatch = content_text.match(/```(?:json)?\s*([\s\S]*?)```/);
       if (jsonMatch) {

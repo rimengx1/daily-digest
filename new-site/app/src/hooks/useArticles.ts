@@ -96,7 +96,7 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
 
 export async function translateContent(
   content: string,
-  provider: 'gpt-codex' | 'deepseek' = 'deepseek'
+  provider: AIProvider = 'deepseek'
 ): Promise<string> {
   const apiKey = API_CONFIG.getApiKey(provider);
   const endpoint = API_CONFIG.endpoints[provider];
@@ -145,7 +145,7 @@ export async function generateAISummary(
   title: string,
   content: string,
   type: 'quick' | 'full' | 'simple' = 'quick',
-  provider: 'gpt-codex' | 'deepseek' = 'deepseek'
+  provider: AIProvider = 'deepseek'
 ): Promise<string> {
   const apiKey = API_CONFIG.getApiKey(provider);
   const endpoint = API_CONFIG.endpoints[provider];
@@ -199,7 +199,7 @@ export async function generateAISummary(
 export async function generateAIScore(
   title: string,
   content: string,
-  provider: 'gpt-codex' | 'deepseek' = 'deepseek'
+  provider: AIProvider = 'deepseek'
 ): Promise<number> {
   const apiKey = API_CONFIG.getApiKey(provider);
   const endpoint = API_CONFIG.endpoints[provider];
