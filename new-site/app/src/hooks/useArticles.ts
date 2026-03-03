@@ -61,7 +61,14 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
     }
     
     // 限制数量
-    filteredArticles = filteredArticles.slice(0, limit);
+    filteredArticles = filteredArticles
+      .slice()
+      .sort((a: any, b: any) => {
+        const aTs = Date.parse(a?.published_at || a?.fetched_at || '') || 0;
+        const bTs = Date.parse(b?.published_at || b?.fetched_at || '') || 0;
+        return bTs - aTs;
+      })
+      .slice(0, limit);
     
     // 转换数据格式
     return filteredArticles.map((item: any) => ({

@@ -36,7 +36,12 @@ export function RSSSection({
     console.log('[RSSSection] filtered.length:', filtered.length);
     console.log('[RSSSection] filtered categories:', filtered.map(a => a.category));
     
-    setTopArticles(filtered.slice(0, 50));
+    setTopArticles(
+      filtered
+        .slice()
+        .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
+        .slice(0, 50)
+    );
   }, [articles]);
 
   return (
