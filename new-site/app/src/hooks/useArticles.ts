@@ -29,6 +29,39 @@ const API_CONFIG = {
   },
 };
 
+const toText = (value: unknown): string =>
+  typeof value === 'string' ? value.trim() : '';
+
+const stripHtmlAndEntities = (value: string): string =>
+  value
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;|&#160;/gi, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;|&#x27;/gi, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const buildSummaryText = (item: any): { quick: string; full: string } => {
+  const quickCandidate =
+    toText(item.aiSummary) ||
+    toText(item.ai_summary) ||
+    stripHtmlAndEntities(toText(item.summary) || toText(item.content)).slice(0, 160);
+
+  const fullCandidate =
+    toText(item.aiInterpretation) ||
+    toText(item.ai_interpretation) ||
+    toText(item.ai_summary) ||
+    quickCandidate;
+
+  return {
+    quick: stripHtmlAndEntities(quickCandidate),
+    full: stripHtmlAndEntities(fullCandidate).slice(0, 360),
+  };
+};
+
 // ============================================
 // RSS API 接口
 // ============================================
@@ -71,26 +104,30 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
       .slice(0, limit);
     
     // 转换数据格式
-    return filteredArticles.map((item: any) => ({
-      id: item.id,
-      title: item.title,
-      aiTitle: item.title,
-      summary: item.summary || '',
-      content: item.content || item.summary || '',
-      url: item.url,
-      source: item.source,
-      category: item.category,
-      language: item.language || 'en',
-      publishedAt: new Date(item.published_at || Date.now()),
-      fetchedAt: new Date(item.fetched_at || Date.now()),
-      isFavorited: false,
-      aiScore: item.aiScore || item.ai_score || Math.floor(60 + Math.random() * 40),
-      aiSummary: item.aiSummary?.trim() || item.ai_summary?.trim() || item.summary?.trim() || '',
-      aiInterpretation: item.aiInterpretation?.trim() || item.ai_summary?.trim() || '',
-      aiExplanation: item.aiExplanation?.trim() || item.ai_explanation?.trim() || '',
-      aiStocks: item.aiStocks || item.ai_stocks || [],  // 优先使用AI生成的股票数据
-      articleNumber: parseInt(item.id?.slice(0, 8) || '0', 16) % 10000,
-    }));
+    return filteredArticles.map((item: any) => {
+      const summaries = buildSummaryText(item);
+
+      return {
+        id: item.id,
+        title: item.title,
+        aiTitle: toText(item.aiTitle) || toText(item.ai_title) || item.title,
+        summary: stripHtmlAndEntities(toText(item.summary)),
+        content: toText(item.content) || toText(item.summary),
+        url: item.url,
+        source: item.source,
+        category: item.category,
+        language: item.language || 'en',
+        publishedAt: new Date(item.publishedAt || item.published_at || Date.now()),
+        fetchedAt: new Date(item.fetchedAt || item.fetched_at || Date.now()),
+        isFavorited: false,
+        aiScore: item.aiScore || item.ai_score || Math.floor(60 + Math.random() * 40),
+        aiSummary: summaries.quick,
+        aiInterpretation: summaries.full,
+        aiExplanation: toText(item.aiExplanation) || toText(item.ai_explanation) || '',
+        aiStocks: item.aiStocks || item.ai_stocks || [],  // 优先使用AI生成的股票数据
+        articleNumber: parseInt((item.id || '').toString().slice(0, 8) || '0', 16) % 10000,
+      };
+    });
   } catch (error) {
     console.error('Failed to load RSS data:', error);
     throw error;
