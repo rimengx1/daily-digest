@@ -145,7 +145,11 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
         title: item.title,
         aiTitle: toText(item.aiTitle) || toText(item.ai_title) || item.title,
         summary: stripHtmlAndEntities(toText(item.summary)),
-        content: toText(item.content) || toText(item.summary),
+        content:
+          toText(item.fullText) ||
+          toText(item.full_text) ||
+          toText(item.content) ||
+          toText(item.summary),
         url: item.url,
         source: item.source,
         category: item.category,
@@ -157,6 +161,8 @@ async function fetchArticlesFromAPI(category?: string, limit: number = 50): Prom
         aiSummary: summaries.quick,
         aiInterpretation: summaries.full,
         aiExplanation: toText(item.aiExplanation) || toText(item.ai_explanation) || '',
+        aiBroadcastScript:
+          toText(item.aiBroadcastScript) || toText(item.ai_broadcast_script) || '',
         aiStocks: item.aiStocks || item.ai_stocks || [],  // 优先使用AI生成的股票数据
         articleNumber: parseInt((item.id || '').toString().slice(0, 8) || '0', 16) % 10000,
       };
@@ -517,3 +523,4 @@ export function useArticles() {
     apiConfig: API_CONFIG,
   };
 }
+
