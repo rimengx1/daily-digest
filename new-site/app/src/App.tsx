@@ -29,68 +29,56 @@ function App() {
     refreshArticles,
   } = useArticles();
 
-  const [activeSection, setActiveSection] = useState<Section>('rss');
+  const [activeSection, setActiveSection] = useState<Section>('ai-hot');
   const [allArticles, setAllArticles] = useState(articles);
 
-  // Add recommended articles on mount
   useEffect(() => {
     const recommended = generateRecommendedArticles();
-    setAllArticles(prev => {
+    setAllArticles((prev) => {
       const combined = [...recommended, ...prev];
       const unique = combined.filter((article, index, self) =>
-        index === self.findIndex(a => a.id === article.id)
+        index === self.findIndex((a) => a.id === article.id)
       );
       return unique;
     });
   }, []);
 
-  // Update allArticles when articles change
   useEffect(() => {
-    setAllArticles(prev => {
-      const combined = [...articles, ...prev.filter(a => a.category === 'recommended')];
+    setAllArticles((prev) => {
+      const combined = [...articles, ...prev.filter((a) => a.category === 'recommended')];
       const unique = combined.filter((article, index, self) =>
-        index === self.findIndex(a => a.id === article.id)
+        index === self.findIndex((a) => a.id === article.id)
       );
       return unique;
     });
   }, [articles]);
 
-  // Handle favorite toggle with toast notification
   const handleToggleFavorite = useCallback((id: string) => {
-    const article = allArticles.find(a => a.id === id);
+    const article = allArticles.find((a) => a.id === id);
     if (!article) return;
 
     const isCurrentlyFavorited = favorites.includes(id);
     toggleFavorite(id);
 
     if (!isCurrentlyFavorited) {
-      toast.success(
-        language === 'zh' ? '已添加到收藏' : 'Added to favorites',
-        {
-          description: article.aiTitle || article.title,
-        }
-      );
+      toast.success(language === 'zh' ? '已添加到收藏' : 'Added to favorites', {
+        description: article.aiTitle || article.title,
+      });
     } else {
-      toast.info(
-        language === 'zh' ? '已取消收藏' : 'Removed from favorites',
-        {
-          description: article.aiTitle || article.title,
-        }
-      );
+      toast.info(language === 'zh' ? '已取消收藏' : 'Removed from favorites', {
+        description: article.aiTitle || article.title,
+      });
     }
   }, [allArticles, favorites, toggleFavorite, language]);
 
-  // Handle section change
   const handleSectionChange = useCallback((section: string) => {
     setActiveSection(section as Section);
   }, []);
 
-  // Initial refresh
   useEffect(() => {
     refreshArticles();
   }, []);
 
-  // Render active section
   const renderSection = () => {
     switch (activeSection) {
       case 'rss':
@@ -162,17 +150,15 @@ function App() {
       />
 
       <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="animate-fadeIn">
-          {renderSection()}
-        </div>
+        <div className="animate-fadeIn">{renderSection()}</div>
       </main>
 
       <footer className="border-t py-8 px-4">
         <div className="max-w-7xl mx-auto text-center text-sm text-muted-foreground">
           <p>© 2024 AI News Aggregator. All rights reserved.</p>
           <p className="mt-2">
-            {language === 'zh' 
-              ? '智能分析 · 实时聚合 · 个性推荐' 
+            {language === 'zh'
+              ? '智能分析 · 实时聚合 · 个性推荐'
               : 'Smart analysis · Real-time aggregation · Personalized recommendations'}
           </p>
         </div>

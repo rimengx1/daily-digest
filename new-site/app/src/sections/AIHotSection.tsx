@@ -26,13 +26,32 @@ export function AIHotSection({
   const [topArticles, setTopArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    // Get top 30 articles by AI score
-    const sorted = [...articles]
-      .filter(a => a.category === 'ai-hot')
+    const aiHotArticles = [...articles].filter((a) => a.category === 'ai-hot');
+
+    if (viewMode === 'studio') {
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      yesterday.setHours(0, 0, 0, 0);
+
+      const yesterdayTop = aiHotArticles
+        .filter((article) => {
+          const articleDate = new Date(article.publishedAt);
+          articleDate.setHours(0, 0, 0, 0);
+          return articleDate.getTime() === yesterday.getTime();
+        })
+        .sort((a, b) => b.aiScore - a.aiScore)
+        .slice(0, 3);
+
+      setTopArticles(yesterdayTop);
+      return;
+    }
+
+    const sorted = aiHotArticles
       .sort((a, b) => b.aiScore - a.aiScore)
       .slice(0, 30);
+
     setTopArticles(sorted);
-  }, [articles]);
+  }, [articles, viewMode]);
 
   return (
     <section className="py-4">
@@ -43,9 +62,17 @@ export function AIHotSection({
             {language === 'zh' ? 'AI热点' : 'AI Hot Topics'}
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
-            {language === 'zh' 
-              ? `评分最高的前${topArticles.length}篇文章` 
-              : `Top ${topArticles.length} articles by score`}
+            {language === 'zh'
+              ? (
+                  viewMode === 'studio'
+                    ? `前一天评分最高的${topArticles.length}篇热点新闻`
+                    : `评分最高的前${topArticles.length}篇文章`
+                )
+              : (
+                  viewMode === 'studio'
+                    ? `Top ${topArticles.length} hot stories from yesterday`
+                    : `Top ${topArticles.length} articles by score`
+                )}
           </p>
         </div>
         <RefreshIndicator
@@ -54,7 +81,7 @@ export function AIHotSection({
           language={language}
         />
       </div>
-      
+
       {topArticles.length === 0 ? (
         <EmptyState type="articles" language={language} />
       ) : (
