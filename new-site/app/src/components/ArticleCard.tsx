@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Star, ExternalLink, Copy, Check, ImageIcon, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -138,6 +138,13 @@ export function ArticleCard({
       handleFetchImage();
     }
   }, [isExpanded, handleGenerateKeySentence, handleGenerateBroadcastScript, handleFetchImage]);
+
+  // 打开 30 秒速读时，自动生成 AI 口播稿
+  useEffect(() => {
+    if (activeTab === 'quick') {
+      void handleGenerateBroadcastScript();
+    }
+  }, [activeTab, handleGenerateBroadcastScript]);
 
   // 录屏模式：显示关键句（如果没有则使用摘要第一句）
   const displayKeySentence = keySentence || article.aiSummary?.split('。')[0] + '。' || '';
@@ -375,11 +382,10 @@ export function ArticleCard({
                           </Button>
                         )}
                       </div>
-                      <p className={`leading-relaxed ${isStudio ? 'text-base' : 'text-sm'}`}>{article.aiSummary}</p>
-                      
-                      {/* 口播稿显示区域 */}
-                      {broadcastScript && (
-                        <div className="mt-4 p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-lg border border-emerald-200 dark:border-emerald-800">
+
+                      {/* 口播稿显示区域：优先展示 AI 生成口播 */}
+                      {broadcastScript ? (
+                        <div className="mt-2 p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-lg border border-emerald-200 dark:border-emerald-800">
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">🎙️ 口播稿（4句结构）</span>
                           </div>
@@ -387,9 +393,10 @@ export function ArticleCard({
                             {broadcastScript}
                           </pre>
                         </div>
-                      )}
-                      {isGeneratingScript && (
-                        <div className="mt-4 text-sm text-muted-foreground">生成口播稿中...</div>
+                      ) : isGeneratingScript ? (
+                        <div className="mt-2 text-sm text-muted-foreground">AI 正在生成口播稿...</div>
+                      ) : (
+                        <p className={`leading-relaxed ${isStudio ? 'text-base' : 'text-sm'}`}>{article.aiSummary}</p>
                       )}
                     </div>
                   )}

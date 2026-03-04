@@ -44,21 +44,54 @@ const stripHtmlAndEntities = (value: string): string =>
     .replace(/\s+/g, ' ')
     .trim();
 
+const normalizeArxivAbstract = (value: string): string =>
+  value
+    .replace(/^arXiv:\S+\s+Announce Type:\s*\w+\s+Abstract:\s*/i, '')
+    .replace(/^arXiv:\S+\s*/i, '')
+    .replace(/^Announce Type:\s*\w+\s*/i, '')
+    .replace(/^Abstract:\s*/i, '')
+    .trim();
+
+const isMostlyAscii = (value: string): boolean => {
+  if (!value) return false;
+  const asciiChars = (value.match(/[\x00-\x7F]/g) || []).length;
+  return asciiChars / value.length > 0.85;
+};
+
+const hasCJK = (value: string): boolean => /[\u4e00-\u9fff]/.test(value);
+
+const pickLeadSentence = (value: string): string => {
+  const hit = value.match(/^(.{0,140}?[。！？.!?])/);
+  if (hit && hit[1]) return hit[1].trim();
+  return value.slice(0, 140).trim();
+};
+
 const buildSummaryText = (item: any): { quick: string; full: string } => {
-  const quickCandidate =
+  const quickCandidateRaw =
     toText(item.aiSummary) ||
     toText(item.ai_summary) ||
     stripHtmlAndEntities(toText(item.summary) || toText(item.content)).slice(0, 160);
 
-  const fullCandidate =
+  const fullCandidateRaw =
     toText(item.aiInterpretation) ||
     toText(item.ai_interpretation) ||
     toText(item.ai_summary) ||
-    quickCandidate;
+    quickCandidateRaw;
+
+  let quick = normalizeArxivAbstract(stripHtmlAndEntities(quickCandidateRaw));
+  const full = normalizeArxivAbstract(stripHtmlAndEntities(fullCandidateRaw)).slice(0, 360);
+
+  // If quick summary still looks like raw arXiv/English metadata, degrade to full-summary lead.
+  if (
+    /arxiv:|announce type:|abstract:/i.test(quick) ||
+    (isMostlyAscii(quick) && hasCJK(full))
+  ) {
+    quick = pickLeadSentence(full);
+  }
 
   return {
-    quick: stripHtmlAndEntities(quickCandidate),
-    full: stripHtmlAndEntities(fullCandidate).slice(0, 360),
+    quick,
+    full,
   };
 };
 
