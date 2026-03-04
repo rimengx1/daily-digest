@@ -2026,7 +2026,24 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-03-02T13:20:00",
-    "fetched_at": "2026-03-02T16:33:49.029636"
+    "fetched_at": "2026-03-02T16:33:49.029636",
+    "aiSummary": "伦敦爆发大规模反AI抗议，数百人游行要求暂停AI发展。同时，地球轨道上的人造物数量激增，卫星数量五年内从3000颗增至14000颗。MIT Technology Review因报道AI能源消耗获杂志编辑奖提名。",
+    "aiExplanation": "伦敦爆发大规模反AI抗议，人们担忧AI潜在危害。同时，太空垃圾日益增多，地球轨道上的人造物已形成密集层。",
+    "aiScore": 70,
+    "aiStocks": [
+      {
+        "symbol": "GOOGL",
+        "name": "Alphabet Inc.",
+        "reason": "旗下Google DeepMind被抗议提及",
+        "change": -1
+      },
+      {
+        "symbol": "META",
+        "name": "Meta Platforms Inc.",
+        "reason": "伦敦办公室被抗议提及",
+        "change": -1
+      }
+    ]
   },
   {
     "id": "1b3d617bb1a0dbce",
@@ -2039,7 +2056,24 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-03-02T12:55:20",
-    "fetched_at": "2026-03-02T16:33:49.029649"
+    "fetched_at": "2026-03-02T16:33:49.029649",
+    "aiSummary": "2月28日，数百名反AI抗议者在伦敦科技中心游行，这是迄今为止规模最大的反AI抗议活动。抗议者担忧AI导致失业、网络垃圾信息乃至人类灭绝风险。组织者称其运动正呈指数级增长，与AI发展速度同步。",
+    "aiExplanation": "伦敦爆发大规模反AI抗议，民众担忧AI导致失业、虚假信息泛滥，甚至人类灭绝风险。抗议者呼吁暂停AI开发，避免技术失控。",
+    "aiScore": 75,
+    "aiStocks": [
+      {
+        "symbol": "GOOGL",
+        "name": "Alphabet (Google)",
+        "reason": "旗下DeepMind被抗议活动针对",
+        "change": -1
+      },
+      {
+        "symbol": "META",
+        "name": "Meta Platforms",
+        "reason": "伦敦办公室位于抗议地点",
+        "change": -1
+      }
+    ]
   },
   {
     "id": "924642609d05bd11",
@@ -2052,7 +2086,24 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-03-02T17:29:42",
-    "fetched_at": "2026-03-02T20:26:13.514987"
+    "fetched_at": "2026-03-02T20:26:13.514987",
+    "aiSummary": "OpenAI与美国国防部达成协议，允许军方在机密环境中使用其技术。公司强调协议禁止用于自主武器和大规模监控，但批评者认为其依赖现有法律而非具体禁令，实际约束力有限。这标志着与Anthropic的道德立场形成鲜明对比，后者因坚持更强硬条款而未能签约。",
+    "aiExplanation": "OpenAI与美国军方达成协议，允许其在机密任务中使用AI技术，但承诺禁用自主武器和大规模监控。相比Anthropic坚持道德立场而失败，OpenAI采取务实法律策略，虽获合同却面临内部质疑。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "OPENAI",
+        "name": "OpenAI",
+        "reason": "与美国国防部达成技术合作协议",
+        "change": 2
+      },
+      {
+        "symbol": "ANTHROPIC",
+        "name": "Anthropic",
+        "reason": "被国防部公开谴责并拒绝类似协议",
+        "change": -1
+      }
+    ]
   },
   {
     "id": "354dd31f764b61f5",
@@ -2065,7 +2116,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-03-02T17:00:00",
-    "fetched_at": "2026-03-02T20:26:13.324186"
+    "fetched_at": "2026-03-02T20:26:13.324186",
+    "aiSummary": "GitHub初学者系列第三季开讲，本期聚焦两大核心协作工具：Issues和Projects。Issues用于追踪任务、Bug和想法，Projects则帮助团队可视化、规划工作流。文章详细讲解了如何创建Issue并将其同步到项目看板，以实现高效的项目管理与团队协作。",
+    "aiExplanation": "本文介绍GitHub两大协作工具：Issues用于追踪任务和问题，Projects用于可视化和管理工作流程，帮助团队高效协作。",
+    "aiScore": 45
   },
   {
     "id": "8bcaf092c4879e3c",
@@ -2078,7 +2132,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T05:00:00",
-    "fetched_at": "2026-03-03T05:11:26.935141"
+    "fetched_at": "2026-03-03T05:11:26.935141",
+    "aiSummary": "研究者提出WKGFC新方法，利用权威知识图谱作为核心证据源，结合LLM智能体进行多跳语义检索。该方法通过马尔可夫决策过程自动优化证据检索流程，显著提升事实核查的准确性和泛化能力，解决了传统方法依赖文本相似度而忽略复杂语义关联的局限。",
+    "aiExplanation": "用知识图谱和AI代理自动查证网络信息，避免假新闻传播。",
+    "aiScore": 85
   },
   {
     "id": "28b0a6493b5e35ea",
@@ -2091,7 +2148,18 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T05:00:00",
-    "fetched_at": "2026-03-03T05:11:26.935156"
+    "fetched_at": "2026-03-03T05:11:26.935156",
+    "aiSummary": "TraderBench提出金融AI评估新框架，结合专家验证任务与对抗性交易模拟。测试13个模型发现，多数在加密交易中采用固定策略，缺乏真正市场适应能力。扩展思维对知识检索有帮助，但对交易表现几乎无影响。",
+    "aiExplanation": "这篇论文提出了一个叫TraderBench的金融AI测试平台。它发现，当前许多AI交易模型在模拟对抗性市场环境中表现僵化，得分几乎不变，说明它们缺乏真正的市场适应能力，只是机械执行固定策略。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "N/A",
+        "name": "TraderBench",
+        "reason": "论文提出的金融AI评估基准",
+        "change": 0
+      }
+    ]
   },
   {
     "id": "c31a505bbbe3201f",
@@ -2104,7 +2172,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T05:00:00",
-    "fetched_at": "2026-03-03T05:11:26.935165"
+    "fetched_at": "2026-03-03T05:11:26.935165",
+    "aiSummary": "研究人员提出动态交互图（DIG）框架，首次使通用大语言模型（LLM）智能体在无预设角色或流程下的涌现式协作变得可观测与可解释。DIG通过捕捉智能体间的因果交互网络，能实时识别、解释并纠正协作错误，解决了多智能体系统因冗余工作或级联故障导致难以调试的关键问题。",
+    "aiExplanation": "这项研究提出了一种新方法，让多个AI智能体在无预设分工的情况下自主协作。通过动态交互图实时追踪它们的互动路径，能及时发现并纠正协作中的错误，提升复杂任务解决能力。",
+    "aiScore": 85
   },
   {
     "id": "359f07ba472688e1",
@@ -2117,7 +2188,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T05:00:00",
-    "fetched_at": "2026-03-03T05:11:26.935174"
+    "fetched_at": "2026-03-03T05:11:26.935174",
+    "aiSummary": "研究人员开发了新框架评估多模态模型对心电图信号的推理能力。该框架将推理分解为感知和演绎两个独立部分：感知评估模型识别信号模式的能力，演绎评估其应用临床知识的逻辑性。这种方法解决了现有评估方法不可扩展或流于表面的问题。",
+    "aiExplanation": "这篇文章提出了一个评估AI心电图分析能力的新方法，将AI推理分为两步：先看它能否准确识别心电图波形（感知），再看它能否正确运用医学知识进行逻辑判断（推理）。通过代码验证和医学标准比对，能更可靠地评估AI的真实分析能力。",
+    "aiScore": 85
   },
   {
     "id": "b179268a3efdb5b9",
@@ -2130,7 +2204,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T05:00:00",
-    "fetched_at": "2026-03-03T05:11:26.935182"
+    "fetched_at": "2026-03-03T05:11:26.935182",
+    "aiSummary": "研究者推出EmCoop框架，用于评估多智能体在具身环境中的协作能力。该框架分离认知与交互层，提出过程级评估指标，超越最终任务成功率。已在两个可扩展环境中验证，支持分析不同团队规模下的协作动态。",
+    "aiExplanation": "EmCoop是一个研究多个AI智能体如何协作完成现实任务的框架。它通过区分高级认知和低级交互，帮助分析团队合作的过程与问题，而不仅仅是最终结果。",
+    "aiScore": 85
   },
   {
     "id": "eec2c13395434b36",
@@ -2143,7 +2220,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T05:00:00",
-    "fetched_at": "2026-03-03T05:11:26.935195"
+    "fetched_at": "2026-03-03T05:11:26.935195",
+    "aiSummary": "研究者提出'单焦点人工智能'新范式，挑战'越大越通用越好'的主流AI发展理念。该范式借鉴自闭症认知理论，主张通过极度专业化实现特定领域内的极致精度。实验模型Mini-Enedina仅用3750万参数就在梁分析任务中达到近乎完美表现，同时刻意保持领域外无能。这为安全关键应用提供了新的AI架构选择。",
+    "aiExplanation": "本文提出“单焦点人工智能”概念，主张让AI模型在特定领域（如工程分析）做到极致精准，而非一味追求通用性。这种专门化模型更安全可靠，可成为通用AI的有益补充。",
+    "aiScore": 85
   },
   {
     "id": "c54045192f3fbe5c",
@@ -2156,7 +2236,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T05:00:00",
-    "fetched_at": "2026-03-03T05:11:26.935207"
+    "fetched_at": "2026-03-03T05:11:26.935207",
+    "aiSummary": "研究人员提出COffeE-PSRO新方法，解决离线多智能体强化学习中的博弈均衡发现问题。该方法结合保守主义原则，在固定数据集限制下量化博弈动态不确定性，并优化策略选择以降低真实博弈中的遗憾值。实验表明其性能优于现有离线方法，能发现更低遗憾的均衡解。",
+    "aiExplanation": "离线多智能体强化学习新方法COffeE-PSRO，通过量化游戏动态不确定性，在有限数据中寻找更可靠的博弈策略，实验证明其能获得更低遗憾值的解决方案。",
+    "aiScore": 85
   },
   {
     "id": "fb3b00cb7218bd33",
@@ -2182,7 +2265,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T05:00:00",
-    "fetched_at": "2026-03-03T05:11:26.935224"
+    "fetched_at": "2026-03-03T05:11:26.935224",
+    "aiSummary": "研究人员提出CARO框架，通过结构化分离错误信号优化LLM自动评分。该方法利用混淆矩阵分解错误模式，针对特定误分类模式生成修复补丁，避免规则稀释问题。实验显示CARO在教师教育和STEM数据集上显著优于现有方法，提升自动评估的精确度和可扩展性。",
+    "aiExplanation": "用AI批改作业时，传统方法容易混淆错误类型。新方法CARO能识别不同错误模式，针对性优化批改规则，让AI评分更准更快。",
+    "aiScore": 85
   },
   {
     "id": "e8926d374ce61eed",
@@ -2195,7 +2281,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T05:00:00",
-    "fetched_at": "2026-03-03T05:11:26.935234"
+    "fetched_at": "2026-03-03T05:11:26.935234",
+    "aiSummary": "研究人员推出MED-COPILOT医疗助手，结合GraphRAG和相似病例检索技术，提升临床决策支持。该系统整合WHO/NICE指南知识图谱与3.6万例患者数据库，在临床记录补全和医学问答任务中表现优于传统大语言模型和标准RAG方法，提供透明可解释的推理过程。",
+    "aiExplanation": "这是一个AI医疗助手，能像医生一样结合医疗指南和相似病例，为临床决策提供可靠建议，减少AI的“幻觉”错误。",
+    "aiScore": 85
   },
   {
     "id": "065ba8a54b0cf2f2",
@@ -2208,7 +2297,18 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-03-03T10:00:00",
-    "fetched_at": "2026-03-03T12:36:15.699029"
+    "fetched_at": "2026-03-03T12:36:15.699029",
+    "aiSummary": "加拿大初创公司Skyward Wildfire声称能通过云播撒技术阻止闪电，从而预防由闪电引发的野火。该公司已获得数百万美元融资，但此前关于“100%阻止闪电”的夸大宣传已被撤下。专家对其技术有效性、环境影响和透明度提出质疑。",
+    "aiExplanation": "一家初创公司声称能通过阻止闪电来预防野火，减少灾害。",
+    "aiScore": 85,
+    "aiStocks": [
+      {
+        "symbol": "N/A",
+        "name": "Skyward Wildfire",
+        "reason": "文章主要介绍该公司技术",
+        "change": 2
+      }
+    ]
   },
   {
     "id": "15d8d0e2cd531a2a",
@@ -2221,7 +2321,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T16:35:55",
-    "fetched_at": "2026-03-03T16:36:40.419955"
+    "fetched_at": "2026-03-03T16:36:40.419955",
+    "aiSummary": "谷歌发布Gemini 3.1 Flash-Lite模型，这是Gemini 3系列中速度最快、成本效益最高的版本。该模型专为大规模智能应用设计，旨在以更低成本实现高效推理。",
+    "aiExplanation": "这是谷歌推出的最快、最省钱的AI模型，专为处理海量任务设计。",
+    "aiScore": 65
   },
   {
     "id": "28e5e30445275381",
@@ -2234,7 +2337,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-03-03T15:53:10",
-    "fetched_at": "2026-03-03T16:36:41.660469"
+    "fetched_at": "2026-03-03T16:36:41.660469",
+    "aiSummary": "麻省理工科技评论推出Insiders Panel专家讨论视频，展示EmTech MIT 2025会议的前沿科技观点。该视频包含行业领袖对新兴技术的深度对话，为读者提供权威的技术趋势分析。这是获取科技前沿洞察的重要资源。",
+    "aiExplanation": "这是麻省理工科技评论为会员提供的专家讨论视频，内容来自2025年EmTech MIT会议。",
+    "aiScore": 50
   },
   {
     "id": "2ac409da360e06db",
@@ -2247,7 +2353,24 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-03-03T13:30:00",
-    "fetched_at": "2026-03-03T16:36:41.660482"
+    "fetched_at": "2026-03-03T16:36:41.660482",
+    "aiSummary": "初创公司Skyward Wildfire声称能通过向云层播撒金属箔条来阻止闪电，从而预防野火，但效果存疑。同时，OpenAI与五角大楼达成协议，允许军方在机密环境中使用其技术，但承诺禁用自主武器和国内大规模监控，引发伦理争议。",
+    "aiExplanation": "一家初创公司声称能用金属箔片改变云层来阻止闪电，从而预防野火，但效果和环境影响尚不明确。同时，OpenAI与美国军方达成协议，允许其在机密环境中使用其技术。",
+    "aiScore": 75,
+    "aiStocks": [
+      {
+        "symbol": "OPENAI",
+        "name": "OpenAI",
+        "reason": "与五角大楼达成军事技术使用协议",
+        "change": 2
+      },
+      {
+        "symbol": "ANTHROPIC",
+        "name": "Anthropic",
+        "reason": "被五角大楼公开谴责，OpenAI对比对象",
+        "change": -1
+      }
+    ]
   },
   {
     "id": "15602cefa54d9cc4",
@@ -2260,7 +2383,10 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-03-03T18:45:09",
-    "fetched_at": "2026-03-03T20:24:12.545317"
+    "fetched_at": "2026-03-03T20:24:12.545317",
+    "aiSummary": "GitHub Enterprise Server 重构了其高可用性搜索架构，从跨节点 Elasticsearch 集群模式转向使用跨集群复制（CCR）。新架构将每个服务器节点作为独立的单节点集群运行，通过 CCR 在节点间复制索引数据，彻底解决了旧架构中因主分片意外移动导致的系统锁死和维护难题，显著提升了系统稳定性和可管理性。",
+    "aiExplanation": "GitHub企业版升级了搜索架构，让系统更稳定可靠。现在搜索索引能自动同步和修复，管理员不用再担心升级或维护时出问题，可以更专注于客户需求。",
+    "aiScore": 85
   },
   {
     "id": "91f3efde59bcc632",
@@ -2273,7 +2399,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T16:50:49",
-    "fetched_at": "2026-03-03T20:24:11.990844"
+    "fetched_at": "2026-03-03T20:24:11.990844",
+    "aiSummary": "研究人员在24小时内成功训练出文本到图像生成模型，打破了传统需要数周训练时间的限制。通过优化算法和计算资源分配，该突破大幅降低了AI图像生成的准入门槛。这项进展将加速创意产业和AI应用开发，使更多研究团队能够快速迭代图像生成技术。",
+    "aiExplanation": "用24小时训练出AI绘画模型，大幅降低技术门槛，让更多人能轻松创作图像。",
+    "aiScore": 85
   },
   {
     "id": "ddee5bd92d67023d",
@@ -2286,7 +2415,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T10:00:00",
-    "fetched_at": "2026-03-03T20:24:06.749741"
+    "fetched_at": "2026-03-03T20:24:06.749741",
+    "aiSummary": "OpenAI发布GPT-5.3 Instant系统卡，披露其最新模型的安全评估与性能细节。该版本在推理速度与多模态能力上显著提升，同时强化了内容安全护栏。系统卡旨在提高模型透明度，帮助开发者与用户理解其能力边界与潜在风险。",
+    "aiExplanation": "GPT-5.3 Instant是OpenAI推出的快速AI模型，具备强大的即时对话与信息处理能力，旨在为用户提供高效、准确的智能服务。",
+    "aiScore": 65
   },
   {
     "id": "9adacbc76dfe78f0",
@@ -2299,7 +2431,10 @@
     "category": "ai-hot",
     "language": "en",
     "published_at": "2026-03-03T10:00:00",
-    "fetched_at": "2026-03-03T20:24:06.749757"
+    "fetched_at": "2026-03-03T20:24:06.749757",
+    "aiSummary": "GPT-5.3 Instant 发布，专为日常对话优化。它响应更快、更流畅，能更好地理解上下文和细微意图。新版本旨在让AI助手更自然地融入日常生活。",
+    "aiExplanation": "GPT-5.3 Instant让日常对话更流畅自然，像与真人聊天一样轻松实用。",
+    "aiScore": 75
   },
   {
     "id": "1f4cc971a2e4312b",
@@ -2312,6 +2447,26 @@
     "category": "rss",
     "language": "en",
     "published_at": "2026-03-03T16:55:00",
-    "fetched_at": "2026-03-04T01:14:09.172857"
+    "fetched_at": "2026-03-04T01:14:09.172857",
+    "aiSummary": "GitHub推出全球线下活动GitHub Copilot Dev Days，帮助开发者掌握AI辅助编程。活动包含实操工作坊、现场演示和社区交流，适合从新手到专家的所有开发者。三月起全球多城市举办，名额有限，可报名参与或申请主办。",
+    "aiExplanation": "GitHub Copilot Dev Days 是全球线下活动，帮助开发者学习用AI辅助编程。无论新手还是专家，都能通过实践研讨会提升技能，并享受社区交流。",
+    "aiScore": 65
+  },
+  {
+    "id": "230422ca87d9c13a",
+    "title": "NeuroHex: Highly-Efficient Hex Coordinate System for Creating World Models to Enable Adaptive AI",
+    "url": "https://arxiv.org/abs/2603.00376",
+    "summary": "arXiv:2603.00376v2 Announce Type: new \nAbstract: NeuroHex is a hexagonal coordinate system designed to support highly efficient world models and reference frames for online adaptive AI systems. Inspired by the hexadirectional firing structure of grid cells in the human brain, NeuroHex adopts a cubic isometric hexagonal coordinate formulation that provides full 60{\\deg} rotational symmetry and low-cost translation, rotation and distance computation. We develop a mathematical framework that incorp",
+    "content": "arXiv:2603.00376v2 Announce Type: new \nAbstract: NeuroHex is a hexagonal coordinate system designed to support highly efficient world models and reference frames for online adaptive AI systems. Inspired by the hexadirectional firing structure of grid cells in the human brain, NeuroHex adopts a cubic isometric hexagonal coordinate formulation that provides full 60{\\deg} rotational symmetry and low-cost translation, rotation and distance computation. We develop a mathematical framework that incorporates ring indexing, quantized angular encoding, and a hierarchical library of foundational, simple, and complex geometric shape primitives. These constructs allow low-overhead point-in-shape tests and spatial matching operations that are expensive in Cartesian coordinate systems. To support realistic settings, the NeuroHex framework can process OpenStreetMap (OSM) data sets using an OSM-to-NeuroHex (OSM2Hex) conversion tool. The OSM2Hex spatial abstraction processing pipeline can achieve a reduction of 90-99% in geometric complexity while maintaining the relevant spatial structure map for navigation. Our initial results, based on actual city and neighborhood scale data sets, demonstrate that NeuroHex offers a highly efficient substrate for building dynamic world models to enable adaptive spatial reasoning in autonomous AI systems with continuous online learning capability.",
+    "source": "arXiv AI",
+    "source_id": "arxiv-ai",
+    "category": "ai-hot",
+    "language": "en",
+    "published_at": "2026-03-04T05:00:00",
+    "fetched_at": "2026-03-04T05:04:47.399630",
+    "aiSummary": "NeuroHex是一种受大脑网格细胞启发的六边形坐标系，为自适应AI系统提供高效的世界建模。它采用立方等距六边形坐标，具备60度旋转对称性和低成本的空间计算能力。通过OSM2Hex工具处理地图数据，可将几何复杂度降低90-99%，为自动驾驶等在线学习AI系统提供动态空间推理基础。",
+    "aiInterpretation": "NeuroHex是一种创新的六边形坐标系，专门为需要在线自适应学习能力的AI系统设计高效的世界模型和参考框架。该系统的灵感来源于人类大脑中网格细胞的六方向放电结构，采用立方等距六边形坐标公式化，实现了完全的60度旋转对称性，并显著降低了平移、旋转和距离计算的计算成本。\n\n研究团队开发了一套完整的数学框架，包含环索引、量化角度编码以及基础、简单和复杂几何形状原型的层次化库。这些结构使得点包含测试和空间匹配操作的计算开销大幅降低，而这些操作在传统的笛卡尔坐标系中通常计算代价高昂。\n\n为支持实际应用场景，NeuroHex框架能够通过OSM2Hex转换工具处理OpenStreetMap数据集。该空间抽象处理流程在保持导航所需相关空间结构的同时，可将几何复杂度降低90-99%。基于实际城市和街区规模数据集的初步结果表明，NeuroHex为构建动态世界模型提供了高效的基础设施，使具备持续在线学习能力的自主AI系统能够进行自适应空间推理。这一突破性技术有望在自动驾驶、机器人导航和智能城市规划等领域发挥重要作用。",
+    "aiExplanation": "NeuroHex是一种模仿大脑网格细胞的新型六边形坐标系统，能大幅简化地图数据，让AI更高效地进行空间导航和实时学习。",
+    "aiScore": 85
   }
 ]
